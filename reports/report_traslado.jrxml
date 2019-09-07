@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_traslado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e17e3ec4-e316-4b52-a836-a641e00a1ad1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW-SONOMUSIC-LOCAL"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="id_traslado" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     empresa.`ruc` AS empresa_ruc,
+     empresa.`razon` AS empresa_razon,
+     empresa.`direccion` AS empresa_direccion,
+     productos.`descripcion` AS productos_descripcion,
+     traslados.`fecha` AS traslados_fecha,
+     traslados.`fecha_recepcion` AS traslados_fecha_recepcion,
+     almacen.`id_almacen` AS almacen_id_almacen,
+     almacen.nombre as almacen_nombre,
+     traslados.`id_traslado` AS traslados_id_traslado,
+     destino.nombre as nombre_destino, 
+     destino.`direccion` AS direccion_llegada,
+     almacen.`direccion` AS direccion_origen,
+     productos.`marca` AS productos_marca,
+     productos_traslados.`c_enviado` AS productos_traslados_c_enviado,
+     productos_traslados.`c_recibido` AS productos_traslados_c_recibido,
+     productos.`id_producto` AS productos_id_producto,
+     productos.`modelo` AS productos_modelo
+FROM
+     `empresa` empresa 
+     INNER JOIN `almacen` almacen ON empresa.`id_empresa` = almacen.`id_empresa`
+     INNER JOIN `traslados` traslados ON almacen.`id_almacen` = traslados.`a_origen`
+     INNER JOIN `productos_traslados` productos_traslados ON traslados.`id_traslado` = productos_traslados.`id_traslado`
+     INNER JOIN `almacen` destino ON traslados.`a_destino` = destino.`id_almacen`
+     INNER JOIN `productos` productos ON productos_traslados.`id_producto` = productos.`id_producto`
+WHERE
+     traslados.id_traslado = $P{id_traslado}
+     order by productos.descripcion, productos.marca, productos.modelo asc]]>
+	</queryString>
+	<field name="empresa_ruc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="empresa_ruc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="empresa_razon" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="empresa_razon"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="empresa_direccion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="empresa_direccion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="productos_descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="traslados_fecha" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="traslados_fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="traslados"/>
+	</field>
+	<field name="traslados_fecha_recepcion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="traslados_fecha_recepcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="traslados"/>
+	</field>
+	<field name="almacen_id_almacen" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="almacen_id_almacen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<field name="almacen_nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="almacen_nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<field name="traslados_id_traslado" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="traslados_id_traslado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="traslados"/>
+	</field>
+	<field name="nombre_destino" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_destino"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<field name="direccion_llegada" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direccion_llegada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<field name="direccion_origen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="direccion_origen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<field name="productos_marca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_marca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_traslados_c_enviado" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="productos_traslados_c_enviado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos_traslados"/>
+	</field>
+	<field name="productos_traslados_c_recibido" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="productos_traslados_c_recibido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos_traslados"/>
+	</field>
+	<field name="productos_id_producto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_id_producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_modelo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_modelo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="125" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="410" y="0" width="145" height="16" forecolor="#FFFFFF" backcolor="#F80000" uuid="d84695a7-7fed-4abc-8f70-269599b2b6ca">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA DE TRASLADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="410" y="16" width="70" height="16" forecolor="#FFFFFF" backcolor="#F80000" uuid="b198a85a-32d6-4f6b-aa9e-9aa8aeb3bb84">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TRASLADO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="480" y="16" width="75" height="16" uuid="71215787-9f3f-4966-9e43-49ca9d8d8973">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traslados_id_traslado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="85" y="0" width="85" height="16" uuid="4ea94ade-1dc7-4790-8854-c6231188cbc7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZON SOCIAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="0" width="220" height="16" uuid="217e0c05-8566-41c6-a167-5925623ce808">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_razon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="85" y="16" width="75" height="16" uuid="68e9c7bc-014b-4471-af83-558dd564124e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="16" width="98" height="16" uuid="1413edc9-9d96-4cbb-ad5a-5fc15619547a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_ruc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="85" y="32" width="75" height="16" uuid="9a3212e2-c6f7-466a-9a37-5165cb217bad">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCION]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="32" width="220" height="16" uuid="b44dc292-1bd0-4ce8-a71d-3691d838ef9b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="130" height="16" uuid="214d4a6a-bd9c-4363-931d-905999303f69">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCION DE PARTIDA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="80" width="425" height="16" uuid="c8e329bd-f74e-4738-87a5-5f47016cfab3">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{almacen_nombre} + " | " + $F{direccion_origen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="96" width="130" height="16" uuid="3b3d05c0-3c92-41a1-ba58-219db8fcf656">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIRECCION DE LLEGADA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="96" width="425" height="16" uuid="2b567710-3b0f-4619-99db-fae9abe6ae08">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_destino} + " | " + $F{direccion_llegada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="410" y="32" width="70" height="16" forecolor="#FFFFFF" backcolor="#F80000" uuid="182969c2-4290-4f76-9965-b7291f9f7b78">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="480" y="32" width="75" height="16" uuid="a6d984b0-bbef-42b2-a62d-a17739a9b0f6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{traslados_fecha}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="0" width="85" height="67" uuid="f0fd7757-43b4-4049-8d3e-8e2283066da8"/>
+				<imageExpression><![CDATA["http://lunasystemsperu.com/clientes/sonomusic/images/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="51" height="20" forecolor="#FFFFFF" backcolor="#F80000" uuid="e0dc50f1-1f46-47d1-a8c1-7c8442e53726"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="51" y="0" width="275" height="20" forecolor="#FFFFFF" backcolor="#F80000" uuid="ba89d1b2-de9c-451b-9699-1dbb81429d1b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE / MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="326" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#F80000" uuid="d344218e-b425-4088-8f58-8776be1d3044"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="426" y="0" width="62" height="20" forecolor="#FFFFFF" backcolor="#F80000" uuid="1e6129d6-e0e1-4dce-b52e-8ee4737351d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.Enviado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="488" y="0" width="67" height="20" forecolor="#FFFFFF" backcolor="#F80000" uuid="9add59c8-bff5-40b1-bf4f-d5564ba813bd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.Recibido]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="51" height="14" uuid="187514c6-d10a-4c51-a62e-e059aa0c9e7d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_id_producto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="51" y="0" width="269" height="14" uuid="9e71f5fc-1229-44c7-b048-21d57130b6ff">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_descripcion}+ " | "+$F{productos_modelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="326" y="0" width="100" height="14" uuid="24c38980-c4e0-40f7-acce-c1f4c5b8b8e6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement stretchType="RelativeToBandHeight" x="426" y="0" width="62" height="14" uuid="987d048f-37cb-4119-8bc8-3ac29e38a5cf">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_traslados_c_enviado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement stretchType="RelativeToBandHeight" x="488" y="0" width="67" height="14" uuid="0f6d49bb-cb5d-4631-9cc7-0c1bce97c520">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_traslados_c_recibido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

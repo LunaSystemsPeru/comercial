@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptt_mayor_cero" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b408f1b-a81e-4768-b02f-02ba88900b32">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_almacen" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     productos.`descripcion` AS productos_descripcion,
+     productos.`marca` AS productos_marca,
+     productos.`modelo` AS productos_modelo,
+     productos.`precio` AS productos_precio,
+     productos_almacen.`id_almacen` AS productos_almacen_id_almacen,
+     productos_almacen.`id_producto` AS productos_almacen_id_producto,
+     productos_almacen.`cactual` AS productos_almacen_cactual,
+     productos.`id_producto` AS productos_id_producto
+FROM
+     `productos_almacen` productos_almacen INNER JOIN `productos` productos ON productos_almacen.`id_producto` = productos.`id_producto`
+WHERE productos_almacen.`cactual`>'0' and productos_almacen.`id_almacen`=$P{id_almacen}]]>
+	</queryString>
+	<field name="productos_descripcion" class="java.lang.String"/>
+	<field name="productos_marca" class="java.lang.String"/>
+	<field name="productos_modelo" class="java.lang.String"/>
+	<field name="productos_precio" class="java.lang.Double"/>
+	<field name="productos_almacen_id_almacen" class="java.lang.Integer"/>
+	<field name="productos_almacen_id_producto" class="java.lang.Integer"/>
+	<field name="productos_almacen_cactual" class="java.lang.Integer"/>
+	<field name="productos_id_producto" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="32" uuid="32db10fd-1018-4310-967d-bdb04b529fc4"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTOS MAYOR A CERO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="20" uuid="218cdb15-2302-4f5e-ba61-60b51d6f2c5f"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="0" width="172" height="20" uuid="1c4bb1fe-f9f3-45a5-ad35-9fb578e0442d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE - MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="0" width="100" height="20" uuid="0b9a6640-d2e4-436b-8f49-8890c7572980"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MARCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="0" width="67" height="20" uuid="ef303d39-b552-4c44-9906-24bfd0f1e1b4"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="55" height="20" uuid="e83c2ba5-238a-4a7e-bfc5-d63f160364a5"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="47" height="20" uuid="1a5b98e6-9ce7-4a89-8440-ad260c2241ce"/>
+				<textElement textAlignment="Justified">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BUENO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="0" width="50" height="20" uuid="007de726-f600-441a-9d6b-33ae1a9fd42e"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MALO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="59" height="20" uuid="14270bcc-f196-4f4b-8b90-8bc9831317df"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{productos_id_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="59" y="0" width="166" height="20" uuid="46daca11-cd86-4e35-a241-1cd7818f2f4c"/>
+				<textFieldExpression><![CDATA[$F{productos_descripcion}+ ' ' + $F{productos_modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="225" y="0" width="100" height="20" uuid="c660195b-d8b1-40cb-9fda-b384bc4a80b3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{productos_marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="325" y="0" width="54" height="20" uuid="035b9523-5ddf-4372-840b-faa586ddbe02"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{productos_almacen_cactual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="45" height="20" uuid="6ddc888d-65f9-45ae-bc5f-048cc15d5bf2"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{productos_precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="447" y="0" width="36" height="20" uuid="b1558bea-9ee6-438e-ae10-37d92ab44824"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="0" width="40" height="20" uuid="7211e677-d9c3-4675-8114-1f72efad6976"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="11" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

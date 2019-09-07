@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_tienda_empresa" pageWidth="960" pageHeight="802" columnWidth="960" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="f904ac2d-e8c8-44a2-885a-70a498163c1b">
+	<property name="ireport.zoom" value="0.9090909090909113"/>
+	<property name="ireport.x" value="118"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW-SONOMUSIC-LOCAL"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="p_id_empresa" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     productos.`id_producto` AS productos_id_producto,
+     productos.`descripcion` AS productos_descripcion,
+     productos.`modelo` AS productos_modelo,     
+     productos.`marca` AS productos_marca,
+     productos.`costo` AS productos_costo,
+     productos.`precio` AS productos_precio,
+     sum(productos_almacen.`cactual`) AS productos_almacen_cactual
+FROM
+     `empresa` empresa
+     INNER JOIN `almacen` almacen ON empresa.`id_empresa` = almacen.`id_empresa`
+     INNER JOIN `productos_almacen` productos_almacen ON almacen.`id_almacen` = productos_almacen.`id_almacen`
+     INNER JOIN `productos` productos ON productos_almacen.`id_producto` = productos.`id_producto`
+where empresa.id_empresa =  $P{p_id_empresa} 
+group by productos.id_producto
+order by  productos.descripcion, productos.modelo, productos.marca asc]]>
+	</queryString>
+	<field name="productos_id_producto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_id_producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_modelo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_modelo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_marca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_marca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_costo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="productos_costo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_precio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="productos_precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_almacen_cactual" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_almacen_cactual"/>
+	</field>
+	<variable name="subtotalcosto" class="java.lang.Double"/>
+	<variable name="ganancia" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="960" height="20" uuid="e714ef90-59a7-4ea4-bbcf-37714bc20974"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE PRODUCTOS VALORIZADOS POR TIENDA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="20" uuid="b9a4e061-e9d8-4dc1-a4ef-f068f33557e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="0" width="410" height="20" uuid="15884203-4b6a-42f5-82b1-5908844a6cfd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="0" width="160" height="20" uuid="709e3d07-1d5b-4453-8b94-f35302fcd91c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MARCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="624" y="0" width="67" height="20" uuid="efe8dfbc-ae7c-4f71-b49a-f5f02ee50c7e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P. COMPRA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="691" y="0" width="67" height="20" uuid="8b5f2545-6460-4ab4-96f1-f34fa415e2e5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P. VENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="758" y="0" width="62" height="20" uuid="bcf8f2fc-1358-4b7f-bf72-583e10378351"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="820" y="0" width="70" height="20" uuid="986bda12-2f94-42bb-b276-5eb85b80d26d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUB. TCOSTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="890" y="0" width="70" height="20" uuid="51a9f49b-2212-4558-a3e2-a6f49f2101d3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GANANCIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="16" uuid="a76641f7-0a2f-48cf-a870-3992492a50ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_id_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="410" height="16" uuid="24a5465f-19da-4ccc-a526-1c9c21476fcb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_descripcion} + " - " + $F{productos_modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="0" width="160" height="16" uuid="30b98c2c-c35f-4180-81af-416a2a0dcaa6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_marca}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="624" y="0" width="67" height="16" uuid="fb2b8179-db65-4060-a9cc-87f358d411d1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_costo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="691" y="0" width="67" height="16" uuid="cfb9457f-5ee5-41fa-a0b9-8f10678dcbec"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_precio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement x="758" y="0" width="62" height="16" uuid="30983749-b642-4fcc-9624-01326d6ff240"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_almacen_cactual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="820" y="0" width="70" height="16" uuid="a7c91c8a-62e6-4a56-958d-b9eca442096b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_almacen_cactual} * $F{productos_costo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="890" y="0" width="70" height="16" uuid="5392ada5-2e62-4285-8b9b-52f30808e43a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{productos_precio} - $F{productos_costo}) * $F{productos_almacen_cactual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

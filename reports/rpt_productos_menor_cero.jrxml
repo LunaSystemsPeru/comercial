@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_productos_cantidad_menor_o_igual_0" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="98d65fbe-3d86-41db-82eb-ef0d4883ef07">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NEW-SONOMUSIC-LOCAL"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="p_id_tienda" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     productos.`descripcion` AS productos_descripcion,
+     productos.`marca` AS productos_marca,
+     productos.`modelo` AS productos_modelo,
+     productos.`precio` AS productos_precio,
+     productos_almacen.`id_almacen` AS productos_almacen_id_almacen,
+     productos_almacen.`id_producto` AS productos_almacen_id_producto,
+     productos_almacen.`cactual` AS productos_almacen_cactual,
+     productos.`id_producto` AS productos_id_producto,
+     al.nombre as nombre_almacen
+FROM
+     `productos_almacen` productos_almacen 
+     inner join almacen as al on al.id_almacen = productos_almacen.id_almacen
+     INNER JOIN `productos` productos ON productos_almacen.`id_producto` = productos.`id_producto`
+WHERE productos_almacen.`cactual`<='0' and productos_almacen.`id_almacen`=  $P{p_id_tienda} ]]>
+	</queryString>
+	<field name="productos_descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_marca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_marca"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_modelo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="productos_modelo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_precio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="productos_precio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="productos_almacen_id_almacen" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_almacen_id_almacen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos_almacen"/>
+	</field>
+	<field name="productos_almacen_id_producto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_almacen_id_producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos_almacen"/>
+	</field>
+	<field name="productos_almacen_cactual" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_almacen_cactual"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos_almacen"/>
+	</field>
+	<field name="productos_id_producto" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="productos_id_producto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
+	</field>
+	<field name="nombre_almacen" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_almacen"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="almacen"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="16" uuid="4030a77d-6d7f-41ba-bc26-20a6fae74374">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTOS MENOR O IGUAL A CERO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="40" y="0" width="184" height="16" uuid="1ae84bcf-0a9b-4dfa-aa4c-70b804980747">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_almacen}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="16" uuid="2b8ba301-35ee-4996-a692-8f188c687004">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tienda:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="40" height="16" uuid="e7c95e67-e0a3-450e-8386-0498c0447162">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="0" width="184" height="16" uuid="182d23a1-3e1d-4176-8a5b-9b9bfc65191b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE - MODELO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="0" width="100" height="16" uuid="3fafa495-1843-43b0-bf38-41004f5bcc1d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MARCA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="70" height="16" uuid="2994769e-7e7e-4e3d-94aa-347199efc595">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="65" height="16" uuid="f03c4b47-91bc-4e8e-9253-f8f719797d1e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ PRECIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="459" y="0" width="49" height="16" uuid="71438658-bef0-4ed1-8867-df2d55ae04a1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BUENO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="508" y="0" width="47" height="16" uuid="707720a1-8394-4d02-8ae5-c2f341c2c753">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MALO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="40" height="16" isPrintWhenDetailOverflows="true" uuid="6a4be5c9-7d11-4a7f-b207-37fbfe1244d0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_id_producto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="40" y="0" width="184" height="16" isPrintWhenDetailOverflows="true" uuid="72604946-1305-4ec3-a1e2-3eabb4841010">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_descripcion} + " - " + $F{productos_modelo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="224" y="0" width="100" height="16" isPrintWhenDetailOverflows="true" uuid="a4261fa9-22a9-4a4d-8652-8ee4191d5217">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0">
+				<reportElement x="324" y="0" width="70" height="16" isPrintWhenDetailOverflows="true" uuid="9c080a1f-bc98-4b6f-b702-ba80c698633b">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_almacen_cactual}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement x="394" y="0" width="65" height="16" isPrintWhenDetailOverflows="true" uuid="c89949ae-eada-4bd3-913e-e7c1b05859e4">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{productos_precio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="459" y="0" width="49" height="16" isPrintWhenDetailOverflows="true" uuid="323af5f1-5843-4e64-9ae7-357f1595e001">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="508" y="0" width="47" height="16" isPrintWhenDetailOverflows="true" uuid="4ede280b-8d69-43f1-a7db-b79023d1a6fd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="URW Gothic L" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
