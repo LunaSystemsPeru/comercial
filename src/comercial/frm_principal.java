@@ -495,7 +495,7 @@ public class frm_principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sono Music Import | Sistema de Gestion de Ventas");
+        setTitle("Comercial Peña | Sistema de Gestion de Ventas");
         setBackground(new java.awt.Color(204, 204, 204));
         setIconImage(Toolkit.getDefaultToolkit().getImage("reports/logo.png"));
 

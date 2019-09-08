@@ -17,7 +17,7 @@ public class cl_conectar {
 
     private static Connection conexion = null;
     private static String bd = "comercial_penia"; // Nombre de BD.
-    private static String user = "comercial_lsp"; // Usuario de BD.
+    private static String user = "lsp_comercial"; // Usuario de BD.
     private static String password = "KEvNlFS2ro7Q"; // Password de BD.
     private static String url = "lunasystemsperu.com";
     //private static String url = "localhost";
