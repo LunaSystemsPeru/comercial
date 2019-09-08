@@ -258,6 +258,9 @@ public class frm_principal extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         lbl_usuario = new javax.swing.JLabel();
 
+        jd_login.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        jd_login.setTitle("Ingresar al Sistema");
+
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -497,7 +500,7 @@ public class frm_principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comercial Peña | Sistema de Gestion de Ventas");
         setBackground(new java.awt.Color(204, 204, 204));
-        setIconImage(Toolkit.getDefaultToolkit().getImage("reports/logo.png"));
+        setIconImage(Toolkit.getDefaultToolkit().getImage("reports/icono.jpg"));
 
         jToolBar1.setBorder(null);
         jToolBar1.setFloatable(false);
@@ -508,7 +511,6 @@ public class frm_principal extends javax.swing.JFrame {
         jLabel1.setText("Tienda: ");
         jToolBar1.add(jLabel1);
 
-        lbl_nom_tienda.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lbl_nom_tienda.setText("Principal");
         jToolBar1.add(lbl_nom_tienda);
 
@@ -520,7 +522,6 @@ public class frm_principal extends javax.swing.JFrame {
         jLabel3.setText("Empresa: ");
         jToolBar1.add(jLabel3);
 
-        lbl_empresa.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lbl_empresa.setText("10469932091 | OYANGUREN GIRON LUIS ENRIQUE");
         jToolBar1.add(lbl_empresa);
 
@@ -896,7 +897,6 @@ public class frm_principal extends javax.swing.JFrame {
         jLabel13.setText("Traslados Pendientes:");
         jToolBar3.add(jLabel13);
 
-        lbl_traslados_encontrados.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lbl_traslados_encontrados.setText("0");
         jToolBar3.add(lbl_traslados_encontrados);
 
@@ -911,7 +911,6 @@ public class frm_principal extends javax.swing.JFrame {
         jLabel6.setText("Usuario: ");
         jToolBar3.add(jLabel6);
 
-        lbl_usuario.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lbl_usuario.setText("loyangureng");
         jToolBar3.add(lbl_usuario);
 
@@ -929,7 +928,7 @@ public class frm_principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jDesktopPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jToolBar3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
