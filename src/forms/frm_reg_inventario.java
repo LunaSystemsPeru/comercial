@@ -35,7 +35,6 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
 
     cl_producto c_producto = new cl_producto();
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
-    cl_productos_empresa c_producto_empresa = new cl_productos_empresa();
 
     cl_inventarios c_inventario = new cl_inventarios();
     cl_productos_inventarios c_detalle = new cl_productos_inventarios();
@@ -55,7 +54,6 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
     public frm_reg_inventario() {
         initComponents();
         c_producto_almacen.setAlmacen(id_almacen);
-        c_producto_empresa.setId_empresa(id_empresa);
         modelo_inventario();
         cargar_productos();
 
@@ -465,7 +463,7 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
         int cenviar = Integer.parseInt(txt_cantidad_enviar.getText());
         Object fila[] = new Object[7];
         fila[0] = c_producto.getId();
-        fila[1] = c_producto.getDescripcion() + " | " + c_producto.getModelo();
+        fila[1] = c_producto.getDescripcion();
         fila[2] = c_producto.getMarca();
         fila[3] = c_varios.formato_numero(c_producto.getPrecio());
         fila[4] = c_producto_almacen.getCantidad();
@@ -491,13 +489,11 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
                     //validar que no existe en la tabla
                     if (valida_tabla(c_producto.getId())) {
                         c_producto.validar_id();
-                        c_producto_empresa.setId_producto(c_producto.getId());
-                        c_producto_empresa.obtener_datos();
                         jd_add_producto.setModal(true);
                         jd_add_producto.setSize(717, 164);
                         jd_add_producto.setLocationRelativeTo(null);
-                        txt_producto.setText(c_producto.getDescripcion() + " " + c_producto.getMarca() + " " + c_producto.getModelo());
-                        txt_precio.setText(c_varios.formato_numero(c_producto_empresa.getPrecio()));
+                        txt_producto.setText(c_producto.getDescripcion() + " " + c_producto.getMarca());
+                        txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
                         txt_cantidad_actual.setText(c_producto_almacen.getCantidad() + "");
                         txt_cantidad_enviar.setText("");
                         txt_cantidad_enviar.setEnabled(true);
@@ -506,14 +502,12 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
                     } else {
                         c_producto.setId(0);
                         c_producto_almacen.setProducto(0);
-                        c_producto_empresa.setId_producto(0);
                         limpiar_buscar();
                         JOptionPane.showMessageDialog(null, "ESTE PRODUCTO YA ESTA SELECCIONADO");
                     }
                 } else {
                     c_producto.setId(0);
                     c_producto_almacen.setProducto(0);
-                    c_producto_empresa.setId_producto(0);
                     limpiar_buscar();
                     JOptionPane.showMessageDialog(null, "ERROR AL SELECCIONAR PRODUCTO");
                 }

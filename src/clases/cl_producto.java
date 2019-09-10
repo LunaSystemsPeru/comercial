@@ -25,7 +25,7 @@ public class cl_producto {
     private int id;
     private String descripcion;
     private String marca;
-    private String modelo;
+    private String cod_barra;
     private double costo;
     private double precio;
     private double comision;
@@ -61,12 +61,12 @@ public class cl_producto {
         this.marca = marca.toUpperCase().trim();
     }
 
-    public String getModelo() {
-        return modelo;
+    public String getCod_barra() {
+        return cod_barra;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo.toUpperCase().trim();
+    public void setCod_barra(String cod_barra) {
+        this.cod_barra = cod_barra;
     }
 
     public double getCosto() {
@@ -151,7 +151,7 @@ public class cl_producto {
             while (rs.next()) {
                 Object[] fila = new Object[7];
                 fila[0] = rs.getObject("id_producto");
-                fila[1] = rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim();
+                fila[1] = rs.getString("descripcion").trim();
                 fila[2] = rs.getString("marca");
                 fila[3] = c_varios.formato_numero(rs.getDouble("precio"));
                 fila[4] = rs.getString("clase");
@@ -204,7 +204,7 @@ public class cl_producto {
             if (rs.next()) {
                 descripcion = rs.getString("descripcion");
                 marca = rs.getString("marca");
-                modelo = rs.getString("modelo");
+                cod_barra = rs.getString("cod_barra");
                 costo = rs.getDouble("costo");
                 precio = rs.getDouble("precio");
                 comision = rs.getDouble("comision");
@@ -225,7 +225,7 @@ public class cl_producto {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into productos "
-                + "values ('" + id + "', '" + descripcion + "', '" + marca + "', '" + modelo + "', '"+costo+"', '" + precio + "', '0', '" + comision + "', "
+                + "values ('" + id + "', '" + descripcion + "', '" + marca + "', '" + cod_barra + "', '"+costo+"', '" + precio + "', '0', '" + comision + "', "
                 + "'" + id_clasificacion + "', '1', '" + id_proveedor + "')";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
@@ -239,7 +239,7 @@ public class cl_producto {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "update productos "
-                + "set descripcion = '" + descripcion + "', marca = '" + marca + "', modelo = '" + modelo + "', precio = '" + precio + "', costo = '" + costo + "', comision = '" + comision + "', "
+                + "set descripcion = '" + descripcion + "', marca = '" + marca + "', cod_barra = '" + cod_barra + "', precio = '" + precio + "', costo = '" + costo + "', comision = '" + comision + "', "
                 + "clase = '" + id_clasificacion + "' "
                 + "where id_producto = '" + id + "'";
         System.out.println(query);

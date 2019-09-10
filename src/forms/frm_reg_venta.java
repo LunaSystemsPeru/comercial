@@ -54,7 +54,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
     cl_documentos_almacen c_doc_almacen = new cl_documentos_almacen();
     cl_documentos_almacen c_doc_guia;
-    cl_productos_empresa c_producto_empresa = new cl_productos_empresa();
 
     m_mis_documentos m_t_documentos = new m_mis_documentos();
     m_ubigeo m_ubigeo = new m_ubigeo();
@@ -92,7 +91,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         initComponents();
         txt_fecha.setText(c_varios.fecha_usuario(c_varios.getFechaActual()));
         c_producto_almacen.setAlmacen(id_almacen);
-        c_producto_empresa.setId_empresa(id_empresa);
         cargar_productos();
         modelo_venta();
 
@@ -193,7 +191,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         System.out.println("producto seleccionado " + pnombre);
                         c_producto.setId(pcodigo);
                         c_producto_almacen.setProducto(pcodigo);
-                        c_producto_empresa.setId_producto(pcodigo);
                     } else {
                         System.out.println("El item es de un tipo desconocido");
                     }
@@ -203,11 +200,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             tac_productos.setMode(0);
             tac_productos.setCaseSensitive(false);
             Statement st = c_conectar.conexion();
-            String sql = "select p.descripcion, pa.cactual, pe.precio, p.id_producto, p.marca, p.modelo "
+            String sql = "select p.descripcion, pa.cactual, p.precio, p.id_producto, p.marca, p.modelo "
                     + "from productos as p "
                     + "inner join productos_almacen as pa on pa.id_producto = p.id_producto "
-                    + "inner join almacen as al on al.id_almacen = pa.id_almacen "
-                    + "inner join productos_empresa as pe on pe.id_empresa = al.id_empresa and pe.id_producto = pa.id_producto "
                     + "where pa.id_almacen = '" + id_almacen + "' and pa.cactual > 0";
             ResultSet rs = c_conectar.consulta(st, sql);
             while (rs.next()) {
@@ -1536,9 +1531,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     //validar que no existe en la tabla
                     if (valida_tabla(c_producto.getId())) {
                         c_producto.validar_id();
-                        c_producto_empresa.obtener_datos();
                         btn_ver_tiendas.setEnabled(true);
-                        txt_precio.setText(c_varios.formato_numero(c_producto_empresa.getPrecio()));
+                        txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
                         txt_cactual.setText(c_producto_almacen.getCantidad() + "");
                         txt_cantidad.setText("1");
                         txt_cantidad.setEnabled(true);
@@ -1546,14 +1540,12 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         txt_cantidad.requestFocus();
                     } else {
                         c_producto.setId(0);
-                        c_producto_empresa.setId_empresa(0);
                         c_producto_almacen.setProducto(0);
                         limpiar_buscar();
                         JOptionPane.showMessageDialog(null, "ESTE PRODUCTO YA ESTA SELECCIONADO");
                     }
                 } else {
                     c_producto.setId(0);
-                    c_producto_empresa.setId_empresa(0);
                     c_producto_almacen.setProducto(0);
                     limpiar_buscar();
                     JOptionPane.showMessageDialog(null, "ERROR AL SELECCIONAR PRODUCTO");
@@ -1618,7 +1610,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             if (!error) {
                 Object fila[] = new Object[5];
                 fila[0] = c_producto.getId();
-                fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca() + " | " + c_producto.getModelo();
+                fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca();
                 fila[2] = cantidad;
                 fila[3] = c_varios.formato_numero(precio);
                 fila[4] = c_varios.formato_numero(parcial);

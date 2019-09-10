@@ -733,7 +733,7 @@ public class frm_mod_separacion extends javax.swing.JDialog {
             if (!error) {
                 Object fila[] = new Object[5];
                 fila[0] = c_producto.getId();
-                fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca() + " | " + c_producto.getModelo();
+                fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca();
                 fila[2] = cantidad;
                 fila[3] = c_varios.formato_numero(precio);
                 fila[4] = c_varios.formato_numero(parcial);

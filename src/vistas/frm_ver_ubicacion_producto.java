@@ -32,7 +32,6 @@ public class frm_ver_ubicacion_producto extends javax.swing.JDialog {
             c_producto.validar_id();
             txt_descripcion.setText(c_producto.getDescripcion());
             txt_marca.setText(c_producto.getMarca());
-            txt_modelo.setText(c_producto.getModelo());
             String query = "select a.nombre as nalmacen, pa.cactual, pa.f_infreso as f_ingreso, pa.f_salida "
                     + "from productos_almacen as pa "
                     + "inner join almacen as a on a.id_almacen = pa.id_almacen "

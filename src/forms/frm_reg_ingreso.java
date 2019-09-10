@@ -45,7 +45,6 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
     cl_proveedor c_proveedor = new cl_proveedor();
     cl_producto c_producto = new cl_producto();
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
-    cl_productos_empresa c_producto_empresa = new cl_productos_empresa();
 
     m_documentos_sunat m_documentos = new m_documentos_sunat();
     m_almacen m_almacen = new m_almacen();
@@ -63,7 +62,6 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         initComponents();
         txt_fecha.setText(c_varios.fecha_usuario(c_varios.getFechaActual()));
         txt_fecha.requestFocus();
-        c_producto_empresa.setId_empresa(id_empresa);
         modelo_ingreso();
     }
 
@@ -113,7 +111,6 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                         String pnombre = ((cla_producto) itemSelected).getDescripcion();
                         System.out.println("producto seleccionado " + pnombre);
                         c_producto.setId(pcodigo);
-                        c_producto_empresa.setId_producto(pcodigo);
                     } else {
                         System.out.println("El item es de un tipo desconocido");
                     }
@@ -123,9 +120,8 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             tac_productos.setMode(0);
             tac_productos.setCaseSensitive(false);
             Statement st = c_conectar.conexion();
-            String sql = "select p.descripcion, pe.precio, p.costo, p.id_producto, p.marca, p.modelo "
-                    + "from productos as p "
-                    + "inner join productos_empresa as pe on pe.id_empresa = '"+id_empresa+"' and pe.id_producto = p.id_producto ";
+            String sql = "select p.descripcion, p.precio, p.costo, p.id_producto, p.marca, p.modelo "
+                    + "from productos as p ";
             ResultSet rs = c_conectar.consulta(st, sql);
             while (rs.next()) {
                 int id_producto = rs.getInt("id_producto");
@@ -896,9 +892,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     if (valida_tabla(c_producto.getId())) {
                         c_producto_almacen.setProducto(c_producto.getId());
                         c_producto_almacen.validar_id();
-                        c_producto_empresa.setId_producto(c_producto.getId());
-                        c_producto_empresa.obtener_datos();
-                        txt_precio.setText(c_varios.formato_numero(c_producto_empresa.getPrecio()));
+                        txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
                         txt_costo.setText(c_varios.formato_numero(c_producto.getCosto()));
                         txt_cactual.setText(c_producto_almacen.getCantidad() + "");
                         txt_cingreso.setText("1");
@@ -998,7 +992,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         double parcial = costo * cantidad;
         Object fila[] = new Object[7];
         fila[0] = c_producto.getId();
-        fila[1] = c_producto.getDescripcion() + " | " + c_producto.getModelo();
+        fila[1] = c_producto.getDescripcion();
         fila[2] = c_producto.getMarca();
         fila[3] = cantidad;
         fila[4] = c_varios.formato_numero(costo);
