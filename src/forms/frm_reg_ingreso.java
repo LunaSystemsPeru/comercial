@@ -767,7 +767,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
     private void txt_fechaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fechaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_fecha.getText().length() == 10) {
-                m_documentos.cbx_documentos(cbx_tido);
+                m_documentos.cbx_documentos_ingreso(cbx_tido);
                 cbx_tido.setEnabled(true);
                 cbx_tido.requestFocus();
             }

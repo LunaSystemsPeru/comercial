@@ -6,7 +6,7 @@
 package vistas;
 
 import clases.cl_almacen;
-import clases.cl_documentos_almacen;
+import clases.cl_documento_almacen;
 import clases.cl_empresa;
 import clases_autocomplete.cla_empresa;
 import clases_autocomplete.cla_mis_documentos;
@@ -23,7 +23,7 @@ public class frm_ver_almacenes extends javax.swing.JInternalFrame {
     cl_almacen c_almacen = new cl_almacen();
     cl_empresa c_empresa = new cl_empresa();
 
-    cl_documentos_almacen c_mis_documentos = new cl_documentos_almacen();
+    cl_documento_almacen c_mis_documentos = new cl_documento_almacen();
 
     int fila_seleccionada;
 

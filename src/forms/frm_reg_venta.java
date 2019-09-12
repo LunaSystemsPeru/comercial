@@ -8,7 +8,7 @@ package forms;
 import clases.cl_cliente;
 import clases.cl_cobros_ventas;
 import clases.cl_conectar;
-import clases.cl_documentos_almacen;
+import clases.cl_documento_almacen;
 import clases.cl_guia_remision;
 import clases.cl_producto;
 import clases.cl_productos_almacen;
@@ -52,8 +52,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     cl_cliente c_cliente = new cl_cliente();
     cl_producto c_producto = new cl_producto();
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
-    cl_documentos_almacen c_doc_almacen = new cl_documentos_almacen();
-    cl_documentos_almacen c_doc_guia;
+    cl_documento_almacen c_doc_almacen = new cl_documento_almacen();
+    cl_documento_almacen c_doc_guia;
 
     m_mis_documentos m_t_documentos = new m_mis_documentos();
     m_ubigeo m_ubigeo = new m_ubigeo();
@@ -1857,7 +1857,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                             c_guia.setDni_chofer(txt_dni_chofer.getText());
                             c_guia.setPlaca(txt_placa_vehiculo.getText());
 
-                            c_doc_guia = new cl_documentos_almacen();
+                            c_doc_guia = new cl_documento_almacen();
                             c_doc_guia.setId_tido(5);
                             c_doc_guia.setId_almacen(c_venta.getId_almacen());
                             c_doc_guia.comprobar_documento();
