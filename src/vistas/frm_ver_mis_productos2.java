@@ -77,7 +77,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
     }
 
     private void cargar_tabla() {
-        query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
+        query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
                 + "from productos_almacen as pa "
                 + "inner join productos as p on p.id_producto = pa.id_producto "
                 + "where pa.id_almacen = '" + id_almacen + "' "
@@ -876,7 +876,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
                 c_mis_productos.setAlmacen(id_almacen);
                 c_mis_productos.limpiar_tienda();
 
-                query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
+                query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
                         + "from productos_almacen as pa "
                         + "inner join productos as p on p.id_producto = pa.id_producto "
                         + "where pa.id_almacen = '" + id_almacen + "' "
@@ -931,7 +931,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
     private void txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_buscar.getText().length() == 0) {
-                query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
+                query = "select pa.id_producto, p.descripcion, p.marca,  p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
                         + "from productos_almacen as pa "
                         + "inner join productos as p on p.id_producto = pa.id_producto "
                         + "where pa.id_almacen = '" + id_almacen + "' "
@@ -944,10 +944,10 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
     private void txt_buscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyReleased
         String buscar = txt_buscar.getText().trim();
         if (buscar.length() > 0) {
-            query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
+            query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, pa.f_infreso, pa.f_salida "
                     + "from productos_almacen as pa "
                     + "inner join productos as p on p.id_producto = pa.id_producto "
-                    + "where pa.id_almacen = '" + id_almacen + "' and (p.descripcion like '%" + buscar + "%' or p.marca like '%" + buscar + "%' or p.modelo like '%" + buscar + "%' ) "
+                    + "where pa.id_almacen = '" + id_almacen + "' and (p.descripcion like '%" + buscar + "%' or p.marca like '%" + buscar + "%' ) "
                     + "order by p.descripcion asc , p.marca asc";
             c_mis_productos.mis_productos(query, jTable1);
         }

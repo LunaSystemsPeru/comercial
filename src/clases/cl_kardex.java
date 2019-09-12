@@ -154,7 +154,7 @@ public class cl_kardex {
                     return false;
                 }
             };
-            String query = "select k.id_kardex, k.fecha, p.descripcion, p.marca, p.modelo, tm.descripcion as nombre_timo, k.cant_ingreso, k.cant_salida, k.costo_ingreso, "
+            String query = "select k.id_kardex, k.fecha, p.descripcion, p.marca,  tm.descripcion as nombre_timo, k.cant_ingreso, k.cant_salida, k.costo_ingreso, "
                     + "k.costo_salida, ds.abreviado, k.serie_documento, k.numero_documento, k.id_usuarios, u.username, k.fecha_registro "
                     + "from kardex_productos as k "
                     + "inner join productos as p on p.id_producto = k.id_producto "
@@ -165,7 +165,7 @@ public class cl_kardex {
                     + "order by k.fecha_registro asc, k.id_kardex asc ";
 
             System.out.println(query);
-
+            
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -192,7 +192,7 @@ public class cl_kardex {
                 saldo = saldo + (rs.getInt("cant_ingreso") - rs.getInt("cant_salida"));
                 fila[0] = rs.getString("id_kardex");
                 fila[1] = c_varios.fecha_usuario(rs.getString("fecha"));
-                fila[2] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim() + " " + rs.getString("marca").trim()).trim();
+                fila[2] = (rs.getString("descripcion").trim() + " " + rs.getString("marca").trim()).trim();
                 fila[3] = rs.getString("nombre_timo");
                 fila[4] = rs.getString("abreviado") + " | " + c_varios.ceros_izquieda_letras(4, rs.getString("serie_documento")) + " - " + c_varios.ceros_izquieda_numero(7, rs.getInt("numero_documento"));
                 String cingreso = rs.getString("cant_ingreso");
