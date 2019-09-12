@@ -28,7 +28,7 @@ public class frm_ver_productos_todos extends javax.swing.JInternalFrame {
     public frm_ver_productos_todos() {
         initComponents();
         String query = "select * from productos "
-                + "order by descripcion asc, modelo asc, marca asc "
+                + "order by descripcion asc, marca asc "
                 + "limit 0";
         c_producto.mostrar(t_productos, query);
         contar_resultados();
@@ -250,25 +250,25 @@ public class frm_ver_productos_todos extends javax.swing.JInternalFrame {
 
             if (tipo_busqueda == 0) {
                 query = "select * from productos "
-                        + "where concat (descripcion, ' ', modelo, ' ', marca) like '%" + texto + "%' "
-                        + "order by descripcion asc, modelo asc, marca asc";
+                        + "where concat (descripcion, ' ', marca) like '%" + texto + "%' "
+                        + "order by descripcion asc,  marca asc";
             }
 
             if (tipo_busqueda == 1) {
                 query = "select * from productos "
                         + "where id_producto =  '" + texto + "' "
-                        + "order by descripcion asc, modelo asc, marca asc";
+                        + "order by descripcion asc,  marca asc";
             }
 
             if (tipo_busqueda == 2) {
                 query = "select * from productos "
                         + "where marca like  '%" + texto + "%' "
-                        + "order by descripcion asc, modelo asc, marca asc";
+                        + "order by descripcion asc, marca asc";
             }
             if (tipo_busqueda == 3) {
                 query = "select * from productos "
                         + "where precio = '" + texto + "' "
-                        + "order by descripcion asc, modelo asc, marca asc";
+                        + "order by descripcion asc, marca asc";
             }
 
             c_producto.mostrar(t_productos, query);
