@@ -11,6 +11,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 /**
  *
  * @author DELACRUZ
+ * 
  */
 public class Comercial {
 

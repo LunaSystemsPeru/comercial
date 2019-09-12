@@ -122,7 +122,7 @@ public class cl_productos_traslado {
                 }
             };
             //c_conectar.conectar();
-            String query = "select pt.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pt.c_enviado, pt.c_recibido "
+            String query = "select pt.id_producto, p.descripcion, p.marca, p.precio, pt.c_enviado, pt.c_recibido "
                     + "from productos_traslados as pt "
                     + "inner join productos as p on p.id_producto = pt.id_producto "
                     + "where pt.id_traslado = '" + id_traslado + "'";
@@ -143,7 +143,7 @@ public class cl_productos_traslado {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim()).trim();
                 fila[2] = rs.getString("marca").trim();
                 int tcenviado = rs.getInt("c_enviado");
                 double pprecio = rs.getDouble("precio");
@@ -181,7 +181,7 @@ public class cl_productos_traslado {
                 }
             };
             //c_conectar.conectar();
-            String query = "select pt.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pt.c_enviado, pt.c_recibido, pa.cactual "
+            String query = "select pt.id_producto, p.descripcion, p.marca,  p.precio, pt.c_enviado, pt.c_recibido, pa.cactual "
                     + "from productos_traslados as pt "
                     + "inner join traslados as t on t.id_traslado = pt.id_traslado "
                     + "inner join productos as p on p.id_producto = pt.id_producto "
@@ -204,7 +204,7 @@ public class cl_productos_traslado {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim()).trim();
                 fila[2] = rs.getString("marca").trim();
                 int cactual = rs.getInt("cactual");
                 double pprecio = rs.getDouble("precio");
