@@ -214,7 +214,7 @@ public class frm_reg_traslado extends javax.swing.JInternalFrame {
             tac_productos.setMode(0);
             tac_productos.setCaseSensitive(false);
             Statement st = c_conectar.conexion();
-            String sql = "select p.descripcion, pa.cactual, pe.precio, p.id_producto, p.marca, p.modelo "
+            String sql = "select p.descripcion, pa.cactual, pe.precio, p.id_producto, p.marca "
                     + "from productos_almacen as pa "
                     + "inner join almacen as al on al.id_almacen = pa.id_almacen "
                     + "inner join productos_empresa as pe on pe.id_empresa = al.id_empresa and pe.id_producto = pa.id_producto "
@@ -223,7 +223,7 @@ public class frm_reg_traslado extends javax.swing.JInternalFrame {
             ResultSet rs = c_conectar.consulta(st, sql);
             while (rs.next()) {
                 int id_producto = rs.getInt("id_producto");
-                String descripcion = rs.getString("descripcion") + " | " + rs.getString("marca") + " | " + rs.getString("modelo")
+                String descripcion = rs.getString("descripcion") + " | " + rs.getString("marca") 
                         + "    |    Cant: " + rs.getInt("cactual") + "    |    Precio: S/ " + c_varios.formato_numero(rs.getDouble("precio"));
                 tac_productos.addItem(new cla_producto(id_producto, descripcion));
             }
