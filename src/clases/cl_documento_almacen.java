@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author luis
  */
-public class cl_documentos_almacen {
+public class cl_documento_almacen {
     
     cl_conectar c_conectar = new cl_conectar();
     
@@ -25,7 +25,7 @@ public class cl_documentos_almacen {
     private String serie;
     private int numero;
 
-    public cl_documentos_almacen() {
+    public cl_documento_almacen() {
     }
 
     public int getId_tido() {

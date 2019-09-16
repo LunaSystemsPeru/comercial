@@ -165,7 +165,7 @@ public class cl_kardex {
                     + "order by k.fecha_registro asc, k.id_kardex asc ";
 
             System.out.println(query);
-
+            
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 

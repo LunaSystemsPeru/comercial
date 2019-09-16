@@ -151,7 +151,7 @@ public class cl_productos_almacen {
             while (rs.next()) {
 
                 fila[0] = rs.getString("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() ).trim();
                 fila[2] = rs.getString("marca").trim();
                 fila[3] = rs.getInt("cactual");
                 fila[4] = c_varios.formato_numero(rs.getDouble("precio"));
@@ -216,7 +216,7 @@ public class cl_productos_almacen {
             while (rs.next()) {
 
                 fila[0] = rs.getString("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() ).trim();
                 fila[2] = rs.getString("marca").trim();
                 fila[3] = rs.getInt("cactual");
                 fila[4] = c_varios.formato_numero(rs.getDouble("precio"));

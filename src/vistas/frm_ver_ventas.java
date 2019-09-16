@@ -9,7 +9,7 @@ import clases.cl_cliente;
 import clases.cl_cobros_ventas;
 import clases.cl_conectar;
 import clases.cl_documento_firmado;
-import clases.cl_documentos_almacen;
+import clases.cl_documento_almacen;
 import clases.cl_productos_ventas;
 import clases.cl_varios;
 import clases.cl_venta;
@@ -1309,7 +1309,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         cla_mis_documentos c_dcumento = (cla_mis_documentos) cbx_doc_venta.getSelectedItem();
         c_venta.setId_tido(c_dcumento.getId_tido());
 
-        cl_documentos_almacen c_doc_almacen = new cl_documentos_almacen();
+        cl_documento_almacen c_doc_almacen = new cl_documento_almacen();
         c_doc_almacen.setId_almacen(id_almacen);
         c_doc_almacen.setId_tido(c_dcumento.getId_tido());
         c_doc_almacen.comprobar_documento();
