@@ -894,7 +894,7 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar3.setBorderPainted(false);
         jToolBar3.setOpaque(false);
 
-        jLabel13.setText("Traslados Pendientes:");
+        jLabel13.setText("Traslados Pendientes: ");
         jToolBar3.add(jLabel13);
 
         lbl_traslados_encontrados.setText("0");
@@ -1012,6 +1012,8 @@ public class frm_principal extends javax.swing.JFrame {
         boolean existe_caja = c_caja.validar_caja();
 
         if (!existe_caja) {
+            txt_tienda.setText(c_almacen.getNombre());
+            txt_fecha.setText(c_varios.fecha_usuario(c_varios.getFechaActual()));
             jd_apertura.setModal(true);
             jd_apertura.setSize(398, 224);
             jd_apertura.setLocationRelativeTo(null);
