@@ -222,6 +222,7 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
                     }
                 }
                 if (documento.length() == 11) {
+                    JOptionPane.showMessageDialog(null, "Espere, se esta buscando los datos en la base de datos de SUNAT");
                     System.out.println("buscar ruc");
                     try {
                         String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);

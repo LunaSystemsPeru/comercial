@@ -51,6 +51,10 @@ public class cl_varios {
     DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
     DecimalFormat formato = null;
 
+    /*
+    @param number = 123548.00
+    return ######0.00 a dos decimales sin comas de miles
+     */
     public String formato_numero(Double number) {
         simbolo.setDecimalSeparator('.');
         formato = new DecimalFormat("######0.00", simbolo);
@@ -59,6 +63,10 @@ public class cl_varios {
         return numero;
     }
 
+    /*
+    @param number = 123548.00
+    return ######0.000 a tres decimales sin comas de miles
+     */
     public String formato_tc(Double number) {
         simbolo.setDecimalSeparator('.');
         formato = new DecimalFormat("######0.000", simbolo);
@@ -69,6 +77,7 @@ public class cl_varios {
 
     /*
     @param numero = #,###,##0.00 //para mostrar en totales , no suma
+    return #,###,##0.00 con comas de miles a dos decimales
      */
     public String formato_totales(Double number) {
         simbolo.setDecimalSeparator('.');

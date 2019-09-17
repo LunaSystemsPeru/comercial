@@ -8,22 +8,37 @@ package vistas;
 import clases.cl_compra;
 import clases.cl_varios;
 import forms.frm_reg_compra;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author luis
  */
 public class frm_ver_compras extends javax.swing.JInternalFrame {
- 
+
     //clases principales
     cl_varios c_varios = new cl_varios();
     cl_compra c_compra = new cl_compra();
+
+    //variables publicas
+    String query = "";
+
     /**
-     * 
+     *
      * Creates new form frm_ver_compras
      */
     public frm_ver_compras() {
         initComponents();
+        query = "SELECT c.id_compra, c.fecha, em.ruc as ruc_empresa, c.estado, p.nro_documento, "
+                + "p.razon_social, ds.abreviado as doc_sunat, c.serie, c.numero, c.total, c.pagado "
+                + "FROM compras as c "
+                + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
+                + "inner join empresa as em on em.id_empresa = c.id_empresa "
+                + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
+                + "where c.estado = 2 "
+                + "order by c.fecha asc ";
+        c_compra.mostrar(t_compras, query);
     }
 
     /**
@@ -45,10 +60,13 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_salir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txt_buscar = new javax.swing.JTextField();
+        cbx_tipo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_compras = new javax.swing.JTable();
+        lbl_ayuda = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setTitle("Ver Documentos de Compras y Pagos");
 
@@ -107,7 +125,28 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Buscar:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha", "Proveedor", "Periodo", "Nro Documento" }));
+        txt_buscar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_buscarFocusGained(evt);
+            }
+        });
+        txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_buscarKeyPressed(evt);
+            }
+        });
+
+        cbx_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fecha", "Proveedor", "Periodo", "Nro Documento" }));
+        cbx_tipo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cbx_tipoFocusGained(evt);
+            }
+        });
+        cbx_tipo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbx_tipoKeyPressed(evt);
+            }
+        });
 
         t_compras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,6 +161,12 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(t_compras);
 
+        lbl_ayuda.setText("Ayuda:");
+
+        jTextField1.setText("Deuda:");
+
+        jLabel3.setText("Total Deuda:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,9 +179,15 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbx_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)))
+                        .addComponent(txt_buscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_ayuda)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -146,10 +197,15 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
@@ -166,6 +222,86 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
 
+    private void cbx_tipoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_tipoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_buscar.setText("");
+            txt_buscar.requestFocus();
+        }
+    }//GEN-LAST:event_cbx_tipoKeyPressed
+
+    private void txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String texto = txt_buscar.getText();
+            if (texto.length() > 1) {
+                int tipo_busqueda = cbx_tipo.getSelectedIndex();
+                if (tipo_busqueda == 0) {
+                    if (texto.length() == 10) {
+                        texto = c_varios.fecha_myql(texto);
+                        query = "SELECT c.id_compra, c.fecha, em.ruc as ruc_empresa, c.estado, p.nro_documento, "
+                                + "p.razon_social, ds.abreviado as doc_sunat, c.serie, c.numero, c.total, c.pagado "
+                                + "FROM compras as c "
+                                + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
+                                + "inner join empresa as em on em.id_empresa = c.id_empresa "
+                                + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
+                                + "where c.fecha = '" + texto + "' "
+                                + "order by p.razon_social asc";
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fecha no es correcta");
+                        txt_buscar.selectAll();
+                        txt_buscar.requestFocus();
+                    }
+                }
+
+                if (tipo_busqueda == 1) {
+                    query = "SELECT c.id_compra, c.fecha, em.ruc as ruc_empresa, c.estado, p.nro_documento, "
+                            + "p.razon_social, ds.abreviado as doc_sunat, c.serie, c.numero, c.total, c.pagado "
+                            + "FROM compras as c "
+                            + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
+                            + "inner join empresa as em on em.id_empresa = c.id_empresa "
+                            + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
+                            + "where p.nro_documento like '%" + texto + "%' or p.razon_social like '%" + texto + "%' "
+                            + "order by c.fecha asc ";
+                }
+                
+                if (tipo_busqueda == 2) {
+                    query = "SELECT c.id_compra, c.fecha, em.ruc as ruc_empresa, c.estado, p.nro_documento, "
+                            + "p.razon_social, ds.abreviado as doc_sunat, c.serie, c.numero, c.total, c.pagado "
+                            + "FROM compras as c "
+                            + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
+                            + "inner join empresa as em on em.id_empresa = c.id_empresa "
+                            + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
+                            + "where concat(year(c.fecha), LPAD(month(c.fecha), 2, 0)) = '"+texto+"' "
+                            + "order by c.fecha asc ";
+                }
+                
+                if (tipo_busqueda == 3) {
+                    query = "SELECT c.id_compra, c.fecha, em.ruc as ruc_empresa, c.estado, p.nro_documento, "
+                            + "p.razon_social, ds.abreviado as doc_sunat, c.serie, c.numero, c.total, c.pagado "
+                            + "FROM compras as c "
+                            + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
+                            + "inner join empresa as em on em.id_empresa = c.id_empresa "
+                            + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
+                            + "where c.numero = '"+texto+"' "
+                            + "order by c.fecha asc ";
+                }
+                c_compra.mostrar(t_compras, query);
+                txt_buscar.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "ESTA VACIO");
+                txt_buscar.selectAll();
+                txt_buscar.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_buscarKeyPressed
+
+    private void cbx_tipoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbx_tipoFocusGained
+        lbl_ayuda.setText("PRESIONE ENTER PARA ESCRIBIR TEXTO DE BUSQUEDA");
+    }//GEN-LAST:event_cbx_tipoFocusGained
+
+    private void txt_buscarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_buscarFocusGained
+        lbl_ayuda.setText("PRESIONE ENTER PARA BUSCAR, SOLO SI EL TEXTO NO ESTA VACIO");
+    }//GEN-LAST:event_txt_buscarFocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
@@ -173,14 +309,17 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_pagos;
     private javax.swing.JButton btn_salir;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbx_tipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel lbl_ayuda;
     private javax.swing.JTable t_compras;
+    private javax.swing.JTextField txt_buscar;
     // End of variables declaration//GEN-END:variables
 }

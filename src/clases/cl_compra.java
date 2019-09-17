@@ -11,6 +11,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import render_tablas.render_compras;
 
 /**
  *
@@ -32,6 +33,7 @@ public class cl_compra {
     private int id_empresa;
     private int id_usuario;
     private int estado;
+    private String glosa;
 
     public cl_compra() {
     }
@@ -124,6 +126,14 @@ public class cl_compra {
         this.id_empresa = id_empresa;
     }
 
+    public String getGlosa() {
+        return glosa;
+    }
+
+    public void setGlosa(String glosa) {
+        this.glosa = glosa.toUpperCase();
+    }
+
     public void obtener_codigo() {
         try {
             Statement st = c_conectar.conexion();
@@ -198,7 +208,25 @@ public class cl_compra {
         c_conectar.cerrar(st);
         return registrado;
     }
-    
+
+    public boolean validar_documento() {
+        boolean existe = false;
+        try {
+            Statement st = c_conectar.conexion();
+            String query = "select * "
+                    + "from compras "
+                    + "where id_proveedor = '" + id_proveedor + "' and id_tido = '" + id_tido + "' and serie = '" + serie + "' and numero = '" + numero + "'";
+            System.out.println(query);
+            ResultSet rs = c_conectar.consulta(st, query);
+            if (rs.next()) {
+                existe = true;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return existe;
+    }
+
     public void mostrar(JTable tabla, String query) {
         DefaultTableModel modelo;
         try {
@@ -225,37 +253,25 @@ public class cl_compra {
 
             //Creando las filas para el JTable
             while (rs.next()) {
-                Object[] fila = new Object[7];
-                fila[0] = rs.getInt("id_cliente");
-                String sdocumento = rs.getString("documento");
-                if (sdocumento.length() == 11) {
-                    if (c_varios.esEntero(sdocumento)) {
-                        if (!c_varios.validar_RUC(sdocumento)) {
-                            System.out.println(" ruc no valido " + sdocumento);
-                            sdocumento = "-";
-                        }
-                    }
+                String documento = rs.getString("doc_sunat") + " | " + rs.getString("serie") + " - " + rs.getString("numero");
+                double dtotal = rs.getDouble("total");
+                double dpagado = rs.getDouble("pagado");
+                double ddeuda = dtotal - dpagado;
+                int iestado = rs.getInt("estado");
+
+                Object[] fila = new Object[8];
+                fila[0] = rs.getInt("id_compra");
+                fila[1] = rs.getString("ruc_empresa");
+                fila[2] = rs.getString("fecha");
+                fila[3] = documento;
+                fila[4] = rs.getString("nro_documento") + " | " + rs.getString("razon_social");
+                fila[5] = c_varios.formato_numero(dtotal);
+                fila[6] = c_varios.formato_numero(ddeuda);
+                if (iestado == 2) {
+                    fila[7] = "POR PAGAR";
                 }
-                fila[1] = sdocumento;
-                fila[2] = rs.getString("nombre");
-                String visita = rs.getString("ultima_venta");
-                if (visita.equals("1000-01-01")) {
-                    fila[3] = "--";
-                } else {
-                    fila[3] = rs.getString("ultima_venta");
-                }
-                double venta = rs.getDouble("venta");
-                fila[4] = c_varios.formato_totales(rs.getDouble("venta"));
-                double deuda = rs.getDouble("venta") - rs.getDouble("pago");
-                fila[5] = c_varios.formato_totales(deuda);
-                if (venta > 0 & deuda > 0) {
-                    fila[6] = "DEUDOR";
-                }
-                if (venta > 0 & deuda == 0) {
-                    fila[6] = "-";
-                }
-                if (venta <= 0) {
-                    fila[6] = "INACTIVO";
+                if (iestado == 1) {
+                    fila[7] = "-";
                 }
 
                 modelo.addRow(fila);
@@ -263,13 +279,15 @@ public class cl_compra {
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);
             tabla.setModel(modelo);
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(450);
-            tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(4).setPreferredWidth(70);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(450);
             tabla.getColumnModel().getColumn(5).setPreferredWidth(70);
             tabla.getColumnModel().getColumn(6).setPreferredWidth(70);
+            tabla.getColumnModel().getColumn(7).setPreferredWidth(70);
+            tabla.setDefaultRenderer(Object.class, new render_compras());
         } catch (SQLException e) {
             System.out.print(e);
         }

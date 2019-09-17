@@ -6,9 +6,15 @@
 package forms;
 
 import clases.cl_compra;
+import clases.cl_proveedor;
 import clases.cl_varios;
+import clases_autocomplete.cla_empresa;
+import clases_autocomplete.cla_mis_documentos;
+import comercial.frm_principal;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import models.m_documentos_sunat;
 import models.m_empresas;
 import vistas.frm_ver_compras;
 
@@ -21,12 +27,15 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
     //clases principales
     cl_varios c_varios = new cl_varios();
     cl_compra c_compra = new cl_compra();
+    cl_proveedor c_proveedor = new cl_proveedor();
 
     //variblaes publicas
     public static boolean registrar = true;
+    int id_usuario = frm_principal.c_usuario.getId_usuario();
 
     //modelos para combox
     m_empresas m_empresa = new m_empresas();
+    m_documentos_sunat m_tido = new m_documentos_sunat();
 
     /**
      * Creates new form frm_reg_compra
@@ -34,12 +43,32 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
     public frm_reg_compra() {
         initComponents();
         m_empresa.cbx_empresas(cbx_empresa);
+        m_tido.cbx_documentos_compra(cbx_tido);
+        
+        String fecha_hoy = c_varios.getFechaActual();
+        txt_fecha.setText(c_varios.fecha_usuario(fecha_hoy));
     }
 
-    public void llenar() {
+    private void llenar() {
+        cla_empresa cla_empresa = (cla_empresa) cbx_empresa.getSelectedItem();
+        cla_mis_documentos cla_tido = (cla_mis_documentos) cbx_tido.getSelectedItem();
+
         c_compra.setFecha(c_varios.fecha_myql(txt_fecha.getText()));
+        c_compra.setId_empresa(cla_empresa.getId_empresa());
+        c_compra.setId_tido(cla_tido.getId_tido());
         c_compra.setSerie(txt_serie.getText());
         c_compra.setNumero(Integer.parseInt(txt_numero.getText()));
+        c_compra.setId_usuario(id_usuario);
+        c_compra.setTotal(Double.parseDouble(txt_total.getText()));
+        c_compra.setGlosa(txt_glosa.getText());
+    }
+    
+    private void calcular_montos () {
+        double total = Double.parseDouble(txt_total.getText());
+        double subtotal = total / 1.18;
+        double igv = subtotal * 0.18;
+        txt_igv.setText(c_varios.formato_numero(igv));
+        txt_subtotal.setText(c_varios.formato_numero(subtotal));
     }
 
     /**
@@ -198,8 +227,12 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Proveedor:");
 
+        txt_ruc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_ruc.setEnabled(false);
         txt_ruc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_rucKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_rucKeyPressed(evt);
             }
@@ -217,14 +250,8 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_razon)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbx_empresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -250,13 +277,21 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(txt_numero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
                                         .addComponent(txt_serie, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(txt_ruc, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txt_fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel11)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(txt_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 284, Short.MAX_VALUE))))
+                    .addComponent(txt_razon)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_ruc)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel11)
+                                .addGap(6, 6, 6))
+                            .addComponent(cbx_empresa, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,6 +302,13 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbx_empresa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txt_razon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -283,13 +325,6 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_ruc, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_razon, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,8 +347,8 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
 
     private void cbx_empresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_empresaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            cbx_tido.setEnabled(true);
-            cbx_tido.requestFocus();
+            txt_ruc.setEnabled(true);
+            txt_ruc.requestFocus();
         }
     }//GEN-LAST:event_cbx_empresaKeyPressed
 
@@ -339,8 +374,20 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
             String texto = txt_numero.getText();
             if (texto.length() > 0) {
                 if (c_varios.esEntero(texto)) {
-                    txt_fecha.setEnabled(true);
-                    txt_fecha.requestFocus();
+                    //validar documento no exista
+                    c_compra.setSerie(txt_serie.getText());
+                    c_compra.setNumero(Integer.parseInt(txt_numero.getText()));
+                    cla_mis_documentos cla_tido = (cla_mis_documentos) cbx_tido.getSelectedItem();
+                    c_compra.setId_tido(cla_tido.getId_tido());
+                    boolean existe = c_compra.validar_documento();
+                    if (!existe) {
+                        //pasar a fecha
+                        txt_fecha.setEnabled(true);
+                        txt_fecha.requestFocus();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "este documento ya esta registrado");
+                        btn_salir.doClick();
+                    }
                 }
             }
         }
@@ -350,8 +397,8 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String texto = txt_fecha.getText();
             if (texto.length() == 10) {
-                txt_ruc.setEnabled(true);
-                txt_ruc.requestFocus();
+                txt_glosa.setEnabled(true);
+                txt_glosa.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_fechaKeyPressed
@@ -360,8 +407,27 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String texto = txt_ruc.getText();
             if (texto.length() == 11) {
-                txt_glosa.setEnabled(true);
-                txt_glosa.requestFocus();
+                c_proveedor.setRuc(txt_ruc.getText());
+                boolean existe = c_proveedor.buscar_ruc();
+                if (existe) {
+                    c_compra.setId_proveedor(c_proveedor.getId_proveedor());
+                    c_proveedor.cargar_datos();
+                    txt_razon.setText(c_proveedor.getRazon_social());
+                    cbx_tido.setEnabled(true);
+                    cbx_tido.requestFocus();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Este proveedor no existe, por favor agreguelo");
+                    Frame f = JOptionPane.getRootFrame();
+                    frm_reg_proveedor dialog = new frm_reg_proveedor(f, true);
+                    frm_reg_proveedor.txt_ndoc.setText(c_proveedor.getRuc());
+                    frm_reg_proveedor.accion = "registrar";
+                    frm_reg_proveedor.origen = "reg_ingreso";
+                    dialog.setLocationRelativeTo(null);
+                    dialog.setVisible(true);
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Faltan digitos");
             }
         }
     }//GEN-LAST:event_txt_rucKeyPressed
@@ -385,6 +451,7 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
             String texto = txt_total.getText();
             if (texto.length() > 0) {
                 if (c_varios.esDecimal(texto)) {
+                    calcular_montos();
                     btn_guardar.setEnabled(true);
                     btn_guardar.requestFocus();
                 } else {
@@ -407,9 +474,15 @@ public class frm_reg_compra extends javax.swing.JInternalFrame {
             c_compra.obtener_codigo();
             c_compra.insertar();
         } else {
-            
+
         }
+        btn_salir.doClick();
     }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void txt_rucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_rucKeyTyped
+        c_varios.solo_numeros(evt);
+        c_varios.limitar_caracteres(evt, txt_ruc, 11);
+    }//GEN-LAST:event_txt_rucKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
