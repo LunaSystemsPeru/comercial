@@ -51,6 +51,10 @@ public class cl_varios {
     DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
     DecimalFormat formato = null;
 
+    /*
+    @param number = 123548.00
+    return ######0.00 a dos decimales sin comas de miles
+     */
     public String formato_numero(Double number) {
         simbolo.setDecimalSeparator('.');
         formato = new DecimalFormat("######0.00", simbolo);
@@ -59,6 +63,10 @@ public class cl_varios {
         return numero;
     }
 
+    /*
+    @param number = 123548.00
+    return ######0.000 a tres decimales sin comas de miles
+     */
     public String formato_tc(Double number) {
         simbolo.setDecimalSeparator('.');
         formato = new DecimalFormat("######0.000", simbolo);
@@ -69,6 +77,7 @@ public class cl_varios {
 
     /*
     @param numero = #,###,##0.00 //para mostrar en totales , no suma
+    return #,###,##0.00 con comas de miles a dos decimales
      */
     public String formato_totales(Double number) {
         simbolo.setDecimalSeparator('.');
@@ -88,6 +97,19 @@ public class cl_varios {
             int ancho = (int) (desktopSize.getWidth() / 1.05);
             int alto = (int) (desktopSize.getHeight() / 1.05);
             ventana.setSize(ancho, alto);
+            Dimension jInternalFrameSize = ventana.getSize();
+
+            ventana.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
+
+        }
+    }
+
+    public void llamar_ventana_normal(JInternalFrame ventana) {
+        if (mostrar(ventana)) {
+            comercial.frm_principal.jDesktopPane1.add(ventana);
+            ventana.show();
+            Dimension desktopSize = comercial.frm_principal.jDesktopPane1.getSize();
             Dimension jInternalFrameSize = ventana.getSize();
 
             ventana.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -254,7 +276,7 @@ public class cl_varios {
         Connection st = con.conx();
 
         String direccion = obtenerDireccionCarpeta();
-        
+
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("_dd_MM_yyyy_HH_mm_ss");
         String fechahora = hourdateFormat.format(date);
@@ -276,13 +298,13 @@ public class cl_varios {
                 exporter.setParameter(JRXlsExporterParameter.IS_IGNORE_CELL_BORDER, false);
                 exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, false);
                 exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,
-                        "temp" + File.separator + salida + fechahora +  ".xls");
+                        "temp" + File.separator + salida + fechahora + ".xls");
 
                 exporter.exportReport();
                 JOptionPane.showMessageDialog(null, "REPORTE GENERADO, \nREVISE EN la Carpeta " + direccion + "temp" + File.separator);
 
                 try {
-                    File file = new File("temp" + File.separator + salida + fechahora +  ".xls");
+                    File file = new File("temp" + File.separator + salida + fechahora + ".xls");
                     Desktop.getDesktop().open(file);
                 } catch (IOException e) {
                     System.out.print(e + " -- error io");
