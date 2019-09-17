@@ -95,16 +95,12 @@ public class cl_varios {
 
         }
     }
-    
+
     public void llamar_ventana_normal(JInternalFrame ventana) {
         if (mostrar(ventana)) {
             comercial.frm_principal.jDesktopPane1.add(ventana);
             ventana.show();
             Dimension desktopSize = comercial.frm_principal.jDesktopPane1.getSize();
-
-            int ancho = (int) (desktopSize.getWidth());
-            int alto = (int) (desktopSize.getHeight());
-            ventana.setSize(ancho, alto);
             Dimension jInternalFrameSize = ventana.getSize();
 
             ventana.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -271,7 +267,7 @@ public class cl_varios {
         Connection st = con.conx();
 
         String direccion = obtenerDireccionCarpeta();
-        
+
         Date date = new Date();
         DateFormat hourdateFormat = new SimpleDateFormat("_dd_MM_yyyy_HH_mm_ss");
         String fechahora = hourdateFormat.format(date);
@@ -293,13 +289,13 @@ public class cl_varios {
                 exporter.setParameter(JRXlsExporterParameter.IS_IGNORE_CELL_BORDER, false);
                 exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, false);
                 exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME,
-                        "temp" + File.separator + salida + fechahora +  ".xls");
+                        "temp" + File.separator + salida + fechahora + ".xls");
 
                 exporter.exportReport();
                 JOptionPane.showMessageDialog(null, "REPORTE GENERADO, \nREVISE EN la Carpeta " + direccion + "temp" + File.separator);
 
                 try {
-                    File file = new File("temp" + File.separator + salida + fechahora +  ".xls");
+                    File file = new File("temp" + File.separator + salida + fechahora + ".xls");
                     Desktop.getDesktop().open(file);
                 } catch (IOException e) {
                     System.out.print(e + " -- error io");

@@ -98,6 +98,11 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
         btn_salir.setFocusable(false);
         btn_salir.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_salir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_salirActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btn_salir);
 
         jLabel1.setText("Buscar:");
@@ -156,6 +161,10 @@ public class frm_ver_compras extends javax.swing.JInternalFrame {
         c_varios.llamar_ventana_normal(formulario);
         this.dispose();
     }//GEN-LAST:event_btn_agregarActionPerformed
+
+    private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btn_salirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
