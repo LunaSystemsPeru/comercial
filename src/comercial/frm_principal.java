@@ -31,6 +31,7 @@ import org.jvnet.substance.SubstanceLookAndFeel;
 import vistas.frm_ver_almacenes;
 import vistas.frm_ver_clientes;
 import vistas.frm_ver_cobros;
+import vistas.frm_ver_compras;
 import vistas.frm_ver_empresas;
 import vistas.frm_ver_guias_remision;
 import vistas.frm_ver_ingresos;
@@ -124,6 +125,13 @@ public class frm_principal extends javax.swing.JFrame {
     }
 
     private void cargar_permisos() {
+        c_permiso.setId_permiso(23);
+        boolean permitido23 = c_permiso.validar();
+
+        if (!permitido23) {
+            jButton12.setEnabled(false);
+        }
+        
         c_permiso.setId_permiso(18);
         boolean permitido18 = c_permiso.validar();
 
@@ -657,10 +665,14 @@ public class frm_principal extends javax.swing.JFrame {
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eccomerce_-_receipt-512.png"))); // NOI18N
         jButton10.setText("Compras");
-        jButton10.setEnabled(false);
         jButton10.setFocusable(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jToolBar5.add(jButton10);
         jToolBar5.add(jSeparator11);
 
@@ -1171,6 +1183,11 @@ public class frm_principal extends javax.swing.JFrame {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        frm_ver_compras formulario = new frm_ver_compras();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jButton10ActionPerformed
 
     /**
      * @param args the command line arguments
