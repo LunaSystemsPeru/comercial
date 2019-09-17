@@ -347,7 +347,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     }
 
     private void limpiar_buscar() {
-        btn_ver_tiendas.setEnabled(false);
+        
         txt_buscar_producto.setText("");
         txt_cantidad.setText("");
         txt_cactual.setText("");
@@ -503,7 +503,12 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         txt_precio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txt_cactual = new javax.swing.JTextField();
-        btn_ver_tiendas = new javax.swing.JButton();
+        jLabel31 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -524,11 +529,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         btn_grabar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btn_actualizar = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
-        cbx_guia = new javax.swing.JComboBox<>();
-        txt_direccion_guia = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        btn_editar_guiar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_detalle = new javax.swing.JTable();
@@ -1071,11 +1071,11 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             }
         });
         txt_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_cantidadKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_cantidadKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cantidadKeyTyped(evt);
             }
         });
 
@@ -1088,12 +1088,17 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 txt_precioFocusGained(evt);
             }
         });
-        txt_precio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_precioKeyTyped(evt);
+        txt_precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precioActionPerformed(evt);
             }
+        });
+        txt_precio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_precioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_precioKeyTyped(evt);
             }
         });
 
@@ -1102,14 +1107,18 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         txt_cactual.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txt_cactual.setEnabled(false);
 
-        btn_ver_tiendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/magnifier.png"))); // NOI18N
-        btn_ver_tiendas.setText("Ver en Otras tiendas");
-        btn_ver_tiendas.setEnabled(false);
-        btn_ver_tiendas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ver_tiendasActionPerformed(evt);
+        jLabel31.setText("Und. Medida:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jComboBox1FocusGained(evt);
             }
         });
+
+        jLabel32.setText("Cant. Sunat:");
+
+        jLabel34.setText("Precio Total:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1118,42 +1127,66 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_buscar_producto))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_cactual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_ver_tiendas)))
-                .addGap(6, 6, 6))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_buscar_producto)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox1, 0, 138, Short.MAX_VALUE)
+                            .addComponent(txt_cantidad))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_cactual)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_precio, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(jTextField3))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_buscar_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_cactual, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_ver_tiendas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_cactual, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Generales Venta"));
@@ -1171,6 +1204,11 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         }
         txt_fecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_fecha.setText("10/10/2018");
+        txt_fecha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_fechaKeyPressed(evt);
+            }
+        });
 
         cbx_tipo_venta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VENTA", "SEPARACION" }));
         cbx_tipo_venta.setEnabled(false);
@@ -1263,7 +1301,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_total_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(lbl_total_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1298,50 +1336,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel11.setText("Desea Guia de Remision:");
-
-        cbx_guia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si, Emitir", "No, alli nomas" }));
-        cbx_guia.setSelectedIndex(1);
-        cbx_guia.setEnabled(false);
-        cbx_guia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                cbx_guiaFocusGained(evt);
-            }
-        });
-        cbx_guia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbx_guiaActionPerformed(evt);
-            }
-        });
-        cbx_guia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cbx_guiaKeyPressed(evt);
-            }
-        });
-
-        txt_direccion_guia.setEnabled(false);
-        txt_direccion_guia.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_direccion_guiaFocusGained(evt);
-            }
-        });
-        txt_direccion_guia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_direccion_guiaKeyPressed(evt);
-            }
-        });
-
-        jLabel24.setText("Direccion de Entrega:");
-
-        btn_editar_guiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/application_edit.png"))); // NOI18N
-        btn_editar_guiar.setText(" Editar Informacion");
-        btn_editar_guiar.setEnabled(false);
-        btn_editar_guiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editar_guiarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1349,17 +1343,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_grabar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_direccion_guia, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_grabar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbx_guia, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txt_dir_cliente, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_nom_cliente, javax.swing.GroupLayout.Alignment.LEADING)
@@ -1388,10 +1374,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                                     .addComponent(txt_fecha)
                                     .addComponent(txt_doc_cliente))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(36, 36, 36)
-                        .addComponent(btn_editar_guiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -1424,24 +1409,14 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_nom_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_dir_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbx_guia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_dir_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_editar_guiar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_direccion_guia, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(58, 58, 58)
                 .addComponent(btn_grabar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -1478,22 +1453,22 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lbl_ayuda, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1509,8 +1484,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1518,13 +1493,12 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(9, 9, 9)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1542,7 +1516,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     //validar que no existe en la tabla
                     if (valida_tabla(c_producto.getId())) {
                         c_producto.validar_id();
-                        btn_ver_tiendas.setEnabled(true);
+                       
                         txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
                         txt_cactual.setText(c_producto_almacen.getCantidad() + "");
                         txt_cantidad.setText("1");
@@ -1746,8 +1720,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     c_cliente.comprobar_cliente();
                     txt_nom_cliente.setText(c_cliente.getNombre());
                     txt_dir_cliente.setText(c_cliente.getDireccion());
-                    cbx_guia.setEnabled(true);
-                    cbx_guia.requestFocus();
+                   
                     /*
                     btn_grabar.setEnabled(true);
                     btn_grabar.requestFocus();
@@ -1842,9 +1815,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 //generar txt 
                 if (c_venta.getId_tipo_venta() == 1) {
                     if (c_venta.getId_tido() == 1 || c_venta.getId_tido() == 2) {
-
+/*
                         int emite_guia = cbx_guia.getSelectedIndex();
-
                         if (emite_guia == 0) {
                             c_guia = new cl_guia_remision();
                             c_guia.setId_almacen(c_venta.getId_almacen());
@@ -1866,9 +1838,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                             c_guia.setNumero(c_doc_guia.getNumero());
 
                             c_guia.registrar();
-
-                        }
-
+                       }
+*/
                         try {
                             //Ponemos a "Dormir" el programa durante los ms que queremos
                             Thread.sleep(2 * 1000);
@@ -1878,7 +1849,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         }
 
                         cl_enviar_venta c_enviar = new cl_enviar_venta();
-                        c_enviar.setGuia(emite_guia);
+   //                     c_enviar.setGuia(emite_guia);
                         c_enviar.setId_venta(c_venta.getId_venta());
                         c_enviar.setId_almacen(id_almacen);
                         c_enviar.start();
@@ -1926,14 +1897,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             System.out.println(e);
         }
     }
-    private void btn_ver_tiendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ver_tiendasActionPerformed
-        Frame f = JOptionPane.getRootFrame();
-        frm_ver_ubicacion_producto.id_producto = c_producto.getId();
-        frm_ver_ubicacion_producto dialog = new frm_ver_ubicacion_producto(f, true);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_btn_ver_tiendasActionPerformed
-
     private void t_detalleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_detalleMouseClicked
         int nro_filas = t_detalle.getRowCount();
         if (nro_filas > 0) {
@@ -2076,59 +2039,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btn_bus_cuponActionPerformed
 
-    private void txt_direccion_guiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_direccion_guiaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            //si esta seleccionado guia
-            if (cbx_guia.getSelectedIndex() == 0) {
-                //si texto es mayor a vacio
-                String texto = txt_direccion_guia.getText();
-                if (texto.length() > 10) {
-                    btn_grabar.setEnabled(true);
-                    btn_grabar.requestFocus();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Falta Ingresar Direccion de Entrega");
-                    txt_direccion_guia.selectAll();
-                    txt_direccion_guia.requestFocus();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR!!!, Usted ha seleccionado no emitir guia");
-                cbx_guia.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txt_direccion_guiaKeyPressed
-
-    private void cbx_guiaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_guiaKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            int guia_seleccionada = cbx_guia.getSelectedIndex();
-            if (guia_seleccionada == 0) {
-                btn_grabar.setEnabled(false);
-
-                jd_guia_remision.setModal(true);
-                jd_guia_remision.setSize(667, 307);
-                jd_guia_remision.setLocationRelativeTo(null);
-                txt_direccion_guia.setText(txt_dir_cliente.getText());
-                txt_llegada_guia.setText(txt_dir_cliente.getText());
-                m_ubigeo.cbx_departamentos(cbx_departamento);
-                c_ubigeo = new cl_ubigeo();
-                jd_guia_remision.setVisible(true);
-
-            } else {
-                btn_editar_guiar.setEnabled(false);
-                txt_direccion_guia.setText("");
-                btn_grabar.setEnabled(true);
-                btn_grabar.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_cbx_guiaKeyPressed
-
-    private void txt_direccion_guiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_direccion_guiaFocusGained
-        lbl_ayuda.setText("ESCRIBIR DIRECCION DE ENTREGA DE LA VENTA - CLIENTE ESPECIFICARA, ENTER PARA FINALIZAR");
-    }//GEN-LAST:event_txt_direccion_guiaFocusGained
-
-    private void cbx_guiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbx_guiaFocusGained
-        lbl_ayuda.setText("ENTER PARA SELECCIONAR SI DESEA GUIA DE REMISION");
-    }//GEN-LAST:event_cbx_guiaFocusGained
-
     private void btn_grabarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btn_grabarFocusGained
         lbl_ayuda.setText("ENTER PARA COBRAR VENTA");
     }//GEN-LAST:event_btn_grabarFocusGained
@@ -2229,29 +2139,16 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txt_dni_choferKeyPressed
 
-    private void cbx_guiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_guiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbx_guiaActionPerformed
-
     private void txt_placa_vehiculoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_placa_vehiculoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_placa_vehiculo.getText().length() > 6) {
-                txt_direccion_guia.setText(txt_llegada_guia.getText());
-                btn_editar_guiar.setEnabled(true);
+           
                 btn_grabar.setEnabled(true);
                 btn_grabar.requestFocus();
                 jd_guia_remision.setVisible(false);
             }
         }
     }//GEN-LAST:event_txt_placa_vehiculoKeyPressed
-
-    private void btn_editar_guiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editar_guiarActionPerformed
-        jd_guia_remision.setModal(true);
-        jd_guia_remision.setSize(667, 307);
-        jd_guia_remision.setLocationRelativeTo(null);
-        c_ubigeo = new cl_ubigeo();
-        jd_guia_remision.setVisible(true);
-    }//GEN-LAST:event_btn_editar_guiarActionPerformed
 
     private void txt_dni_choferKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dni_choferKeyTyped
         c_varios.limitar_caracteres(evt, txt_dni_chofer, 8);
@@ -2262,28 +2159,45 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         c_varios.limitar_caracteres(evt, txt_placa_vehiculo, 8);
     }//GEN-LAST:event_txt_placa_vehiculoKeyTyped
 
+    private void txt_precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_precioActionPerformed
+
+    private void txt_fechaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fechaKeyPressed
+        
+           if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_fecha.getText().length() == 10) {               
+                cbx_tipo_venta.setEnabled(true);            
+                cbx_tipo_venta.requestFocus();
+                
+            }
+        }
+        
+    }//GEN-LAST:event_txt_fechaKeyPressed
+
+    private void jComboBox1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusGained
+lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1FocusGained
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_bus_cupon;
     private javax.swing.JButton btn_crear_cliente;
-    private javax.swing.JButton btn_editar_guiar;
     private javax.swing.JButton btn_grabar;
     private javax.swing.JButton btn_jd_actualizar;
     private javax.swing.JButton btn_jd_eliminar;
     private javax.swing.JButton btn_pago;
-    private javax.swing.JButton btn_ver_tiendas;
     private javax.swing.JComboBox<String> cbx_departamento;
     private javax.swing.JComboBox<String> cbx_distrito;
-    private javax.swing.JComboBox<String> cbx_guia;
     private javax.swing.JComboBox<String> cbx_provincia;
     private javax.swing.JComboBox<String> cbx_tipo_doc;
     private javax.swing.JComboBox<String> cbx_tipo_transporte;
     private javax.swing.JComboBox<String> cbx_tipo_venta;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -2297,7 +2211,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -2305,6 +2218,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -2321,6 +2237,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_fin_venta;
     private javax.swing.JDialog jd_guia_remision;
     private javax.swing.JDialog jd_modificar_item;
@@ -2334,7 +2252,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_cactual;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_dir_cliente;
-    private javax.swing.JTextField txt_direccion_guia;
     private javax.swing.JTextField txt_dni_chofer;
     private javax.swing.JTextField txt_doc_cliente;
     private javax.swing.JFormattedTextField txt_fecha;
