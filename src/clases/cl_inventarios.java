@@ -20,6 +20,7 @@ public class cl_inventarios {
     private String fecha;
     private int id_almacen;
     private int id_usuario;
+    private int total_productos;
 
     public cl_inventarios() {
     }
@@ -64,11 +65,19 @@ public class cl_inventarios {
         this.id_usuario = id_usuario;
     }
 
+    public int getTotal_productos() {
+        return total_productos;
+    }
+
+    public void setTotal_productos(int total_productos) {
+        this.total_productos = total_productos;
+    }
+
     public boolean registrar() {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into inventario "
-                + "values ('" + id_inventario + "', '" + anio + "', '" + id_almacen + "', '" + fecha + "', '" + id_usuario + "')";
+                + "values ('" + id_inventario + "', '" + anio + "', '" + id_almacen + "', '" + fecha + "', '" + id_usuario + "', '" + total_productos + "')";
         int resultado = c_conectar.actualiza(st, query);
         //  System.out.println(query);
         if (resultado > -1) {
@@ -77,7 +86,7 @@ public class cl_inventarios {
         c_conectar.cerrar(st);
         return registrado;
     }
-    
+
     public boolean eliminar() {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
@@ -91,8 +100,8 @@ public class cl_inventarios {
         c_conectar.cerrar(st);
         return registrado;
     }
-    
-     public void obtener_codigo() {
+
+    public void obtener_codigo() {
         try {
             Statement st = c_conectar.conexion();
             String query = "select ifnull(max(id_inventario) + 1, 1) as codigo "
@@ -106,7 +115,7 @@ public class cl_inventarios {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     public void mostrar(JTable tabla, String query) {
         try {
             DefaultTableModel tmodelo;
@@ -150,5 +159,5 @@ public class cl_inventarios {
             System.out.print(e);
         }
     }
-    
+
 }

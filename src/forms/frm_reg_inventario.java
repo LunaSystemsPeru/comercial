@@ -128,7 +128,7 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
             ResultSet rs = c_conectar.consulta(st, sql);
             while (rs.next()) {
                 int id_producto = rs.getInt("id_producto");
-                String descripcion = rs.getString("descripcion") + " | " + rs.getString("marca") 
+                String descripcion = rs.getString("descripcion") + " | " + rs.getString("marca")
                         + "    |    Cant: " + rs.getInt("cactual") + "    |    Precio: S/ " + c_varios.formato_numero(rs.getDouble("precio"));
                 tac_productos.addItem(new cla_producto(id_producto, descripcion));
             }
@@ -243,6 +243,9 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
             }
         });
         txt_cantidad_enviar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_cantidad_enviarKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_cantidad_enviarKeyPressed(evt);
             }
@@ -442,8 +445,8 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String tcantidad = txt_cantidad_enviar.getText();
             if (c_varios.esEntero(tcantidad)) {
-                int cactual = Integer.parseInt(txt_cantidad_actual.getText());
-                int cenviar = Integer.parseInt(tcantidad);
+                double cactual = Double.parseDouble(txt_cantidad_actual.getText());
+                double cenviar = Double.parseDouble(tcantidad);
                 if (cenviar < 0) {
                     JOptionPane.showMessageDialog(null, "ERROR LA CANTIDAD ES MENOR A CERO");
                 } else {
@@ -535,19 +538,19 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
         btn_guardar.setEnabled(false);
 
         if (JOptionPane.OK_OPTION == confirmado) {
-            c_inventario.setAnio(2019);
+            c_inventario.setAnio(Integer.parseInt(c_varios.getanio()));
             c_inventario.setFecha(c_varios.getFechaActual());
             c_inventario.setId_almacen(id_almacen);
             c_inventario.setId_usuario(id_usuario);
             c_inventario.obtener_codigo();
-
+                int contar_filas = t_inventario.getRowCount();
+                c_inventario.setTotal_productos(contar_filas);
             boolean registrar = c_inventario.registrar();
 
             if (registrar) {
                 c_detalle.setAnio(c_inventario.getAnio());
                 c_detalle.setId_inventario(c_inventario.getId_inventario());
                 c_detalle.setId_almacen(id_almacen);
-                int contar_filas = t_inventario.getRowCount();
                 for (int i = 0; i < contar_filas; i++) {
                     c_detalle.setId_producto(Integer.parseInt(t_inventario.getValueAt(i, 0).toString()));
                     c_detalle.setCactual(Integer.parseInt(t_inventario.getValueAt(i, 4).toString()));
@@ -569,6 +572,11 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
     private void txt_cantidad_enviarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_cantidad_enviarFocusGained
         lbl_ayuda.setText("ESCRIBA CANTIDAD ENCONTRADA EN FISICO Y PRESIONE ENTER");
     }//GEN-LAST:event_txt_cantidad_enviarFocusGained
+
+    private void txt_cantidad_enviarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cantidad_enviarKeyTyped
+        c_varios.solo_precio(evt);
+        c_varios.limitar_caracteres(evt, txt_cantidad_enviar, 10);
+    }//GEN-LAST:event_txt_cantidad_enviarKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

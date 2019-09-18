@@ -602,10 +602,7 @@
                       </Group>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel32" min="-2" pref="25" max="-2" attributes="0"/>
-                                  <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel32" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="txt_cant_sunat" min="-2" pref="25" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -1169,9 +1166,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_ayuda">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel24"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

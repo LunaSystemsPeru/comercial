@@ -341,6 +341,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         txt_cantidad.setText("");
         txt_cant_sunat.setText("");
         txt_precio.setText("");
+        txt_cant_actual.setText("");
+        txt_precio_total.setText("");
         txt_cantidad.setEnabled(false);
         txt_cant_sunat.setEnabled(false);
         txt_precio.setEnabled(false);
@@ -971,9 +973,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                             .addComponent(txt_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31))
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txt_cant_sunat, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1243,8 +1243,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         }
 
         jLabel23.setText("Ayuda:");
-
-        lbl_ayuda.setText("jLabel24");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

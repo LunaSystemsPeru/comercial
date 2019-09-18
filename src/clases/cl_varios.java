@@ -157,6 +157,12 @@ public class cl_varios {
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         return formateador.format(ahora);
     }
+    
+    public String getanio() {
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy");
+        return formateador.format(ahora);
+    }
 
     public String getFechaActual_sfs() {
         Date ahora = new Date();
