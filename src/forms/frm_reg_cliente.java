@@ -43,12 +43,12 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             c_cliente.comprobar_cliente();
             txt_ndoc.setText(c_cliente.getDocumento());
             txt_nom.setText(c_cliente.getNombre());
-            txt_celular.setText(c_cliente.getCelular());
+         txt_celular.setText(c_cliente.getCelular());
             txt_email.setText(c_cliente.getTelefono());
-            txt_dir.setText(c_cliente.getDireccion());
+           txt_dir.setText(c_cliente.getDireccion());
             txt_ndoc.setEnabled(false);
             txt_nom.setEnabled(true);
-            txt_dir.setEnabled(true);
+         txt_dir.setEnabled(true);
             txt_nom.requestFocus();
             btn_reg.setEnabled(true);
         }
@@ -322,8 +322,8 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private void txt_nomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nomKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_nom.getText().length() > 0) {
-                txt_dir.setEnabled(true);
-                txt_dir.requestFocus();
+                txt_telefono.setEnabled(true);
+                txt_telefono.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_nomKeyPressed
@@ -331,19 +331,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private void txt_nomKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nomKeyTyped
         c_varios.limitar_caracteres(evt, txt_nom, 245);
     }//GEN-LAST:event_txt_nomKeyTyped
-
-    private void txt_dirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dirKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_dir.getText().length() > 0) {
-                txt_celular.setEnabled(true);
-                txt_celular.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txt_dirKeyPressed
-
-    private void txt_dirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dirKeyTyped
-        c_varios.limitar_caracteres(evt, txt_dir, 245);
-    }//GEN-LAST:event_txt_dirKeyTyped
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         btn_reg.setEnabled(false);
@@ -383,15 +370,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
-    private void txt_celularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_celularKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_celular.getText().length() > 0) {
-                txt_telefono.setEnabled(true);
-                txt_telefono.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txt_celularKeyPressed
-
     private void txt_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_email.getText().length() > 0) {
@@ -409,6 +387,28 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txt_telefonoKeyPressed
+
+    private void txt_celularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_celularKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_celular.getText().length() > 0) {
+                txt_telefono.setEnabled(true);
+                txt_telefono.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_celularKeyPressed
+
+    private void txt_dirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dirKeyTyped
+        c_varios.limitar_caracteres(evt, txt_dir, 245);
+    }//GEN-LAST:event_txt_dirKeyTyped
+
+    private void txt_dirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dirKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_dir.getText().length() > 0) {
+                txt_celular.setEnabled(true);
+                txt_celular.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_dirKeyPressed
 
     /**
      * @param args the command line arguments
@@ -468,7 +468,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_celular;
-    public static javax.swing.JTextField txt_dir;
+    private javax.swing.JTextField txt_dir;
     private javax.swing.JTextField txt_email;
     public static javax.swing.JTextField txt_ndoc;
     public static javax.swing.JTextField txt_nom;

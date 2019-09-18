@@ -854,7 +854,7 @@
                       <Component id="txt_buscar_producto" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBox1" pref="138" max="32767" attributes="0"/>
+                              <Component id="cbx_unid_medida" pref="138" max="32767" attributes="0"/>
                               <Component id="txt_cantidad" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
@@ -864,10 +864,10 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_cactual" max="32767" attributes="0"/>
+                              <Component id="txt_cant_sunat" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="136" max="-2" attributes="0"/>
+                                  <Component id="txt_cant_actual" min="-2" pref="136" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -878,7 +878,7 @@
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txt_precio" pref="148" max="32767" attributes="0"/>
-                              <Component id="jTextField3" max="32767" attributes="0"/>
+                              <Component id="txt_precio_total" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -899,7 +899,7 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel31" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="cbx_unid_medida" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="jLabel32" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -912,13 +912,13 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="txt_precio" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="txt_cactual" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txt_cant_sunat" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel34" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="jTextField3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txt_precio_total" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="txt_cant_actual" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -935,6 +935,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_buscar_producto">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_buscar_productoFocusGained"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_buscar_productoKeyPressed"/>
@@ -978,7 +981,7 @@
             <Property name="text" type="java.lang.String" value="Cant. Actual:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_cactual">
+        <Component class="javax.swing.JTextField" name="txt_cant_sunat">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="4"/>
             <Property name="enabled" type="boolean" value="false"/>
@@ -989,7 +992,7 @@
             <Property name="text" type="java.lang.String" value="Und. Medida:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cbx_unid_medida">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -999,9 +1002,10 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jComboBox1FocusGained"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbx_unid_medidaFocusGained"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -1017,9 +1021,15 @@
             <Property name="text" type="java.lang.String" value="Precio Total:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txt_cant_actual">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
+        <Component class="javax.swing.JTextField" name="txt_precio_total">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -1042,7 +1052,6 @@
                       <Component id="btn_grabar" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="txt_dir_cliente" alignment="0" max="32767" attributes="0"/>
                               <Component id="txt_nom_cliente" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1122,12 +1131,10 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txt_nom_cliente" min="-2" pref="25" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txt_dir_cliente" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btn_actualizar" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Component id="btn_grabar" min="-2" pref="50" max="-2" attributes="0"/>
@@ -1234,11 +1241,6 @@
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txt_nom_clienteFocusGained"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nom_clienteKeyPressed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txt_dir_cliente">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_crear_cliente">
           <Properties>
