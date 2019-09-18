@@ -8,15 +8,16 @@ package forms;
 import clases.cl_producto;
 import clases.cl_productos_clasificacion;
 import clases.cl_productos_empresa;
+import clases.cl_productos_presentacion;
 import clases.cl_proveedor;
 import clases.cl_varios;
-import clases_autocomplete.cla_empresa;
 import clases_autocomplete.cla_producto_clasificacion;
+import clases_autocomplete.cla_unidad_medida;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.m_empresas;
 import models.m_producto_clasificacion;
+import models.m_unidades;
 
 /**
  *
@@ -24,20 +25,22 @@ import models.m_producto_clasificacion;
  */
 public class frm_reg_producto extends javax.swing.JDialog {
 
+    //clases principales    
     public static cl_producto c_producto = new cl_producto();
 
+    //clases secundarias
     cl_varios c_varios = new cl_varios();
+    cl_productos_clasificacion c_clasificacion;
+    cl_productos_presentacion c_presentacion;
 
     //autollenado clasificacon
     m_producto_clasificacion m_clasificacion = new m_producto_clasificacion();
     m_empresas m_empresa = new m_empresas();
+    m_unidades m_unidad = new m_unidades();
 
-    cl_productos_clasificacion c_clasificacion;
-    cl_productos_empresa c_producto_empresa;
-
+    //variables publicas    
     static DefaultTableModel detalle;
     static int fila_seleccionada;
-
     public static boolean registrar;
 
     /**
@@ -48,6 +51,8 @@ public class frm_reg_producto extends javax.swing.JDialog {
         initComponents();
 
         m_clasificacion.cbx_clasificaciones(cbx_clasificacion);
+        m_unidad.llenar_combo(cbx_unidad_medida);
+        modelo_presentaciones();
 
         if (registrar == false) {
             this.setTitle("Modificar Producto");
@@ -58,7 +63,6 @@ public class frm_reg_producto extends javax.swing.JDialog {
             txt_descripcion.setText(c_producto.getDescripcion());
             txt_marca.setText(c_producto.getMarca());
             txt_cod_barra.setText(c_varios.formato_numero(c_producto.getComision()));
-            txt_costo.setText(c_varios.formato_numero(c_producto.getCosto()));
             txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
             txt_proveedor.setText(c_proveedor.getRuc() + " | " + c_proveedor.getRazon_social());
 
@@ -71,9 +75,30 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
             txt_cod_barra.setEnabled(true);
             txt_marca.setEnabled(true);
-            txt_costo.setEnabled(true);
             btn_guardar.setEnabled(true);
         }
+    }
+
+    private void modelo_presentaciones() {
+        //formato de tabla detalle de venta
+        detalle = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int fila, int columna) {
+                return false;
+            }
+        };
+        detalle.addColumn("Item");
+        detalle.addColumn("Descripcion");
+        detalle.addColumn("Factor");
+        detalle.addColumn("Precio Unit.");
+        t_presentaciones.setModel(detalle);
+        t_presentaciones.getColumnModel().getColumn(0).setPreferredWidth(20);
+        t_presentaciones.getColumnModel().getColumn(1).setPreferredWidth(300);
+        t_presentaciones.getColumnModel().getColumn(2).setPreferredWidth(50);
+        t_presentaciones.getColumnModel().getColumn(3).setPreferredWidth(80);
+        c_varios.centrar_celda(t_presentaciones, 0);
+        c_varios.centrar_celda(t_presentaciones, 2);
+        c_varios.derecha_celda(t_presentaciones, 3);
     }
 
     /**
@@ -90,12 +115,10 @@ public class frm_reg_producto extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
         txt_marca = new javax.swing.JTextField();
-        txt_costo = new javax.swing.JTextField();
         cbx_clasificacion = new javax.swing.JComboBox<>();
         txt_proveedor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -112,6 +135,10 @@ public class frm_reg_producto extends javax.swing.JDialog {
         btn_add_presentacion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_presentaciones = new javax.swing.JTable();
+        jLabel11 = new javax.swing.JLabel();
+        txt_precio_minimo = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        cbx_unidad_medida = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registrar Producto");
@@ -147,8 +174,6 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         jLabel3.setText("Marca:");
 
-        jLabel4.setText("Costo Unidad:");
-
         jLabel8.setText("Clasificacion:");
 
         jLabel9.setText("Proveedor:");
@@ -164,17 +189,6 @@ public class frm_reg_producto extends javax.swing.JDialog {
         txt_marca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_marcaKeyPressed(evt);
-            }
-        });
-
-        txt_costo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_costo.setEnabled(false);
-        txt_costo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_costoKeyTyped(evt);
-            }
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_costoKeyPressed(evt);
             }
         });
 
@@ -204,7 +218,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         jLabel2.setText("Tipo Producto:");
 
-        cbx_tipo_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BIEN", "SERVICIO" }));
+        cbx_tipo_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BIEN" }));
         cbx_tipo_producto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbx_tipo_productoKeyPressed(evt);
@@ -226,6 +240,9 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         txt_factor.setEnabled(false);
         txt_factor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_factorKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_factorKeyPressed(evt);
             }
@@ -234,10 +251,23 @@ public class frm_reg_producto extends javax.swing.JDialog {
         jLabel10.setText("Precio Venta Unitario:");
 
         txt_precio.setEnabled(false);
+        txt_precio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_precioKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_precioKeyPressed(evt);
+            }
+        });
 
         btn_add_presentacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
         btn_add_presentacion.setText("Agregar");
         btn_add_presentacion.setEnabled(false);
+        btn_add_presentacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_add_presentacionActionPerformed(evt);
+            }
+        });
 
         t_presentaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,7 +300,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_precio)
+                                .addComponent(txt_precio, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                                 .addGap(101, 101, 101)
                                 .addComponent(btn_add_presentacion))
                             .addComponent(txt_nombre_presentacion)))
@@ -296,6 +326,29 @@ public class frm_reg_producto extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel11.setText("Precio Unitario Minimo:");
+
+        txt_precio_minimo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_precio_minimo.setEnabled(false);
+        txt_precio_minimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_precio_minimoKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_precio_minimoKeyPressed(evt);
+            }
+        });
+
+        jLabel12.setText("Unidad Medida:");
+
+        cbx_unidad_medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_unidad_medida.setEnabled(false);
+        cbx_unidad_medida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbx_unidad_medidaKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,27 +363,30 @@ public class frm_reg_producto extends javax.swing.JDialog {
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_descripcion)
                             .addComponent(txt_proveedor)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                                        .addComponent(jLabel7)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_cod_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbx_tipo_producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(cbx_clasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(cbx_clasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_marca, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                                    .addComponent(cbx_unidad_medida, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_precio_minimo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_cod_barra, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -360,8 +416,10 @@ public class frm_reg_producto extends javax.swing.JDialog {
                         .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_costo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(txt_precio_minimo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(cbx_unidad_medida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -383,10 +441,20 @@ public class frm_reg_producto extends javax.swing.JDialog {
         c_producto.setMarca(txt_marca.getText());
         c_producto.setCod_barra(txt_cod_barra.getText());
         c_producto.setComision(0);
-        c_producto.setPrecio(Double.parseDouble(txt_precio.getText()));
-        c_producto.setCosto(Double.parseDouble(txt_costo.getText()));
+        c_producto.setCosto(0);
+        c_producto.setPrecio(Double.parseDouble(txt_precio_minimo.getText()));
+        int tipo_producto = cbx_tipo_producto.getSelectedIndex();
+        c_producto.setTipo_producto(tipo_producto);
         cla_producto_clasificacion cla_clasificacion = (cla_producto_clasificacion) cbx_clasificacion.getSelectedItem();
         c_producto.setId_clasificacion(cla_clasificacion.getId_clasificacion());
+        c_producto.setIcbper(0);
+        if (cla_clasificacion.getId_clasificacion() == 3) {
+            c_producto.setIcbper(1);
+        }
+        cla_unidad_medida cla_unidad = (cla_unidad_medida) cbx_unidad_medida.getSelectedItem();
+        c_producto.setId_unidad(cla_unidad.getId());
+
+        c_presentacion = new cl_productos_presentacion();
 
         boolean realizado = false;
 
@@ -397,7 +465,19 @@ public class frm_reg_producto extends javax.swing.JDialog {
             realizado = c_producto.modificar();
         }
 
+        c_presentacion.setId_producto(c_producto.getId());
+
         if (realizado) {
+            if (registrar) {
+                int contar_presentaciones = t_presentaciones.getRowCount();
+                for (int i = 0; i < contar_presentaciones; i++) {
+                    c_presentacion.setId_presentacion(i + 1);
+                    c_presentacion.setNombre(t_presentaciones.getValueAt(i, 1).toString());
+                    c_presentacion.setFactor(Double.parseDouble(t_presentaciones.getValueAt(i, 2).toString()));
+                    c_presentacion.setPrecio(Double.parseDouble(t_presentaciones.getValueAt(i, 3).toString()));
+                    c_presentacion.insertar();
+                }
+            }
             this.dispose();
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
@@ -422,22 +502,6 @@ public class frm_reg_producto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txt_marcaKeyPressed
 
-    private void txt_costoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_costoKeyTyped
-        c_varios.solo_precio(evt);
-        c_varios.limitar_caracteres(evt, txt_costo, 15);
-    }//GEN-LAST:event_txt_costoKeyTyped
-
-    private void txt_costoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_costoKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String texto = txt_costo.getText();
-            if (c_varios.esDecimal(texto)) {
-                txt_nombre_presentacion.setEnabled(true);
-                txt_nombre_presentacion.selectAll();
-                txt_nombre_presentacion.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txt_costoKeyPressed
-
     private void cbx_clasificacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_clasificacionKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             txt_descripcion.setEnabled(true);
@@ -451,8 +515,8 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
     private void txt_cod_barraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cod_barraKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txt_costo.setEnabled(true);
-            txt_costo.requestFocus();
+            cbx_unidad_medida.setEnabled(true);
+            cbx_unidad_medida.requestFocus();
         }
     }//GEN-LAST:event_txt_cod_barraKeyPressed
 
@@ -488,6 +552,80 @@ public class frm_reg_producto extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txt_factorKeyPressed
+
+    private void txt_precio_minimoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precio_minimoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String texto = txt_precio_minimo.getText();
+            if (c_varios.esDecimal(texto)) {
+                cla_unidad_medida cla_unidad = (cla_unidad_medida) cbx_unidad_medida.getSelectedItem();
+
+                //crear objeto unidad 
+                Object fila[] = new Object[4];
+                fila[0] = 1;
+                fila[1] = cla_unidad.getNombre();
+                fila[2] = 1;
+                fila[3] = Double.parseDouble(texto);
+                detalle.addRow(fila);
+
+                //pasar a presentacion y activar boton grabar
+                btn_guardar.setEnabled(true);
+                txt_nombre_presentacion.setEnabled(true);
+                txt_nombre_presentacion.selectAll();
+                txt_nombre_presentacion.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_precio_minimoKeyPressed
+
+    private void txt_precio_minimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precio_minimoKeyTyped
+        c_varios.solo_precio(evt);
+    }//GEN-LAST:event_txt_precio_minimoKeyTyped
+
+    private void cbx_unidad_medidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_unidad_medidaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            txt_precio_minimo.setEnabled(true);
+            txt_precio_minimo.requestFocus();
+        }
+    }//GEN-LAST:event_cbx_unidad_medidaKeyPressed
+
+    private void txt_precioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String texto = txt_precio.getText();
+            if (c_varios.esDecimal(texto)) {
+                btn_add_presentacion.setEnabled(true);
+                btn_add_presentacion.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_precioKeyPressed
+
+    private void txt_factorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_factorKeyTyped
+        c_varios.solo_precio(evt);
+        c_varios.limitar_caracteres(evt, txt_factor, 6);
+    }//GEN-LAST:event_txt_factorKeyTyped
+
+    private void txt_precioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precioKeyTyped
+        c_varios.solo_precio(evt);
+        c_varios.limitar_caracteres(evt, txt_precio, 6);
+    }//GEN-LAST:event_txt_precioKeyTyped
+
+    private void btn_add_presentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_presentacionActionPerformed
+        int contar_filas = t_presentaciones.getRowCount();
+
+        //crear objeto unidad 
+        Object fila[] = new Object[4];
+        fila[0] = contar_filas + 1;
+        fila[1] = txt_nombre_presentacion.getText().toUpperCase();
+        fila[2] = Double.parseDouble(txt_factor.getText());
+        fila[3] = Double.parseDouble(txt_precio.getText());
+        detalle.addRow(fila);
+
+        txt_nombre_presentacion.setText("");
+        txt_factor.setText("");
+        txt_precio.setText("");
+        btn_add_presentacion.setEnabled(false);
+        txt_factor.setEnabled(false);
+        txt_precio.setEnabled(false);
+        txt_nombre_presentacion.requestFocus();
+    }//GEN-LAST:event_btn_add_presentacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,12 +674,14 @@ public class frm_reg_producto extends javax.swing.JDialog {
     private javax.swing.JButton btn_guardar;
     private javax.swing.JComboBox<String> cbx_clasificacion;
     private javax.swing.JComboBox<String> cbx_tipo_producto;
+    private javax.swing.JComboBox<String> cbx_unidad_medida;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -552,12 +692,12 @@ public class frm_reg_producto extends javax.swing.JDialog {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable t_presentaciones;
     private javax.swing.JTextField txt_cod_barra;
-    private javax.swing.JTextField txt_costo;
     private javax.swing.JTextField txt_descripcion;
     private javax.swing.JTextField txt_factor;
     private javax.swing.JTextField txt_marca;
     private javax.swing.JTextField txt_nombre_presentacion;
     private javax.swing.JTextField txt_precio;
+    private javax.swing.JTextField txt_precio_minimo;
     private javax.swing.JTextField txt_proveedor;
     // End of variables declaration//GEN-END:variables
 }

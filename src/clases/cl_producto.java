@@ -36,6 +36,7 @@ public class cl_producto {
     private String estado;
     private int id_proveedor;
     private int id_clasificacion;
+    private int id_unidad;
 
     public cl_producto() {
     }
@@ -152,7 +153,14 @@ public class cl_producto {
         this.id_clasificacion = id_clasificacion;
     }
 
-    
+    public int getId_unidad() {
+        return id_unidad;
+    }
+
+    public void setId_unidad(int id_unidad) {
+        this.id_unidad = id_unidad;
+    }
+
     public void mostrar(JTable tabla, String query) {
         try {
             DefaultTableModel tmodelo;
@@ -243,6 +251,7 @@ public class cl_producto {
                 estado = rs.getString("estado");
                 id_proveedor = rs.getInt("id_proveedor");
                 id_clasificacion = rs.getInt("id_clasificacion");
+                id_unidad = rs.getInt("id_unidad");
                 existe = true;
             }
 
@@ -257,7 +266,7 @@ public class cl_producto {
         Statement st = c_conectar.conexion();
         String query = "insert into productos "
                 + "values ('" + id + "', '" + descripcion + "', '" + marca + "', '" + cod_barra + "', '"+costo+"', '" + precio + "', '0', '0', '" + comision + "', "
-                + "'" + tipo_producto + "', '" + icbper + "', '1', '" + id_proveedor + "', '" + id_clasificacion + "')";
+                + "'" + tipo_producto + "', '" + icbper + "', '1', '0', '" + id_clasificacion + "', '" + id_unidad + "')";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {

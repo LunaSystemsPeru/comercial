@@ -17,7 +17,6 @@ public class cl_productos_ingresos {
     cl_varios c_varios = new cl_varios();
 
     private int id_ingreso;
-    private int periodo;
     private int id_producto;
     private int cantidad;
     private double precio;
@@ -32,14 +31,6 @@ public class cl_productos_ingresos {
 
     public void setId_ingreso(int id_ingreso) {
         this.id_ingreso = id_ingreso;
-    }
-
-    public int getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(int periodo) {
-        this.periodo = periodo;
     }
 
     public int getId_producto() {
@@ -78,7 +69,7 @@ public class cl_productos_ingresos {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into productos_ingresos "
-                + "values ('" + id_ingreso + "', '" + periodo + "', '" + id_producto + "', '" + cantidad + "', '" + costo + "', '" + precio + "')";
+                + "values ('" + id_ingreso + "', '" + id_producto + "', '" + cantidad + "', '" + costo + "', '" + precio + "')";
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
             registrado = true;
@@ -90,7 +81,7 @@ public class cl_productos_ingresos {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "delete from productos_ingresos "
-                + "where id_ingreso = '" + id_ingreso + "' and periodo = '" + periodo + "'";
+                + "where id_ingreso = '" + id_ingreso + "'";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
@@ -110,10 +101,10 @@ public class cl_productos_ingresos {
                 }
             };
             //c_conectar.conectar();
-            String query = "select pi.id_producto, p.descripcion, p.marca, p.modelo, pi.cantidad, pi.costo, pi.precio "
+            String query = "select pi.id_producto, p.descripcion, p.marca, pi.cantidad, pi.costo, pi.precio "
                     + "from productos_ingresos as pi "
                     + "inner join productos as p on p.id_producto = pi.id_producto "
-                    + "where pi.id_ingreso= '" + id_ingreso + "' and pi.periodo = '" + periodo + "'";
+                    + "where pi.id_ingreso= '" + id_ingreso + "'";
             System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
@@ -131,11 +122,11 @@ public class cl_productos_ingresos {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = rs.getString("descripcion").trim();
                 fila[2] = rs.getString("marca").trim();
                 fila[3] = rs.getInt("cantidad");
                 fila[4] = c_varios.formato_totales(rs.getDouble("costo"));
-                fila[5] = c_varios.formato_totales(rs.getDouble("precio"));;
+                fila[5] = c_varios.formato_totales(rs.getDouble("precio"));
                 modelo.addRow(fila);
             }
             c_conectar.cerrar(st);

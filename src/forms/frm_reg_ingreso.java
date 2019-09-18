@@ -893,7 +893,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                         c_producto_almacen.validar_id();
                         txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
                         txt_costo.setText(c_varios.formato_numero(c_producto.getCosto()));
-                        txt_cactual.setText(c_producto_almacen.getCantidad() + "");
+                        txt_cactual.setText(c_producto_almacen.getCtotal() + "");
                         txt_cingreso.setText("1");
                         txt_cingreso.setEnabled(true);
                         txt_cingreso.requestFocus();
@@ -1016,14 +1016,12 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             c_ingreso.setId_usuario(frm_principal.c_usuario.getId_usuario());
             c_ingreso.setSerie(txt_serie.getText());
             c_ingreso.setNumero(Integer.parseInt(txt_numero.getText()));
-            c_ingreso.setPeriodo(Integer.parseInt(c_varios.obtener_periodo()));
             c_ingreso.setTc(Double.parseDouble(txt_tc.getText()));
             c_ingreso.obtener_codigo();
 
             boolean registrado = c_ingreso.registrar();
 
             c_detalle.setId_ingreso(c_ingreso.getId_ingreso());
-            c_detalle.setPeriodo(c_ingreso.getPeriodo());
             if (registrado) {
                 int nro_filas = t_detalle.getRowCount();
                 for (int i = 0; i < nro_filas; i++) {

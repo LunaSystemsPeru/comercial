@@ -6,7 +6,7 @@
 package models;
 
 import clases.cl_conectar;
-import clases_autocomplete.cla_presentaciones;
+import clases_autocomplete.cla_unidad_medida;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,35 +17,24 @@ import javax.swing.JOptionPane;
  *
  * @author luis
  */
-public class m_presentaciones {
-
+public class m_unidades {
     cl_conectar c_conectar = new cl_conectar();
-    private int id_producto;
-
-    public m_presentaciones() {
-    }
-
-    public void setId_producto(int id_producto) {
-        this.id_producto = id_producto;
-    }
-
-    public void cbx_empresas(JComboBox cbx) {
+    
+    public void llenar_combo (JComboBox cbx) {
         try {
             cbx.removeAllItems();
-
+            
             Statement st = c_conectar.conexion();
-
-            String query = "select id_presentacion, nombre, factor "
-                    + "from productos_presentaciones "
-                    + "where id_producto = '" + id_producto + "' "
-                    + "order by factor asc ";
+            
+            String query = "select * "
+                    + "from unidades_medida "
+                    + "order by nombre asc";
             ResultSet rs = c_conectar.consulta(st, query);
-
+            
             while (rs.next()) {
-                String texto = rs.getString("nombre") + " x " + rs.getString("factor");
-                cbx.addItem(new cla_presentaciones(rs.getInt("id_presentacion"), texto));
+                cbx.addItem(new cla_unidad_medida(rs.getInt("id_unidad"), rs.getString("nombre")));
             }
-
+            
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);
         } catch (SQLException ex) {

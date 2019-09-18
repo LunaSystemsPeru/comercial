@@ -705,7 +705,7 @@ public class frm_ver_mis_productos extends javax.swing.JDialog {
         //ajuste segun kardex 
         //cambiar cantidad actual por cantidad segun kardex
         //update productos_almacen set cantidad = _stock
-        c_mis_productos.setCantidad(c_kardex.obtener_suma_kardex());
+        c_mis_productos.setCtotal(c_kardex.obtener_suma_kardex());
         if (c_mis_productos.actualizar_cantidad_producto()) {
             jd_ajuste_producto.dispose();
             c_mis_productos.mis_productos(query, jTable1);

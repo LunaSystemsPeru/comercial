@@ -460,14 +460,14 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_cantidad_enviarKeyPressed
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        int cenviar = Integer.parseInt(txt_cantidad_enviar.getText());
+        double cenviar = Double.parseDouble(txt_cantidad_enviar.getText());
         Object fila[] = new Object[7];
         fila[0] = c_producto.getId();
         fila[1] = c_producto.getDescripcion();
         fila[2] = c_producto.getMarca();
         fila[3] = c_varios.formato_numero(c_producto.getPrecio());
-        fila[4] = c_producto_almacen.getCantidad();
-        int diferencia = cenviar - c_producto_almacen.getCantidad();
+        fila[4] = c_producto_almacen.getCtotal();
+        double diferencia = cenviar - c_producto_almacen.getCtotal();
         fila[5] = cenviar;
         fila[6] = diferencia;
 
@@ -494,7 +494,7 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
                         jd_add_producto.setLocationRelativeTo(null);
                         txt_producto.setText(c_producto.getDescripcion() + " " + c_producto.getMarca());
                         txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
-                        txt_cantidad_actual.setText(c_producto_almacen.getCantidad() + "");
+                        txt_cantidad_actual.setText(c_producto_almacen.getCtotal() + "");
                         txt_cantidad_enviar.setText("");
                         txt_cantidad_enviar.setEnabled(true);
                         txt_cantidad_enviar.requestFocus();

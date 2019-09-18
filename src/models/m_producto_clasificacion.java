@@ -29,6 +29,7 @@ public class m_producto_clasificacion {
             
             String query = "select * "
                     + "from productos_clasificacion "
+                    + "where id_clasificacion != 0 "
                     + "order by nombre asc";
             ResultSet rs = c_conectar.consulta(st, query);
             

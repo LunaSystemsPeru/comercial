@@ -835,7 +835,7 @@ public class frm_mod_separacion extends javax.swing.JDialog {
                         c_producto.validar_id();
                         c_producto_empresa.obtener_datos();
                         txt_precio.setText(c_varios.formato_numero(c_producto_empresa.getPrecio()));
-                        txt_cactual.setText(c_producto_almacen.getCantidad() + "");
+                        txt_cactual.setText(c_producto_almacen.getCtotal() + "");
                         txt_cantidad.setText("1");
                         txt_cantidad.setEnabled(true);
                         txt_cantidad.requestFocus();

@@ -104,7 +104,7 @@ public class cl_productos_presentacion {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "update productos_presentaciones "
-                + "set = '" + nombre + "', factor = '" + factor + "', precio_unitario = '" + precio + "' "
+                + "set nombre = '" + nombre + "', factor = '" + factor + "', precio_unitario = '" + precio + "' "
                 + "where id_producto = '" + id_producto + "' and id_presentacion = '" + id_presentacion + "'";
         //System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
@@ -114,7 +114,7 @@ public class cl_productos_presentacion {
         c_conectar.cerrar(st);
         return registrado;
     }
-
+    
     public boolean obtener_datos() {
         boolean existe = false;
         try {

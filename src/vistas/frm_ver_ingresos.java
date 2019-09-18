@@ -24,11 +24,12 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     cl_productos_ingresos c_detalle = new cl_productos_ingresos();
 
     int fila_seleccionada;
+    String query;
 
     public frm_ver_ingresos() {
         initComponents();
         String periodo = c_varios.obtener_periodo();
-        String query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+        query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                 + "from ingresos as i "
                 + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                 + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
@@ -302,22 +303,21 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     private void txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String buscar = txt_buscar.getText().trim();
-            String query = "";
             int tipo_busqueda = cbx_buscar.getSelectedIndex();
 
             if (tipo_busqueda == 0) {
-                query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+                query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
                         + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
                         + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
-                        + "where i.periodo = '" + buscar + "' "
+                        + "where concat(year(i.fecha), LPAD(month(i.fecha), 2, 0)) = '" + buscar + "' "
                         + "order by i.fecha asc, i.numero asc";
             }
 
             if (tipo_busqueda == 1) {
                 buscar = c_varios.fecha_myql(buscar);
-                query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+                query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
                         + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
@@ -327,7 +327,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
             }
 
             if (tipo_busqueda == 2) {
-                query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+                query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
                         + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
@@ -336,7 +336,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                         + "order by i.fecha asc";
             }
             if (tipo_busqueda == 3) {
-                query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+                query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
                         + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
@@ -357,10 +357,8 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         if (evt.getClickCount() == 2) {
             activar_botones();
             fila_seleccionada = t_ingresos.getSelectedRow();
-            c_ingreso.setPeriodo(Integer.parseInt(t_ingresos.getValueAt(fila_seleccionada, 6).toString()));
-            c_ingreso.setId_ingreso(Integer.parseInt(t_ingresos.getValueAt(fila_seleccionada, 7).toString()));
+            c_ingreso.setId_ingreso(Integer.parseInt(t_ingresos.getValueAt(fila_seleccionada, 0).toString()));
             c_detalle.setId_ingreso(c_ingreso.getId_ingreso());
-            c_detalle.setPeriodo(c_ingreso.getPeriodo());
         }
     }//GEN-LAST:event_t_ingresosMouseClicked
 
@@ -375,17 +373,9 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
 
                 if (JOptionPane.OK_OPTION == confirmado) {
                     c_detalle.setId_ingreso(c_ingreso.getId_ingreso());
-                    c_detalle.setPeriodo(c_ingreso.getPeriodo());
                     c_detalle.eliminar();
                     c_ingreso.eliminar();
 
-                    String periodo = c_varios.obtener_periodo();
-                    String query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
-                            + "from ingresos as i "
-                            + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
-                            + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
-                            + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
-                            + "where i.periodo = '" + periodo + "' ";
                     c_ingreso.mostrar(t_ingresos, query);
                 }
             } else {
