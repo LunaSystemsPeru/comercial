@@ -187,10 +187,10 @@ public class cl_producto {
             while (rs.next()) {
                 Object[] fila = new Object[7];
                 fila[0] = rs.getObject("id_producto");
-                fila[1] = rs.getString("descripcion").trim();
+                fila[1] = rs.getString("descripcion").trim() + " x " + rs.getString("id_unidad");
                 fila[2] = rs.getString("marca");
                 fila[3] = c_varios.formato_numero(rs.getDouble("precio"));
-                fila[4] = rs.getString("clase");
+                fila[4] = rs.getString("id_clasificacion");
                 fila[5] = rs.getInt("ctotal");
                 fila[6] = c_varios.formato_numero(rs.getDouble("comision"));
 
