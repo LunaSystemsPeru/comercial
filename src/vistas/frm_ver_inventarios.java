@@ -278,9 +278,7 @@ public class frm_ver_inventarios extends javax.swing.JInternalFrame {
             btn_detalle.setEnabled(true);
             btn_eliminar.setEnabled(false);
             fila_seleccionada = t_inventarios.getSelectedRow();
-            c_detalle.setAnio(Integer.parseInt(t_inventarios.getValueAt(fila_seleccionada, 0).toString()));
             c_detalle.setId_inventario(Integer.parseInt(t_inventarios.getValueAt(fila_seleccionada, 1).toString()));
-            c_detalle.setId_almacen(id_almacen);
         }
     }//GEN-LAST:event_t_inventariosMouseClicked
 

@@ -1015,7 +1015,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                 int nro_filas = t_detalle.getRowCount();
                 for (int i = 0; i < nro_filas; i++) {
                     c_detalle.setId_producto(Integer.parseInt(t_detalle.getValueAt(i, 0).toString()));
-                    c_detalle.setCantidad(Integer.parseInt(t_detalle.getValueAt(i, 3).toString()));
+                    c_detalle.setCantidad(Double.parseDouble(t_detalle.getValueAt(i, 3).toString()));
                     c_detalle.setCosto(Double.parseDouble(t_detalle.getValueAt(i, 4).toString()));
                     c_detalle.setPrecio(Double.parseDouble(t_detalle.getValueAt(i, 5).toString()));
 

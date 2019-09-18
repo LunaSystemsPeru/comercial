@@ -548,13 +548,11 @@ public class frm_reg_inventario extends javax.swing.JInternalFrame {
             boolean registrar = c_inventario.registrar();
 
             if (registrar) {
-                c_detalle.setAnio(c_inventario.getAnio());
                 c_detalle.setId_inventario(c_inventario.getId_inventario());
-                c_detalle.setId_almacen(id_almacen);
                 for (int i = 0; i < contar_filas; i++) {
                     c_detalle.setId_producto(Integer.parseInt(t_inventario.getValueAt(i, 0).toString()));
-                    c_detalle.setCactual(Integer.parseInt(t_inventario.getValueAt(i, 4).toString()));
-                    c_detalle.setCfisico(Integer.parseInt(t_inventario.getValueAt(i, 5).toString()));
+                    c_detalle.setCactual(Double.parseDouble(t_inventario.getValueAt(i, 4).toString()));
+                    c_detalle.setCfisico(Double.parseDouble(t_inventario.getValueAt(i, 5).toString()));
                     c_detalle.registrar();
                 }
 

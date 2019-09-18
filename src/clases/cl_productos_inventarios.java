@@ -21,11 +21,9 @@ public class cl_productos_inventarios {
     cl_varios c_varios = new cl_varios();
 
     private int id_inventario;
-    private int anio;
-    private int id_almacen;
     private int id_producto;
-    private int cactual;
-    private int cfisico;
+    private double cactual;
+    private double cfisico;
 
     public cl_productos_inventarios() {
     }
@@ -38,22 +36,6 @@ public class cl_productos_inventarios {
         this.id_inventario = id_inventario;
     }
 
-    public int getAnio() {
-        return anio;
-    }
-
-    public void setAnio(int anio) {
-        this.anio = anio;
-    }
-
-    public int getId_almacen() {
-        return id_almacen;
-    }
-
-    public void setId_almacen(int id_almacen) {
-        this.id_almacen = id_almacen;
-    }
-
     public int getId_producto() {
         return id_producto;
     }
@@ -62,19 +44,19 @@ public class cl_productos_inventarios {
         this.id_producto = id_producto;
     }
 
-    public int getCactual() {
+    public double getCactual() {
         return cactual;
     }
 
-    public void setCactual(int cactual) {
+    public void setCactual(double cactual) {
         this.cactual = cactual;
     }
 
-    public int getCfisico() {
+    public double getCfisico() {
         return cfisico;
     }
 
-    public void setCfisico(int cfisico) {
+    public void setCfisico(double cfisico) {
         this.cfisico = cfisico;
     }
 
@@ -82,7 +64,7 @@ public class cl_productos_inventarios {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into productos_inventario "
-                + "values ('" + id_producto + "','" + id_inventario + "', '" + id_almacen + "', '" + anio + "', '" + cactual + "', '" + cfisico + "')";
+                + "values ('" + id_producto + "','" + id_inventario + "', '" + cactual + "', '" + cfisico + "')";
         int resultado = c_conectar.actualiza(st, query);
         //  System.out.println(query);
         if (resultado > -1) {
@@ -105,7 +87,7 @@ public class cl_productos_inventarios {
             String query = "select pi.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pi.cant_actual, pi.cant_fisico "
                     + "from productos_inventario as pi "
                     + "inner join productos as p on p.id_producto = pi.id_producto "
-                    + "where pi.id_inventario = '" + id_inventario + "' and pi.anio = '" + anio + "' and pi.id_almacen = '" + id_almacen + "' ";
+                    + "where pi.id_inventario = '" + id_inventario + "' ";
             //System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);

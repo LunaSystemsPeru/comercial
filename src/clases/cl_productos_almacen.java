@@ -260,7 +260,7 @@ public class cl_productos_almacen {
             String query = "select * "
                     + "from productos_almacen "
                     + "where id_producto = '" + producto + "' and id_almacen = '" + almacen + "'";
-            System.out.println(query);
+         //   System.out.println(query);
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
                 ctotal = rs.getDouble("cactual");
