@@ -350,10 +350,10 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         
         txt_buscar_producto.setText("");
         txt_cantidad.setText("");
-        txt_cactual.setText("");
+        txt_cant_sunat.setText("");
         txt_precio.setText("");
         txt_cantidad.setEnabled(false);
-        txt_cactual.setEnabled(false);
+        txt_cant_sunat.setEnabled(false);
         txt_precio.setEnabled(false);
         txt_buscar_producto.requestFocus();
     }
@@ -502,13 +502,13 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txt_cactual = new javax.swing.JTextField();
+        txt_cant_sunat = new javax.swing.JTextField();
         jLabel31 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_unid_medida = new javax.swing.JComboBox<>();
         jLabel32 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txt_cant_actual = new javax.swing.JTextField();
+        txt_precio_total = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -1050,6 +1050,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Buscar:");
 
+        txt_buscar_producto.setEnabled(false);
         txt_buscar_producto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txt_buscar_productoFocusGained(evt);
@@ -1104,21 +1105,26 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Cant. Actual:");
 
-        txt_cactual.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_cactual.setEnabled(false);
+        txt_cant_sunat.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_cant_sunat.setEnabled(false);
 
         jLabel31.setText("Und. Medida:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+        cbx_unid_medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbx_unid_medida.setEnabled(false);
+        cbx_unid_medida.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jComboBox1FocusGained(evt);
+                cbx_unid_medidaFocusGained(evt);
             }
         });
 
         jLabel32.setText("Cant. Sunat:");
 
         jLabel34.setText("Precio Total:");
+
+        txt_cant_actual.setEnabled(false);
+
+        txt_precio_total.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1135,7 +1141,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     .addComponent(txt_buscar_producto)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, 138, Short.MAX_VALUE)
+                            .addComponent(cbx_unid_medida, 0, 138, Short.MAX_VALUE)
                             .addComponent(txt_cantidad))
                         .addGap(29, 29, 29)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1143,10 +1149,10 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_cactual)
+                            .addComponent(txt_cant_sunat)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txt_cant_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel34)
@@ -1154,7 +1160,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_precio, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(jTextField3))))
+                            .addComponent(txt_precio_total))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -1169,7 +1175,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbx_unid_medida, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1179,12 +1185,12 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_cactual, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_cant_sunat, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_precio_total, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_cant_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -1518,7 +1524,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                         c_producto.validar_id();
                        
                         txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
-                        txt_cactual.setText(c_producto_almacen.getCantidad() + "");
+                        txt_cant_sunat.setText(c_producto_almacen.getCantidad() + "");
                         txt_cantidad.setText("1");
                         txt_cantidad.setEnabled(true);
                         txt_cantidad.selectAll();
@@ -1583,7 +1589,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 }
             }
 
-            int cactual = Integer.parseInt(txt_cactual.getText());
+            int cactual = Integer.parseInt(txt_cant_sunat.getText());
             if (cactual <= 0) {
                 JOptionPane.showMessageDialog(null, "ERROR NO HAY STOCK PARA ESTE PRODUCTO");
                 error = true;
@@ -1700,8 +1706,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 if (c_cliente.comprobar_cliente()) {
                     txt_doc_cliente.setText(c_cliente.getDocumento());
                     txt_dir_cliente.setText(c_cliente.getDireccion());
-                    btn_grabar.setEnabled(true);
-                    btn_grabar.requestFocus();
+                     txt_buscar_producto.setEnabled(true);            
+                    txt_buscar_producto.requestFocus();
                 } else {
                     limpiar_cliente();
                     JOptionPane.showMessageDialog(null, "CLIENTE NO SELECCIONADO \nSELECCIONE CON ENTER");
@@ -2175,9 +2181,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_txt_fechaKeyPressed
 
-    private void jComboBox1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusGained
+    private void cbx_unid_medidaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbx_unid_medidaFocusGained
 lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1FocusGained
+    }//GEN-LAST:event_cbx_unid_medidaFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2194,8 +2200,8 @@ lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your han
     private javax.swing.JComboBox<String> cbx_tipo_doc;
     private javax.swing.JComboBox<String> cbx_tipo_transporte;
     private javax.swing.JComboBox<String> cbx_tipo_venta;
+    private javax.swing.JComboBox<String> cbx_unid_medida;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -2237,8 +2243,6 @@ lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your han
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_fin_venta;
     private javax.swing.JDialog jd_guia_remision;
     private javax.swing.JDialog jd_modificar_item;
@@ -2249,7 +2253,8 @@ lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your han
     private javax.swing.JLabel lbl_ubigeo;
     private javax.swing.JTable t_detalle;
     private javax.swing.JTextField txt_buscar_producto;
-    private javax.swing.JTextField txt_cactual;
+    private javax.swing.JTextField txt_cant_actual;
+    private javax.swing.JTextField txt_cant_sunat;
     private javax.swing.JTextField txt_cantidad;
     private javax.swing.JTextField txt_dir_cliente;
     private javax.swing.JTextField txt_dni_chofer;
@@ -2270,6 +2275,7 @@ lbl_ayuda.setText("Presionar enter para continuar");        // TODO add your han
     private javax.swing.JTextField txt_numero;
     private javax.swing.JTextField txt_placa_vehiculo;
     private javax.swing.JTextField txt_precio;
+    private javax.swing.JTextField txt_precio_total;
     private javax.swing.JTextField txt_razon_transportista;
     private javax.swing.JTextField txt_ruc_transportista;
     private javax.swing.JTextField txt_serie;
