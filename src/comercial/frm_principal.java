@@ -112,7 +112,7 @@ public class frm_principal extends javax.swing.JFrame {
         try {
             Timer timer = new Timer(60000, new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("mostrando id almacen " + c_almacen.getId());
+                    //System.out.println("mostrando id almacen " + c_almacen.getId());
                     c_notificaciones.setId_almacen(c_almacen.getId());
                     c_notificaciones.mostrar();
                 }

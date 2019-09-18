@@ -28,12 +28,11 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     public frm_ver_ingresos() {
         initComponents();
         String periodo = c_varios.obtener_periodo();
-        String query = "select i.periodo, i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+        String query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                 + "from ingresos as i "
                 + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                 + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
-                + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
-                + "where i.periodo = '" + periodo + "' ";
+                + "inner join usuarios as u on u.id_usuarios = i.id_usuarios ";
         c_ingreso.mostrar(t_ingresos, query);
     }
 

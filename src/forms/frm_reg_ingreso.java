@@ -461,7 +461,6 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
 
         btn_add_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
         btn_add_producto.setToolTipText("agregar Producto");
-        btn_add_producto.setEnabled(false);
         btn_add_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_add_productoActionPerformed(evt);

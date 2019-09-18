@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author DELACRUZ
  */
-public class cl_producto_presentacion {
+public class cl_productos_presentacion {
 
     cl_conectar c_conectar = new cl_conectar();
 
@@ -24,7 +24,7 @@ public class cl_producto_presentacion {
     private double factor;
     private double precio;
 
-    public cl_producto_presentacion() {
+    public cl_productos_presentacion() {
     }
 
     public int getId_producto() {

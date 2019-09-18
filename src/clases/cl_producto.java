@@ -28,9 +28,12 @@ public class cl_producto {
     private String cod_barra;
     private double costo;
     private double precio;
+    private double ctotal;
+    private double csunat;
     private double comision;
+    private int tipo_producto;
+    private int icbper;
     private String estado;
-    private int ctotal;
     private int id_proveedor;
     private int id_clasificacion;
 
@@ -50,7 +53,7 @@ public class cl_producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion.toUpperCase().trim();
+        this.descripcion = descripcion;
     }
 
     public String getMarca() {
@@ -58,7 +61,7 @@ public class cl_producto {
     }
 
     public void setMarca(String marca) {
-        this.marca = marca.toUpperCase().trim();
+        this.marca = marca;
     }
 
     public String getCod_barra() {
@@ -85,6 +88,22 @@ public class cl_producto {
         this.precio = precio;
     }
 
+    public double getCtotal() {
+        return ctotal;
+    }
+
+    public void setCtotal(double ctotal) {
+        this.ctotal = ctotal;
+    }
+
+    public double getCsunat() {
+        return csunat;
+    }
+
+    public void setCsunat(double csunat) {
+        this.csunat = csunat;
+    }
+
     public double getComision() {
         return comision;
     }
@@ -93,20 +112,28 @@ public class cl_producto {
         this.comision = comision;
     }
 
+    public int getTipo_producto() {
+        return tipo_producto;
+    }
+
+    public void setTipo_producto(int tipo_producto) {
+        this.tipo_producto = tipo_producto;
+    }
+
+    public int getIcbper() {
+        return icbper;
+    }
+
+    public void setIcbper(int icbper) {
+        this.icbper = icbper;
+    }
+
     public String getEstado() {
         return estado;
     }
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-    public int getCtotal() {
-        return ctotal;
-    }
-
-    public void setCtotal(int ctotal) {
-        this.ctotal = ctotal;
     }
 
     public int getId_proveedor() {
@@ -125,6 +152,7 @@ public class cl_producto {
         this.id_clasificacion = id_clasificacion;
     }
 
+    
     public void mostrar(JTable tabla, String query) {
         try {
             DefaultTableModel tmodelo;
@@ -207,11 +235,14 @@ public class cl_producto {
                 cod_barra = rs.getString("cod_barra");
                 costo = rs.getDouble("costo");
                 precio = rs.getDouble("precio");
+                ctotal = rs.getDouble("ctotal");
+                csunat = rs.getDouble("csunat");
                 comision = rs.getDouble("comision");
+                tipo_producto = rs.getInt("tipo_producto");
+                icbper = rs.getInt("afecto_icbper");
                 estado = rs.getString("estado");
                 id_proveedor = rs.getInt("id_proveedor");
-                id_clasificacion = rs.getInt("clase");
-                ctotal = rs.getInt("ctotal");
+                id_clasificacion = rs.getInt("id_clasificacion");
                 existe = true;
             }
 
@@ -225,8 +256,8 @@ public class cl_producto {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into productos "
-                + "values ('" + id + "', '" + descripcion + "', '" + marca + "', '" + cod_barra + "', '"+costo+"', '" + precio + "', '0', '" + comision + "', "
-                + "'" + id_clasificacion + "', '1', '" + id_proveedor + "')";
+                + "values ('" + id + "', '" + descripcion + "', '" + marca + "', '" + cod_barra + "', '"+costo+"', '" + precio + "', '0', '0', '" + comision + "', "
+                + "'" + tipo_producto + "', '" + icbper + "', '1', '" + id_proveedor + "', '" + id_clasificacion + "')";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
