@@ -150,8 +150,8 @@ public class cl_productos_almacen {
             mostrar.addColumn("Descripcion");
             mostrar.addColumn("Marca");
             mostrar.addColumn("Cant. Act.");
+            mostrar.addColumn("Cant. Sunat.");
             mostrar.addColumn("Precio");
-            mostrar.addColumn("%");
             mostrar.addColumn("Ult. Ingreso");
             mostrar.addColumn("Ult. Salida");
 
@@ -160,11 +160,11 @@ public class cl_productos_almacen {
             while (rs.next()) {
 
                 fila[0] = rs.getString("id_producto");
-                fila[1] = (rs.getString("descripcion").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " x " + rs.getString("um.nombre")).trim();
                 fila[2] = rs.getString("marca").trim();
-                fila[3] = rs.getInt("cactual");
-                fila[4] = c_varios.formato_numero(rs.getDouble("precio"));
-                fila[5] = rs.getDouble("comision");
+                fila[3] = rs.getDouble("cactual");
+                fila[4] = rs.getDouble("csunat");
+                fila[5] = c_varios.formato_numero(rs.getDouble("precio"));
                 String fingreso = rs.getString("f_infreso");
                 if (fingreso.equals("1000-01-01")) {
                     fingreso = "-";
