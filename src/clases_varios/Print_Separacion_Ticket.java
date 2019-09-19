@@ -81,7 +81,6 @@ public class Print_Separacion_Ticket {
         c_venta.validar_venta();
 
         c_detalle.setId_venta(id_venta);
-        c_detalle.setId_almacen(id_almacen);
         int contar = c_detalle.contar_lineas();
         
         c_sunat.setId(c_venta.getId_tido());

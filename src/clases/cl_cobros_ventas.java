@@ -22,7 +22,6 @@ public class cl_cobros_ventas {
     cl_varios c_varios = new cl_varios();
 
     private int id_venta;
-    private int id_almacen;
     private int id_cobro;
     private String fecha;
     private double monto;
@@ -37,14 +36,6 @@ public class cl_cobros_ventas {
 
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
-    }
-
-    public int getId_almacen() {
-        return id_almacen;
-    }
-
-    public void setId_almacen(int id_almacen) {
-        this.id_almacen = id_almacen;
     }
 
     public int getId_cobro() {
@@ -86,7 +77,7 @@ public class cl_cobros_ventas {
             Statement st = c_conectar.conexion();
             String query = "select ifnull(max(id_cobro) + 1, 1) as codigo "
                     + "from ventas_cobros "
-                    + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "'";
+                    + "where id_ventas = '" + id_venta + "'";
             ResultSet rs = c_conectar.consulta(st, query);
 
             while (rs.next()) {
@@ -105,7 +96,7 @@ public class cl_cobros_ventas {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into ventas_cobros "
-                + "Values ('" + id_venta + "', '" + id_almacen + "', '" + id_cobro + "', '" + fecha + "', '" + monto + "', '" + tipo_pago + "')";
+                + "Values ('" + id_venta + "', '" + id_cobro + "', '" + fecha + "', '" + monto + "', '" + tipo_pago + "')";
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
             registrado = true;
@@ -118,7 +109,7 @@ public class cl_cobros_ventas {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "delete from ventas_cobros "
-                + "where id_almacen = '" + id_almacen + "' and id_ventas = '" + id_venta + "'";
+                + "where id_ventas = '" + id_venta + "'";
         int resultado = c_conectar.actualiza(st, query);
         // System.out.println(query);
         if (resultado > -1) {
@@ -132,7 +123,7 @@ public class cl_cobros_ventas {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "delete from ventas_cobros "
-                + "where id_almacen = '" + id_almacen + "' and id_ventas = '" + id_venta + "' and id_cobro = '"+id_cobro+"'";
+                + "where id_ventas = '" + id_venta + "' and id_cobro = '"+id_cobro+"'";
         int resultado = c_conectar.actualiza(st, query);
         // System.out.println(query);
         if (resultado > -1) {
@@ -154,7 +145,7 @@ public class cl_cobros_ventas {
             //c_conectar.conectar();
             String query = "select id_cobro, fecha, monto, tipo_pago "
                     + "from ventas_cobros "
-                    + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "' "
+                    + "where id_ventas = '" + id_venta + "' "
                     + "order by fecha asc";
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
