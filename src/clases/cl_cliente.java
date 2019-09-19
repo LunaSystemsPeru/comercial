@@ -190,6 +190,21 @@ public class cl_cliente {
         return registrado;
     }
 
+    public boolean modificar() {
+        boolean registrado = false;
+        Statement st = c_conectar.conexion();
+        String query = "update clientes "
+                + "set nombre = '" + nombre + "', direccion = '" + direccion + "', telefono = '" + telefono + "', celular = '" + celular + "' "
+                + "where id_cliente = '" + codigo + "' ";
+        System.out.println(query);
+        int resultado = c_conectar.actualiza(st, query);
+        if (resultado > -1) {
+            registrado = true;
+        }
+        c_conectar.cerrar(st);
+        return registrado;
+    }
+
     public int obtener_codigo() {
         int resultado = 0;
 

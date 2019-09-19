@@ -534,7 +534,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_pago_venta, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addComponent(lbl_pago_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -885,7 +885,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
         jLabel31.setText("Und. Medida:");
 
-        cbx_unid_medida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbx_unid_medida.setEnabled(false);
         cbx_unid_medida.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -1251,7 +1250,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
