@@ -1552,7 +1552,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
     private void btn_grabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_grabarActionPerformed
         //btn_pago.setEnabled(false);
-
         jd_fin_venta.setModal(true);
         jd_fin_venta.setSize(580, 302);
         jd_fin_venta.setLocationRelativeTo(null);
