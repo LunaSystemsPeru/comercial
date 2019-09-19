@@ -75,12 +75,13 @@ public class cl_enviar_venta extends Thread {
             String letras_numeros = c_letras.Convertir(c_venta.getTotal() + "", true) + " SOLES";
             System.out.println(letras_numeros);
             System.out.println(url_codigo_qr);
-            
+
             File miDir = new File(".");
             try {
                 Map<String, Object> parametros = new HashMap<>();
                 String path = miDir.getCanonicalPath();
-                String direccion = path + "//reports//subreports//";
+                String diagonal = File.separator;
+                String direccion = path + diagonal + "reports" + diagonal + "subreports" + diagonal;
 
                 System.out.println(direccion);
                 parametros.put("SUBREPORT_DIR", direccion);
@@ -118,7 +119,8 @@ public class cl_enviar_venta extends Thread {
             try {
                 Map<String, Object> parametros = new HashMap<>();
                 String path = miDir.getCanonicalPath();
-                String direccion = path + "//reports//subreports//";
+                String diagonal = File.separator;
+                String direccion = path + diagonal + "reports" + diagonal + "subreports" + diagonal;
 
                 System.out.println(direccion);
                 parametros.put("SUBREPORT_DIR", direccion);
