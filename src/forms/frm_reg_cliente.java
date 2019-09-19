@@ -37,25 +37,27 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             c_cliente.setCodigo(0);
         }
 
-        if (c_cliente.getCodigo() != 0) {
+        if (accion.equals("modificar")) {
             btn_reg.setText("Modificar");
             System.out.println(accion);
             c_cliente.comprobar_cliente();
             txt_ndoc.setText(c_cliente.getDocumento());
             txt_nom.setText(c_cliente.getNombre());
-         txt_celular.setText(c_cliente.getCelular());
-            txt_email.setText(c_cliente.getTelefono());
-           txt_dir.setText(c_cliente.getDireccion());
+            txt_celular.setText(c_cliente.getCelular());
+            txt_telefono.setText(c_cliente.getTelefono());
+            txt_dir.setText(c_cliente.getDireccion());
             txt_ndoc.setEnabled(false);
             txt_nom.setEnabled(true);
-         txt_dir.setEnabled(true);
+            txt_dir.setEnabled(true);
+            txt_celular.setEnabled(true);
+            txt_email.setEnabled(true);
+            txt_telefono.setEnabled(true);
             txt_nom.requestFocus();
             btn_reg.setEnabled(true);
         }
     }
 
     private void llenar() {
-        c_cliente.setCodigo(c_cliente.obtener_codigo());
         c_cliente.setDocumento(txt_ndoc.getText());
         c_cliente.setNombre(txt_nom.getText().trim().toUpperCase());
         c_cliente.setDireccion(txt_dir.getText().trim().toUpperCase());
@@ -340,6 +342,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             llenar();
 
             if (accion.equals("registrar")) {
+                c_cliente.setCodigo(c_cliente.obtener_codigo());
                 if (c_cliente.registrar()) {
                     Notification.show("Clientes", "CLIENTE REGISTRADO CORRECTAMENTE");
                     if (origen.equals("reg_venta")) {
@@ -349,18 +352,17 @@ public class frm_reg_cliente extends javax.swing.JDialog {
                 }
             }
 
-//            if (accion.equals("modificar")) {
-//                if (c_entidad.modificar()) {
-//                    Notification.show("Clientes", "CLIENTE MODIFICADO CORRECTAMENTE");
-//                    if (origen.equals("reg_venta")) {
-//                        frm_reg_venta.btn_actualizar.doClick();
-//                    }
-//                    if (origen.equals("reg_guiaa")) {
-//                        frm_reg_guia.btn_actualizar.doClick();
-//                    }
-//                    this.dispose();
-//                }
-//            }
+            if (accion.equals("modificar")) {
+                c_cliente.modificar();
+                Notification.show("Clientes", "CLIENTE MODIFICADO CORRECTAMENTE");
+                if (origen.equals("reg_venta")) {
+                    frm_reg_venta.btn_actualizar.doClick();
+                }
+                if (origen.equals("ver_clientes")) {
+                    //
+                }
+                this.dispose();
+            }
             accion = "";
             origen = "";
         }
