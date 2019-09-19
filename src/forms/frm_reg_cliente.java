@@ -34,10 +34,12 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         initComponents();
 
         if (accion.equals("registrar")) {
+            this.setTitle("Agregar Cliente");
             c_cliente.setCodigo(0);
         }
 
         if (accion.equals("modificar")) {
+            this.setTitle("Modificar Cliente");
             btn_reg.setText("Modificar");
             System.out.println(accion);
             c_cliente.comprobar_cliente();
@@ -93,18 +95,23 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         txt_telefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Registrar Cliente");
+        setTitle("Modificar Cliente");
         setType(java.awt.Window.Type.UTILITY);
 
         jLabel3.setText("Nombre o Razon Social:");
 
         txt_ndoc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_ndoc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_ndocKeyTyped(evt);
+        txt_ndoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ndocActionPerformed(evt);
             }
+        });
+        txt_ndoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_ndocKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ndocKeyTyped(evt);
             }
         });
 
@@ -336,7 +343,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         btn_reg.setEnabled(false);
-        int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Registrar al Cliente?");
+        int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Modificar al Cliente?");
 
         if (JOptionPane.OK_OPTION == confirmado) {
             llenar();
@@ -365,6 +372,8 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
             accion = "";
             origen = "";
+        }else{
+             this.dispose();
         }
     }//GEN-LAST:event_btn_regActionPerformed
 
@@ -411,6 +420,10 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txt_dirKeyPressed
+
+    private void txt_ndocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ndocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ndocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,7 +483,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_celular;
-    private javax.swing.JTextField txt_dir;
+    public static javax.swing.JTextField txt_dir;
     private javax.swing.JTextField txt_email;
     public static javax.swing.JTextField txt_ndoc;
     public static javax.swing.JTextField txt_nom;
