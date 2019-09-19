@@ -131,7 +131,7 @@ public class cl_proveedor {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "update proveedor "
-                + "set razon social = '" + razon_social + "', direccion ='" + direccion + "',condicion= '" + condicion + "',estado= '" + estado + "' "
+                + "set razon_social = '" + razon_social + "', direccion ='" + direccion + "',condicion= '" + condicion + "',estado= '" + estado + "' "
                 + "where id_proveedor= '"+id_proveedor+"'";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
