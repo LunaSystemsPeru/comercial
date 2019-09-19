@@ -1335,8 +1335,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 //si nro de filas es mayor a 0 entonces ir a datos generales
                 int contar_filas = t_detalle.getRowCount();
                 if (contar_filas > 0) {
-                    cbx_tipo_venta.setEnabled(true);
-                    cbx_tipo_venta.requestFocus();
+                    btn_grabar.setEnabled(true);
+                    btn_grabar.requestFocus();
+                   
                 }
             }
         }
@@ -1442,7 +1443,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 //ir a nombre cliente
                 limpiar_cliente();
                 cargar_clientes(3);
-                
+
                 cargar_productos(1);
             }
         }
@@ -1529,6 +1530,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                     btn_grabar.setEnabled(true);
                     btn_grabar.requestFocus();
                      */
+                    txt_buscar_producto.setEnabled(true);
+                    txt_buscar_producto.requestFocus();
                 } else {
                     JOptionPane.showMessageDialog(this, "CLIENTE NO EXISTE");
                 }
@@ -1549,7 +1552,6 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
     private void btn_grabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_grabarActionPerformed
         //btn_pago.setEnabled(false);
-
         jd_fin_venta.setModal(true);
         jd_fin_venta.setSize(580, 302);
         jd_fin_venta.setLocationRelativeTo(null);
