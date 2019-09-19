@@ -1443,6 +1443,8 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 //ir a nombre cliente
                 limpiar_cliente();
                 cargar_clientes(3);
+                
+                cargar_productos(1);
             }
         }
     }//GEN-LAST:event_cbx_tipo_ventaKeyPressed
