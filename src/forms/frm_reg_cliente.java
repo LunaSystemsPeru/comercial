@@ -34,10 +34,12 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         initComponents();
 
         if (accion.equals("registrar")) {
+            this.setTitle("Agregar Cliente");
             c_cliente.setCodigo(0);
         }
 
         if (accion.equals("modificar")) {
+            this.setTitle("Modificar Cliente");
             btn_reg.setText("Modificar");
             System.out.println(accion);
             c_cliente.comprobar_cliente();
@@ -93,7 +95,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         txt_telefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Registrar Cliente");
+        setTitle("Modificar Cliente");
         setType(java.awt.Window.Type.UTILITY);
 
         jLabel3.setText("Nombre o Razon Social:");
@@ -470,7 +472,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_celular;
-    private javax.swing.JTextField txt_dir;
+    public static javax.swing.JTextField txt_dir;
     private javax.swing.JTextField txt_email;
     public static javax.swing.JTextField txt_ndoc;
     public static javax.swing.JTextField txt_nom;
