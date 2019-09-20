@@ -129,11 +129,11 @@ public class cl_productos_ventas {
     public void mostrar_modificar(DefaultTableModel modelo) {
         try {
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca, p.modelo, pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca,  pv.cantidad, pv.precio "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
                     + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "' "
-                    + "order by p.descripcion asc, p.modelo asc";
+                    + "order by p.descripcion asc";
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -141,7 +141,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[5];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim() + " - " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim() ).trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
                 double pparcial = pcantidad * pprecio;
@@ -160,12 +160,12 @@ public class cl_productos_ventas {
     public void mostrar_traslado(DefaultTableModel modelo) {
         try {
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca, p.modelo, pa.cactual, pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca, pa.cactual, pv.cantidad, pv.precio "
                     + "from productos_ventas as pv "
                     + "inner join productos_almacen as pa on pa.id_almacen = pv.id_almacen and pa.id_producto = pv.id_producto "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
                     + "where pv.id_ventas = '" + id_venta + "' and pv.id_almacen = '" + id_almacen + "' "
-                    + "order by p.descripcion asc, p.modelo asc";
+                    + "order by p.descripcion asc";
             System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
@@ -174,7 +174,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() ).trim();
                 fila[2] = rs.getString("marca").trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
@@ -201,11 +201,11 @@ public class cl_productos_ventas {
                 }
             };
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca, p.modelo, pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca,  pv.cantidad, pv.precio "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
                     + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "' "
-                    + "order by p.descripcion asc, p.modelo asc";
+                    + "order by p.descripcion asc";
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -222,7 +222,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() ).trim();
                 fila[2] = rs.getString("marca").trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
