@@ -1013,6 +1013,11 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
         cbx_tipo_venta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VENTA", "SEPARACION" }));
         cbx_tipo_venta.setEnabled(false);
+        cbx_tipo_venta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_tipo_ventaActionPerformed(evt);
+            }
+        });
         cbx_tipo_venta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbx_tipo_ventaKeyPressed(evt);
@@ -1023,6 +1028,11 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         cbx_tipo_doc.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 cbx_tipo_docFocusGained(evt);
+            }
+        });
+        cbx_tipo_doc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_tipo_docActionPerformed(evt);
             }
         });
         cbx_tipo_doc.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1949,6 +1959,14 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private void txt_precio_totalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_precio_totalFocusGained
         lbl_ayuda.setText("MODIFICAR CANTIDAD        ENTER: PARA GUARDAR EN DETALLE");
     }//GEN-LAST:event_txt_precio_totalFocusGained
+
+    private void cbx_tipo_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_tipo_ventaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_tipo_ventaActionPerformed
+
+    private void cbx_tipo_docActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_tipo_docActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_tipo_docActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

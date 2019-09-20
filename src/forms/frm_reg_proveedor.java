@@ -41,7 +41,7 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
             System.out.println(accion);
             c_proveedor.cargar_datos();
             txt_ndoc.setText(c_proveedor.getRuc());
-            txt_nom.setText(c_proveedor.getRazon_social());
+            txt_nom.setText(c_proveedor.getRazon_social().trim().toUpperCase());
             txt_condicion.setText(c_proveedor.getCondicion());
             txt_estado.setText(c_proveedor.getEstado());
             txt_dir.setText(c_proveedor.getDireccion());
@@ -101,11 +101,11 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
 
         txt_nom.setEnabled(false);
         txt_nom.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_nomKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nomKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nomKeyTyped(evt);
             }
         });
 
@@ -213,7 +213,7 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,46 +298,45 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         this.dispose();
-         
+
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
 
-  
-        
         btn_guardar.setEnabled(false);
         int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Modificar al proveedor?");
-        if (confirmado==JOptionPane.OK_OPTION) {
-            
-        
-        c_proveedor.setCondicion(txt_condicion.getText());
-        c_proveedor.setEstado(txt_estado.getText());
-        c_proveedor.setDireccion(txt_dir.getText());
-        c_proveedor.setRazon_social(txt_nom.getText());
-        c_proveedor.setRuc(txt_ndoc.getText());
+        if (confirmado == JOptionPane.OK_OPTION) {
 
-        if (accion.equals("registrar")) {
-            c_proveedor.obtener_codigo();
+            c_proveedor.setCondicion(txt_condicion.getText());
+            c_proveedor.setEstado(txt_estado.getText());
+            c_proveedor.setDireccion(txt_dir.getText());
+            c_proveedor.setRazon_social(txt_nom.getText().trim().toUpperCase());
+            c_proveedor.setRuc(txt_ndoc.getText());
 
-            boolean registrado = c_proveedor.registrar();
-            if (registrado) {
-                this.dispose();
-                origen = "";
-                accion = "";
+            if (accion.equals("registrar")) {
+                c_proveedor.obtener_codigo();
+
+                boolean registrado = c_proveedor.registrar();
+                if (registrado) {
+                    this.dispose();
+                    origen = "";
+                    accion = "";
+                }
+
             }
 
-        }
-        
-        if (accion.equals("modificar")) {
-            
-            boolean registrado = c_proveedor.modificar();
-            if (registrado) {
-                this.dispose();
-                origen = "";
-                accion = "";
-            }
+            if (accion.equals("modificar")) {
 
-        }
+                boolean registrado = c_proveedor.modificar();
+                if (registrado) {
+                    this.dispose();
+                    origen = "";
+                    accion = "";
+                }
+
+            }
+        } else {
+            this.dispose();
         }
     }//GEN-LAST:event_btn_guardarActionPerformed
 
