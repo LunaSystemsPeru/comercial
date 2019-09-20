@@ -345,6 +345,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         txt_cantidad.setEnabled(false);
         txt_cant_sunat.setEnabled(false);
         txt_precio.setEnabled(false);
+        txt_precio_total.setEnabled(false);
         cbx_unid_medida.setEnabled(false);
         txt_buscar_producto.requestFocus();
     }
