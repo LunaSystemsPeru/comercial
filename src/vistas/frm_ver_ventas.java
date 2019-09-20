@@ -13,7 +13,7 @@ import clases.cl_documento_almacen;
 import clases.cl_productos_ventas;
 import clases.cl_varios;
 import clases.cl_venta;
-import clases.cl_venta_cupon;
+import clases.cl_venta_eliminada;
 import clases_autocomplete.cla_mis_documentos;
 import clases_varios.leer_numeros;
 import forms.frm_mod_separacion;
@@ -45,7 +45,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
     cl_venta c_separacion = new cl_venta();
     cl_documento_firmado c_hash = new cl_documento_firmado();
 
-    cl_venta_cupon c_cupon = new cl_venta_cupon();
+    cl_venta_eliminada c_cupon = new cl_venta_eliminada();
     cl_productos_ventas c_detalle = new cl_productos_ventas();
     cl_cobros_ventas c_cobros = new cl_cobros_ventas();
     cl_cliente c_cliente = new cl_cliente();
@@ -979,7 +979,6 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         double monto_cupon = Double.parseDouble(t_ventas.getValueAt(fila_seleccionada, 5).toString());
 
         //eliminar productos
-        c_detalle.setId_almacen(id_almacen);
         c_detalle.setId_venta(id_venta);
         c_detalle.eliminar();
 
@@ -990,12 +989,10 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         //eliminar cobros
         c_venta.validar_venta();
         if (c_venta.getFecha().equals(c_varios.getFechaActual())) {
-            c_cobros.setId_almacen(id_almacen);
             c_cobros.setId_venta(id_venta);
             c_cobros.eliminar();
         } else {
             //crear cupon
-            c_cupon.setId_almacen(id_almacen);
             c_cupon.setId_venta(id_venta);
             c_cupon.setId_usuario(id_usuario);
             c_cupon.setFecha(c_varios.getFechaActual());
@@ -1034,7 +1031,6 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
             int id_venta = Integer.parseInt(t_ventas.getValueAt(fila_seleccionada, 8).toString());
             double monto_cupon = Double.parseDouble(t_ventas.getValueAt(fila_seleccionada, 5).toString());
 
-            c_cupon.setId_almacen(id_almacen);
             c_cupon.setId_venta(id_venta);
             c_cupon.validar_cupon();
 
@@ -1061,7 +1057,6 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
 
             String venta = t_ventas.getValueAt(fila_seleccionada, 2).toString() + " | " + t_ventas.getValueAt(fila_seleccionada, 3).toString();
 
-            c_detalle.setId_almacen(id_almacen);
             c_detalle.setId_venta(id_venta);
             c_detalle.mostrar(t_detalle);
 
@@ -1083,7 +1078,6 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
             String cliente = t_ventas.getValueAt(fila_seleccionada, 3).toString();
             double total = Double.parseDouble(t_ventas.getValueAt(fila_seleccionada, 4).toString());
 
-            c_cobros.setId_almacen(id_almacen);
             c_cobros.setId_venta(id_venta);
             c_cobros.mostrar(t_cobros);
 
@@ -1329,7 +1323,6 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
 
             //copiar productos de la separacion, establacer variables generales
             c_nuevo_detalle.setId_venta(c_venta.getId_venta());
-            c_nuevo_detalle.setId_almacen(c_venta.getId_almacen());
 
             //recorrer tabla de productos de la separacion
             cl_conectar c_conectar = new cl_conectar();

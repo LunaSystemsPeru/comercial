@@ -10,7 +10,6 @@ import clases.cl_cliente;
 import clases.cl_conectar;
 import clases.cl_producto;
 import clases.cl_productos_almacen;
-import clases.cl_productos_empresa;
 import clases.cl_productos_traslado;
 import clases.cl_productos_ventas;
 import clases.cl_traslados;
@@ -1277,7 +1276,6 @@ public class frm_reg_traslado extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //probando venta
         cl_productos_ventas c_producto_venta = new cl_productos_ventas();
-        c_producto_venta.setId_almacen(id_almacen);
         c_producto_venta.setId_venta(c_venta.getId_venta());
         c_producto_venta.mostrar_traslado(detalle);
         t_traslado.setModel(detalle);

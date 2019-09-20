@@ -86,7 +86,6 @@ public class frm_mod_separacion extends javax.swing.JDialog {
 
         c_venta.setId_almacen(id_almacen);
         c_venta.validar_venta();
-        c_detalle.setId_almacen(id_almacen);
         c_detalle.setId_venta(c_venta.getId_venta());
 
         c_detalle.mostrar_modificar(detalle);
@@ -882,7 +881,6 @@ public class frm_mod_separacion extends javax.swing.JDialog {
             //recorrer tabla y agregar nuevos productos
             int contar_tabla = t_detalle.getRowCount();
             for (int i = 0; i < contar_tabla; i++) {
-                c_detalle.setId_almacen(id_almacen);
                 c_detalle.setId_venta(c_venta.getId_venta());
                 c_detalle.setId_producto(Integer.parseInt(t_detalle.getValueAt(i, 0).toString()));
                 c_detalle.setCantidad(Integer.parseInt(t_detalle.getValueAt(i, 2).toString()));
