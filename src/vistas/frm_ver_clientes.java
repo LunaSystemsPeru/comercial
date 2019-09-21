@@ -19,14 +19,18 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
 
     cl_cliente c_cliente = new cl_cliente();
     int fila_seleccionada;
+    String query;
 
     public frm_ver_clientes() {
         initComponents();
-        String query = "select * "
+        query = "select * "
                 + "from clientes "
                 + "where (venta - pago) > 0 "
                 + "order by nombre asc";
+
         c_cliente.mostrar(t_clientes, query);
+        txt_buscar.requestFocus();
+
     }
 
     /**
@@ -42,7 +46,7 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
         txt_buscar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         t_clientes = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbx_boton = new javax.swing.JComboBox();
         jToolBar1 = new javax.swing.JToolBar();
         btn_modificar = new javax.swing.JButton();
         btn_cerrar = new javax.swing.JButton();
@@ -52,6 +56,11 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/find.png"))); // NOI18N
         jLabel1.setText("Buscar por RUC o Razon Social:");
 
+        txt_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_buscarActionPerformed(evt);
+            }
+        });
         txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_buscarKeyPressed(evt);
@@ -76,7 +85,17 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(t_clientes);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TODOS", "DEUDORES", "INACTIVOS" }));
+        cbx_boton.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "TODOS", "DEUDORES", "INACTIVOS" }));
+        cbx_boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_botonActionPerformed(evt);
+            }
+        });
+        cbx_boton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cbx_botonKeyPressed(evt);
+            }
+        });
 
         jToolBar1.setFloatable(false);
         jToolBar1.setOpaque(false);
@@ -96,6 +115,7 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
 
         btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         btn_cerrar.setText("Cerrar");
+        btn_cerrar.setFocusable(false);
         btn_cerrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_cerrar.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btn_cerrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -119,7 +139,7 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 203, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -132,7 +152,7 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                 .addContainerGap())
@@ -176,11 +196,44 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_btn_modificarActionPerformed
 
+    private void cbx_botonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_botonKeyPressed
+        
+    }//GEN-LAST:event_cbx_botonKeyPressed
+
+    private void cbx_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_botonActionPerformed
+      int tipo_cliente = cbx_boton.getSelectedIndex();
+        if (tipo_cliente == 0) {
+            query = "select * "
+                    + "from clientes "
+                    + "order by nombre asc";
+        }
+        if (tipo_cliente==1) {
+            query = "select * "
+                    + "from clientes "
+                    + "where pago<venta "
+                    + "order by nombre asc";
+            
+        }
+        if (tipo_cliente==2) {
+            query = "select * "
+                    + "from clientes "
+                    + "where ultima_venta='1000-01-01' "
+                    + "order by nombre asc";
+            
+        }
+
+c_cliente.mostrar(t_clientes, query);
+    }//GEN-LAST:event_cbx_botonActionPerformed
+
+    private void txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_buscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton btn_modificar;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox cbx_boton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;

@@ -7,6 +7,9 @@ package vistas;
 
 import clases.cl_proveedor;
 import clases.cl_varios;
+import forms.frm_reg_proveedor;
+import java.awt.Frame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +17,7 @@ import clases.cl_varios;
  */
 public class frm_ver_proveedores extends javax.swing.JInternalFrame {
 
+    int fila_seleccionada;
     cl_varios c_varios = new cl_varios();
     cl_proveedor c_proveedor = new cl_proveedor();
 
@@ -38,7 +42,7 @@ public class frm_ver_proveedores extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btn_modificar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -46,15 +50,22 @@ public class frm_ver_proveedores extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         t_proveedores = new javax.swing.JTable();
 
+        setTitle("Ver proveedores");
+
         jToolBar1.setFloatable(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/application_edit.png"))); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.setEnabled(false);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/application_edit.png"))); // NOI18N
+        btn_modificar.setText("Modificar");
+        btn_modificar.setEnabled(false);
+        btn_modificar.setFocusable(false);
+        btn_modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btn_modificar);
         jToolBar1.add(jSeparator1);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cross.png"))); // NOI18N
@@ -92,6 +103,11 @@ public class frm_ver_proveedores extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        t_proveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_proveedoresMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(t_proveedores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,9 +158,30 @@ public class frm_ver_proveedores extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_buscarKeyPressed
 
+    private void t_proveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_proveedoresMouseClicked
+       if (evt.getClickCount() == 2) {
+            fila_seleccionada = t_proveedores.getSelectedRow();
+            btn_modificar.setEnabled(true);
+        }
+       
+    }//GEN-LAST:event_t_proveedoresMouseClicked
+
+    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+   
+        int id_proveedor = Integer.parseInt(t_proveedores.getValueAt(fila_seleccionada, 0).toString());
+        btn_modificar.setEnabled(false);
+        Frame f = JOptionPane.getRootFrame();
+        frm_reg_proveedor.accion = "modificar";
+        frm_reg_proveedor.origen = "ver_proveedor";
+        frm_reg_proveedor.c_proveedor.setId_proveedor(id_proveedor);
+        frm_reg_proveedor dialog = new frm_reg_proveedor(f, true);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_btn_modificarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_modificar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
