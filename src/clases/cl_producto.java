@@ -236,6 +236,7 @@ public class cl_producto {
             String query = "select * "
                     + "from productos "
                     + "where id_producto = '" + id + "'";
+            System.out.println(query);
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
                 descripcion = rs.getString("descripcion");

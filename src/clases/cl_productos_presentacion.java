@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -114,7 +116,7 @@ public class cl_productos_presentacion {
         c_conectar.cerrar(st);
         return registrado;
     }
-    
+
     public boolean obtener_datos() {
         boolean existe = false;
         try {
@@ -136,5 +138,42 @@ public class cl_productos_presentacion {
             System.out.println(ex.getMessage());
         }
         return existe;
+    }
+
+    public void mostrar(JTable tabla) {
+        try {
+            DefaultTableModel modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int fila, int columna) {
+                    return false;
+                }
+            };
+
+            Statement st = c_conectar.conexion();
+            String query = "select * "
+                    + "from unidades_medida "
+                    + "where id_producto = '" + id_producto + "' "
+                    + "order by factor asc";
+            ResultSet rs = c_conectar.consulta(st, query);
+
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[4];
+                fila[0] = rs.getInt("id_presentacion");
+                fila[1] = rs.getString("nombre");
+                fila[2] = rs.getString("factor");
+                fila[3] = rs.getString("precio_unitario");
+
+                modelo.addRow(fila);
+            }
+
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
+
+            tabla.setModel(modelo);
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
+
     }
 }
