@@ -566,7 +566,6 @@
                   <Border info="null"/>
                 </Property>
                 <Property name="floatable" type="boolean" value="false"/>
-                <Property name="rollover" type="boolean" value="true"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Constraints>

@@ -566,7 +566,6 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar4.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar4.setBorder(null);
         jToolBar4.setFloatable(false);
-        jToolBar4.setRollover(true);
         jToolBar4.setBorderPainted(false);
         jToolBar4.add(jSeparator2);
 
