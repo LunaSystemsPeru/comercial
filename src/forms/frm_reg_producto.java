@@ -57,19 +57,19 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         if (registrar == false) {
             this.setTitle("Modificar Producto");
-            
+
             cl_proveedor c_proveedor = new cl_proveedor();
             c_presentacion = new cl_productos_presentacion();
-            
+
             c_producto.validar_id();
-            
+
             //cargar datos
             c_proveedor.setId_proveedor(c_producto.getId_proveedor());
             c_proveedor.cargar_datos();
-            
+
             c_presentacion.setId_producto(c_producto.getId());
             c_presentacion.mostrar(t_presentaciones);
-            
+
             txt_descripcion.setText(c_producto.getDescripcion());
             txt_marca.setText(c_producto.getMarca());
             txt_cod_barra.setText(c_varios.formato_numero(c_producto.getComision()));
@@ -296,6 +296,11 @@ public class frm_reg_producto extends javax.swing.JDialog {
                 "Item", "Descripcion", "Factor", "Precio Unitario"
             }
         ));
+        t_presentaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                t_presentacionesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(t_presentaciones);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -642,6 +647,15 @@ public class frm_reg_producto extends javax.swing.JDialog {
         txt_precio.setEnabled(false);
         txt_nombre_presentacion.requestFocus();
     }//GEN-LAST:event_btn_add_presentacionActionPerformed
+
+    private void t_presentacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_presentacionesMouseClicked
+        if (evt.getClickCount() == 2) {
+            fila_seleccionada = t_presentaciones.getSelectedRow();
+            txt_nombre_presentacion.setText(t_presentaciones.getValueAt(fila_seleccionada, 1).toString());
+            txt_factor.setText(t_presentaciones.getValueAt(fila_seleccionada, 2).toString());
+            txt_precio.setText(t_presentaciones.getValueAt(fila_seleccionada, 3).toString());
+        }
+    }//GEN-LAST:event_t_presentacionesMouseClicked
 
     /**
      * @param args the command line arguments
