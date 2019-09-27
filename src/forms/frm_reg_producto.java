@@ -7,9 +7,9 @@ package forms;
 
 import clases.cl_producto;
 import clases.cl_productos_clasificacion;
-import clases.cl_productos_empresa;
 import clases.cl_productos_presentacion;
 import clases.cl_proveedor;
+import clases.cl_unidad_medida;
 import clases.cl_varios;
 import clases_autocomplete.cla_producto_clasificacion;
 import clases_autocomplete.cla_unidad_medida;
@@ -32,6 +32,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
     cl_varios c_varios = new cl_varios();
     cl_productos_clasificacion c_clasificacion;
     cl_productos_presentacion c_presentacion;
+    cl_unidad_medida c_unidad = new cl_unidad_medida();
 
     //autollenado clasificacon
     m_producto_clasificacion m_clasificacion = new m_producto_clasificacion();
@@ -56,20 +57,35 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         if (registrar == false) {
             this.setTitle("Modificar Producto");
+            
             cl_proveedor c_proveedor = new cl_proveedor();
+            c_presentacion = new cl_productos_presentacion();
+            
             c_producto.validar_id();
+            
+            //cargar datos
             c_proveedor.setId_proveedor(c_producto.getId_proveedor());
             c_proveedor.cargar_datos();
+            
+            c_presentacion.setId_producto(c_producto.getId());
+            c_presentacion.mostrar(t_presentaciones);
+            
             txt_descripcion.setText(c_producto.getDescripcion());
             txt_marca.setText(c_producto.getMarca());
             txt_cod_barra.setText(c_varios.formato_numero(c_producto.getComision()));
-            txt_precio.setText(c_varios.formato_numero(c_producto.getPrecio()));
+            txt_precio_minimo.setText(c_varios.formato_numero(c_producto.getPrecio()));
             txt_proveedor.setText(c_proveedor.getRuc() + " | " + c_proveedor.getRazon_social());
 
+            //obtener modelo unidad
+            c_unidad.setId(c_producto.getId_unidad());
+            c_unidad.validar_id();
+            cbx_unidad_medida.setEnabled(true);
+            cbx_unidad_medida.getModel().setSelectedItem(new cla_unidad_medida(c_unidad.getId(), c_unidad.getNombre()));
+
+            //obtener modelo clasificacion
             c_clasificacion = new cl_productos_clasificacion();
             c_clasificacion.setId_clasificacion(c_producto.getId_clasificacion());
             c_clasificacion.obtener_datos();
-            System.out.println(c_clasificacion.getDescripcion());
             cbx_clasificacion.setEnabled(true);
             cbx_clasificacion.getModel().setSelectedItem(new cla_producto_clasificacion(c_clasificacion.getId_clasificacion(), c_clasificacion.getDescripcion()));
 

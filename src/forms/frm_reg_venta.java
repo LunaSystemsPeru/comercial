@@ -345,6 +345,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         txt_cantidad.setEnabled(false);
         txt_cant_sunat.setEnabled(false);
         txt_precio.setEnabled(false);
+        txt_precio_total.setEnabled(false);
         cbx_unid_medida.setEnabled(false);
         txt_buscar_producto.requestFocus();
     }
@@ -1571,10 +1572,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     private void btn_crear_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crear_clienteActionPerformed
         btn_actualizar.setEnabled(true);
         Frame f = JOptionPane.getRootFrame();
-        frm_reg_cliente dialog = new frm_reg_cliente(f, true);
         frm_reg_cliente.accion = "registrar";
         frm_reg_cliente.origen = "reg_venta";
-        frm_reg_cliente.c_cliente.setCodigo(0);
+        frm_reg_cliente dialog = new frm_reg_cliente(f, true);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_btn_crear_clienteActionPerformed

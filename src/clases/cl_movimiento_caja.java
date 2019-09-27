@@ -92,7 +92,7 @@ public class cl_movimiento_caja {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into cajas_movimientos "
-                + "Values ('" + id_movimiento + "', '" + id_almacen + "', '" + fecha + "', '" + ingresa + "', '" + retirar + "', '" + motivo + "', '" + id_usuario + "')";
+                + "Values ('" + fecha + "', '" + id_almacen + "', '" + id_movimiento + "', '" + ingresa + "', '" + retirar + "', '" + motivo + "', '" + id_usuario + "')";
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
             registrado = true;

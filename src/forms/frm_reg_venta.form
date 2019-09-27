@@ -759,34 +759,39 @@
                           <Component id="jButton3" min="-2" pref="127" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txt_nom_cliente" min="-2" pref="359" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Component id="jLabel6" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="btn_crear_cliente" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="btn_actualizar" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="txt_serie" max="32767" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="txt_numero" min="-2" pref="109" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="cbx_tipo_doc" min="-2" pref="180" max="-2" attributes="0"/>
+                                      <Component id="cbx_tipo_venta" max="32767" attributes="0"/>
+                                      <Component id="txt_fecha" max="32767" attributes="0"/>
+                                      <Component id="txt_doc_cliente" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="btn_crear_cliente" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btn_actualizar" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="txt_serie" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txt_numero" min="-2" pref="109" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="cbx_tipo_doc" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="cbx_tipo_venta" max="32767" attributes="0"/>
-                              <Component id="txt_fecha" max="32767" attributes="0"/>
-                              <Component id="txt_doc_cliente" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>

@@ -56,6 +56,11 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/find.png"))); // NOI18N
         jLabel1.setText("Buscar por RUC o Razon Social:");
 
+        txt_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_buscarActionPerformed(evt);
+            }
+        });
         txt_buscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_buscarKeyPressed(evt);
@@ -219,6 +224,10 @@ public class frm_ver_clientes extends javax.swing.JInternalFrame {
 
 c_cliente.mostrar(t_clientes, query);
     }//GEN-LAST:event_cbx_botonActionPerformed
+
+    private void txt_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_buscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

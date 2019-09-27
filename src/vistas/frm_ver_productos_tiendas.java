@@ -21,7 +21,7 @@ public class frm_ver_productos_tiendas extends javax.swing.JInternalFrame {
 
     public frm_ver_productos_tiendas() {
         initComponents();
-        String query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
+        String query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
                 + "from productos_almacen as pa "
                 + "inner join productos as p on p.id_producto = pa.id_producto "
                 + "inner join almacen as a on a.id_almacen = pa.id_almacen "
@@ -145,25 +145,25 @@ public class frm_ver_productos_tiendas extends javax.swing.JInternalFrame {
             String texto = txt_buscar.getText();
             String query;
             if (chx_todos.isSelected()) {
-                query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
+                query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
                         + "from productos_almacen as pa "
                         + "inner join productos as p on p.id_producto = pa.id_producto "
                         + "inner join almacen as a on a.id_almacen = pa.id_almacen "
-                        + "where concat (descripcion, ' ', modelo, ' ', marca) like '%" + texto + "%' "
+                        + "where concat (descripcion, ' ',  marca) like '%" + texto + "%' "
                         + "order by p.descripcion asc , p.marca asc ";
             } else {
                 cla_almacen o_almacen = (cla_almacen) cbx_tiendas.getSelectedItem();
                 int id_almacen = o_almacen.getId_almacen();
 
-                query = "select pa.id_producto, p.descripcion, p.marca, p.modelo, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
+                query = "select pa.id_producto, p.descripcion, p.marca, p.precio, pa.cactual, p.comision, a.nombre as nalmacen "
                         + "from productos_almacen as pa "
                         + "inner join productos as p on p.id_producto = pa.id_producto "
                         + "inner join almacen as a on a.id_almacen = pa.id_almacen "
-                        + "where concat (descripcion, ' ', modelo, ' ', marca) like '%" + texto + "%' and pa.id_almacen = '" + id_almacen + "' "
+                        + "where concat (descripcion, ' ', marca) like '%" + texto + "%' and pa.id_almacen = '" + id_almacen + "' "
                         + "order by p.descripcion asc , p.marca asc ";
 
             }
-            
+
             c_mis_productos.productos_tiendas(query, t_productos);
         }
     }//GEN-LAST:event_txt_buscarKeyPressed

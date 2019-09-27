@@ -16,6 +16,7 @@ import clases_hilos.cl_notificaciones;
 import clases_varios.cl_grafica_mensual;
 import forms.frm_reg_cierre_caja;
 import forms.frm_reg_movimiento_caja;
+import forms.frm_reg_salida;
 import forms.frm_reg_traslado;
 import forms.frm_reg_venta;
 import java.awt.Frame;
@@ -42,6 +43,7 @@ import vistas.frm_ver_mis_productos2;
 import vistas.frm_ver_productos_tiendas;
 import vistas.frm_ver_productos_todos;
 import vistas.frm_ver_proveedores;
+import vistas.frm_ver_salidas;
 import vistas.frm_ver_traslados;
 import vistas.frm_ver_usuarios;
 import vistas.frm_ver_ventas;
@@ -564,7 +566,6 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar4.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar4.setBorder(null);
         jToolBar4.setFloatable(false);
-        jToolBar4.setRollover(true);
         jToolBar4.setBorderPainted(false);
         jToolBar4.add(jSeparator2);
 
@@ -767,7 +768,7 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar2.add(jButton7);
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shop-78-512.png"))); // NOI18N
-        jButton20.setText("Guias de Remision");
+        jButton20.setText("Salidas");
         jButton20.setFocusable(false);
         jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton20.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1160,7 +1161,7 @@ public class frm_principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        frm_ver_guias_remision formulario = new frm_ver_guias_remision();
+        frm_ver_salidas formulario = new frm_ver_salidas();
         c_varios.llamar_ventana(formulario);
 
     }//GEN-LAST:event_jButton20ActionPerformed
