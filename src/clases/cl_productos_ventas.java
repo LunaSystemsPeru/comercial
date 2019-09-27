@@ -8,7 +8,6 @@ package clases;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,11 +21,10 @@ public class cl_productos_ventas {
     cl_varios c_varios = new cl_varios();
 
     private int id_venta;
-    private int id_almacen;
     private int id_producto;
     private double precio;
     private double costo;
-    private int cantidad;
+    private double cantidad;
 
     public cl_productos_ventas() {
     }
@@ -37,14 +35,6 @@ public class cl_productos_ventas {
 
     public void setId_venta(int id_venta) {
         this.id_venta = id_venta;
-    }
-
-    public int getId_almacen() {
-        return id_almacen;
-    }
-
-    public void setId_almacen(int id_almacen) {
-        this.id_almacen = id_almacen;
     }
 
     public int getId_producto() {
@@ -71,11 +61,11 @@ public class cl_productos_ventas {
         this.costo = costo;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
@@ -83,7 +73,7 @@ public class cl_productos_ventas {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into productos_ventas "
-                + "Values ('" + id_almacen + "', '" + id_venta + "', '" + id_producto + "', '" + cantidad + "', '" + costo + "', '" + precio + "')";
+                + "Values ('" + id_producto + "', '" + id_venta + "', '" + cantidad + "', '" + costo + "', '" + precio + "')";
         int resultado = c_conectar.actualiza(st, query);
         // System.out.println(query);
         if (resultado > -1) {
@@ -97,7 +87,7 @@ public class cl_productos_ventas {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "delete from productos_ventas "
-                + "where id_almacen = '" + id_almacen + "' and id_ventas = '" + id_venta + "'";
+                + "where id_ventas = '" + id_venta + "'";
         int resultado = c_conectar.actualiza(st, query);
         // System.out.println(query);
         if (resultado > -1) {
@@ -113,7 +103,7 @@ public class cl_productos_ventas {
             Statement st = c_conectar.conexion();
             String query = "select count(*) as contar "
                     + "from productos_ventas "
-                    + "where id_almacen = '" + id_almacen + "' and id_ventas = '" + id_venta + "'";
+                    + "where id_ventas = '" + id_venta + "'";
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
                 contar = rs.getInt("contar");
@@ -132,8 +122,8 @@ public class cl_productos_ventas {
             String query = "select pv.id_producto, p.descripcion, p.marca,  pv.cantidad, pv.precio "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
-                    + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "' "
-                    + "order by p.descripcion asc";
+                    + "where id_ventas = '" + id_venta + "' "
+                    + "order by p.descripcion asc, p.modelo asc";
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -160,13 +150,14 @@ public class cl_productos_ventas {
     public void mostrar_traslado(DefaultTableModel modelo) {
         try {
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca, pa.cactual, pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca, pa.cactual, pv.cantidad, pv.precio, um.nombre as und_medida "
                     + "from productos_ventas as pv "
                     + "inner join productos_almacen as pa on pa.id_almacen = pv.id_almacen and pa.id_producto = pv.id_producto "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
-                    + "where pv.id_ventas = '" + id_venta + "' and pv.id_almacen = '" + id_almacen + "' "
+                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad " 
+                    + "where pv.id_ventas = '" + id_venta + "' "
                     + "order by p.descripcion asc";
-            System.out.println(query);
+          //  System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -174,7 +165,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() ).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " x " + rs.getString("und_medida")).trim();
                 fila[2] = rs.getString("marca").trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
@@ -201,10 +192,11 @@ public class cl_productos_ventas {
                 }
             };
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca,  pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca, pv.cantidad, pv.precio, um.nombre as und_medida "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
-                    + "where id_ventas = '" + id_venta + "' and id_almacen = '" + id_almacen + "' "
+                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad " 
+                    + "where id_ventas = '" + id_venta + "' "
                     + "order by p.descripcion asc";
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
@@ -222,7 +214,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[6];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() ).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " x " + rs.getString("und_medida").trim()).trim();
                 fila[2] = rs.getString("marca").trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");

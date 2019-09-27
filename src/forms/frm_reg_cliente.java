@@ -52,7 +52,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             txt_nom.setEnabled(true);
             txt_dir.setEnabled(true);
             txt_celular.setEnabled(true);
-            txt_email.setEnabled(true);
             txt_telefono.setEnabled(true);
             txt_nom.requestFocus();
             btn_reg.setEnabled(true);
@@ -87,9 +86,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cerrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txt_celular = new javax.swing.JTextField();
-        txt_email = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         txt_telefono = new javax.swing.JTextField();
@@ -101,18 +98,28 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         jLabel3.setText("Nombre o Razon Social:");
 
         txt_ndoc.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_ndoc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_ndocKeyTyped(evt);
+        txt_ndoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ndocActionPerformed(evt);
             }
+        });
+        txt_ndoc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_ndocKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ndocKeyTyped(evt);
             }
         });
 
         jLabel4.setText("Direccion:");
 
         txt_nom.setEnabled(false);
+        txt_nom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nomActionPerformed(evt);
+            }
+        });
         txt_nom.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nomKeyPressed(evt);
@@ -164,19 +171,10 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
         jLabel1.setText("Telefono / Celular:");
 
-        jLabel5.setText("Email:");
-
         txt_celular.setEnabled(false);
         txt_celular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_celularKeyPressed(evt);
-            }
-        });
-
-        txt_email.setEnabled(false);
-        txt_email.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_emailKeyPressed(evt);
             }
         });
 
@@ -195,32 +193,36 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_dir, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
-                            .addComponent(txt_nom)
-                            .addComponent(txt_email)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_ndoc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_dir, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                                    .addComponent(txt_nom)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txt_ndoc, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 343, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -238,21 +240,17 @@ public class frm_reg_cliente extends javax.swing.JDialog {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_dir, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_celular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_email, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -326,8 +324,8 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private void txt_nomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nomKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_nom.getText().length() > 0) {
-                txt_telefono.setEnabled(true);
-                txt_telefono.requestFocus();
+                txt_dir.setEnabled(true);
+                txt_dir.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_nomKeyPressed
@@ -338,7 +336,7 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         btn_reg.setEnabled(false);
-        int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Registrar al Cliente?");
+        int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Modificar al Cliente?");
 
         if (JOptionPane.OK_OPTION == confirmado) {
             llenar();
@@ -367,6 +365,8 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
             accion = "";
             origen = "";
+        } else {
+            this.dispose();
         }
     }//GEN-LAST:event_btn_regActionPerformed
 
@@ -374,20 +374,11 @@ public class frm_reg_cliente extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btn_cerrarActionPerformed
 
-    private void txt_emailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_emailKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_email.getText().length() > 0) {
-                btn_reg.setEnabled(true);
-                btn_reg.requestFocus();
-            }
-        }
-    }//GEN-LAST:event_txt_emailKeyPressed
-
     private void txt_telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_telefono.getText().length() > 0) {
-                txt_email.setEnabled(true);
-                txt_email.requestFocus();
+                btn_reg.setEnabled(true);
+                btn_reg.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_telefonoKeyPressed
@@ -413,6 +404,14 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_txt_dirKeyPressed
+
+    private void txt_ndocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ndocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ndocActionPerformed
+
+    private void txt_nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nomActionPerformed
 
     /**
      * @param args the command line arguments
@@ -466,14 +465,12 @@ public class frm_reg_cliente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_celular;
     public static javax.swing.JTextField txt_dir;
-    private javax.swing.JTextField txt_email;
     public static javax.swing.JTextField txt_ndoc;
     public static javax.swing.JTextField txt_nom;
     private javax.swing.JTextField txt_telefono;

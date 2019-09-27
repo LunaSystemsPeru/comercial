@@ -5,7 +5,6 @@
  */
 package clases_varios;
 
-import br.com.adilson.util.Extenso;
 import br.com.adilson.util.PrinterMatrix;
 import clases.cl_almacen;
 import clases.cl_cliente;
@@ -18,13 +17,9 @@ import clases.cl_varios;
 import clases.cl_venta;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.print.Doc;
 import javax.print.DocFlavor;
 import javax.print.DocPrintJob;
@@ -83,7 +78,6 @@ public class Print_Venta_Ticket {
         c_venta.validar_venta();
         
         c_detalle.setId_venta(id_venta);
-        c_detalle.setId_almacen(id_almacen);
         int contar = c_detalle.contar_lineas();
 
         c_sunat.setId(c_venta.getId_tido());

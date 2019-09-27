@@ -197,8 +197,7 @@ public class cl_venta {
         try {
             Statement st = c_conectar.conexion();
             String query = "select ifnull(max(id_ventas) + 1, 1) as codigo "
-                    + "from ventas "
-                    + "where id_almacen = '" + id_almacen + "'";
+                    + "from ventas ";
             //System.out.println(query);
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
@@ -216,7 +215,7 @@ public class cl_venta {
         Statement st = c_conectar.conexion();
         String query = "insert into ventas "
                 + "values ('" + id_venta + "', '" + id_almacen + "', '" + fecha + "', '" + id_tido + "', '" + serie + "', '" + numero + "', "
-                + "'" + id_cliente + "', '" + id_usuario + "', '" + total + "', '0', '" + id_tipo_venta + "', '" + estado + "', '" + enviado_sunat + "')";
+                + "'" + id_cliente + "', '" + id_usuario + "', '" + total + "', '0', '" + id_tipo_venta + "', '" + estado + "', current_timestamp() ,'" + enviado_sunat + "')";
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {
             registrado = true;
@@ -322,7 +321,7 @@ public class cl_venta {
                     }
                 }
                 Object[] fila = new Object[9];
-                fila[0] = c_varios.ceros_izquieda_letras(4, rs.getString("id_ventas"));
+                fila[0] = rs.getString("id_ventas");
                 fila[1] = rs.getString("fecha");
                 fila[2] = rs.getString("abreviado") + " | " + c_varios.ceros_izquieda_letras(4, rs.getString("serie")) + " - " + c_varios.ceros_izquieda_numero(7, rs.getInt("numero"));
                 fila[3] = rs.getString("documento") + " | " + rs.getString("nombre");

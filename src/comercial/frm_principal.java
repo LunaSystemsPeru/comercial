@@ -218,8 +218,8 @@ public class frm_principal extends javax.swing.JFrame {
         jp_dias = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jToolBar4 = new javax.swing.JToolBar();
-        jButton5 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
@@ -566,6 +566,7 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar4.setFloatable(false);
         jToolBar4.setRollover(true);
         jToolBar4.setBorderPainted(false);
+        jToolBar4.add(jSeparator2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Office-Customer-Male-Light-icon.png"))); // NOI18N
         jButton5.setText("Clientes");
@@ -578,7 +579,6 @@ public class frm_principal extends javax.swing.JFrame {
             }
         });
         jToolBar4.add(jButton5);
-        jToolBar4.add(jSeparator2);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shopping-add-512.png"))); // NOI18N
         jButton6.setText("Vender");
