@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class cl_productos_presentacion {
 
     cl_conectar c_conectar = new cl_conectar();
+    cl_varios c_varios = new cl_varios();
 
     private int id_producto;
     private int id_presentacion;
@@ -116,6 +117,20 @@ public class cl_productos_presentacion {
         c_conectar.cerrar(st);
         return registrado;
     }
+    
+      public boolean eliminar_todo() {
+        boolean registrado = false;
+        Statement st = c_conectar.conexion();
+        String query = "delete from productos_presentaciones "
+                + "where id_producto = '" + id_producto + "'";
+        //System.out.println(query);
+        int resultado = c_conectar.actualiza(st, query);
+        if (resultado > -1) {
+            registrado = true;
+        }
+        c_conectar.cerrar(st);
+        return registrado;
+    }
 
     public boolean obtener_datos() {
         boolean existe = false;
@@ -140,22 +155,27 @@ public class cl_productos_presentacion {
         return existe;
     }
 
-    public void mostrar(JTable tabla) {
+    public void mostrar(JTable tabla, DefaultTableModel modelo) {
         try {
-            DefaultTableModel modelo = new DefaultTableModel() {
+            /*DefaultTableModel modelo = new DefaultTableModel() {
                 @Override
                 public boolean isCellEditable(int fila, int columna) {
                     return false;
                 }
-            };
+            };*/
 
             Statement st = c_conectar.conexion();
             String query = "select * "
-                    + "from unidades_medida "
+                    + "from productos_presentaciones "
                     + "where id_producto = '" + id_producto + "' "
                     + "order by factor asc";
             ResultSet rs = c_conectar.consulta(st, query);
-
+/*
+            modelo.addColumn("Item");
+            modelo.addColumn("Descripcion");
+            modelo.addColumn("Factor");
+            modelo.addColumn("Precio Unit.");
+*/
             //Creando las filas para el JTable
             while (rs.next()) {
                 Object[] fila = new Object[4];
@@ -171,6 +191,14 @@ public class cl_productos_presentacion {
             c_conectar.cerrar(rs);
 
             tabla.setModel(modelo);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
+            c_varios.centrar_celda(tabla, 0);
+            c_varios.centrar_celda(tabla, 2);
+            c_varios.derecha_celda(tabla, 3);
+
         } catch (SQLException e) {
             System.out.print(e);
         }

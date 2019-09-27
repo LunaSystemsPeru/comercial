@@ -43,6 +43,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
     static DefaultTableModel detalle;
     static int fila_seleccionada;
     public static boolean registrar;
+    boolean modificar_presentacion = false;
 
     /**
      * Creates new form frm_reg_producto
@@ -53,9 +54,10 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
         m_clasificacion.cbx_clasificaciones(cbx_clasificacion);
         m_unidad.llenar_combo(cbx_unidad_medida);
+
         modelo_presentaciones();
 
-        if (registrar == false) {
+        if (!registrar) {
             this.setTitle("Modificar Producto");
 
             cl_proveedor c_proveedor = new cl_proveedor();
@@ -67,12 +69,9 @@ public class frm_reg_producto extends javax.swing.JDialog {
             c_proveedor.setId_proveedor(c_producto.getId_proveedor());
             c_proveedor.cargar_datos();
 
-            c_presentacion.setId_producto(c_producto.getId());
-            c_presentacion.mostrar(t_presentaciones);
-
             txt_descripcion.setText(c_producto.getDescripcion());
             txt_marca.setText(c_producto.getMarca());
-            txt_cod_barra.setText(c_varios.formato_numero(c_producto.getComision()));
+            txt_cod_barra.setText(c_producto.getCod_barra());
             txt_precio_minimo.setText(c_varios.formato_numero(c_producto.getPrecio()));
             txt_proveedor.setText(c_proveedor.getRuc() + " | " + c_proveedor.getRazon_social());
 
@@ -89,6 +88,12 @@ public class frm_reg_producto extends javax.swing.JDialog {
             cbx_clasificacion.setEnabled(true);
             cbx_clasificacion.getModel().setSelectedItem(new cla_producto_clasificacion(c_clasificacion.getId_clasificacion(), c_clasificacion.getDescripcion()));
 
+            c_presentacion.setId_producto(c_producto.getId());
+            c_presentacion.mostrar(t_presentaciones, detalle);
+
+            txt_nombre_presentacion.setEnabled(true);
+
+            txt_descripcion.setEnabled(true);
             txt_cod_barra.setEnabled(true);
             txt_marca.setEnabled(true);
             btn_guardar.setEnabled(true);
@@ -489,15 +494,16 @@ public class frm_reg_producto extends javax.swing.JDialog {
         c_presentacion.setId_producto(c_producto.getId());
 
         if (realizado) {
-            if (registrar) {
-                int contar_presentaciones = t_presentaciones.getRowCount();
-                for (int i = 0; i < contar_presentaciones; i++) {
-                    c_presentacion.setId_presentacion(i + 1);
-                    c_presentacion.setNombre(t_presentaciones.getValueAt(i, 1).toString());
-                    c_presentacion.setFactor(Double.parseDouble(t_presentaciones.getValueAt(i, 2).toString()));
-                    c_presentacion.setPrecio(Double.parseDouble(t_presentaciones.getValueAt(i, 3).toString()));
-                    c_presentacion.insertar();
-                }
+            if (!registrar) {
+                c_presentacion.eliminar_todo();
+            }
+            int contar_presentaciones = t_presentaciones.getRowCount();
+            for (int i = 0; i < contar_presentaciones; i++) {
+                c_presentacion.setId_presentacion(i + 1);
+                c_presentacion.setNombre(t_presentaciones.getValueAt(i, 1).toString());
+                c_presentacion.setFactor(Double.parseDouble(t_presentaciones.getValueAt(i, 2).toString()));
+                c_presentacion.setPrecio(Double.parseDouble(t_presentaciones.getValueAt(i, 3).toString()));
+                c_presentacion.insertar();
             }
             this.dispose();
         }
@@ -603,8 +609,10 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
     private void cbx_unidad_medidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_unidad_medidaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            txt_precio_minimo.setEnabled(true);
-            txt_precio_minimo.requestFocus();
+            if (registrar) {
+                txt_precio_minimo.setEnabled(true);
+                txt_precio_minimo.requestFocus();
+            }
         }
     }//GEN-LAST:event_cbx_unidad_medidaKeyPressed
 
@@ -629,15 +637,26 @@ public class frm_reg_producto extends javax.swing.JDialog {
     }//GEN-LAST:event_txt_precioKeyTyped
 
     private void btn_add_presentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_presentacionActionPerformed
-        int contar_filas = t_presentaciones.getRowCount();
+        if (!modificar_presentacion) {
+            int contar_filas = t_presentaciones.getRowCount();
 
-        //crear objeto unidad 
-        Object fila[] = new Object[4];
-        fila[0] = contar_filas + 1;
-        fila[1] = txt_nombre_presentacion.getText().toUpperCase();
-        fila[2] = Double.parseDouble(txt_factor.getText());
-        fila[3] = Double.parseDouble(txt_precio.getText());
-        detalle.addRow(fila);
+            //crear objeto unidad 
+            Object fila[] = new Object[4];
+            fila[0] = contar_filas + 1;
+            fila[1] = txt_nombre_presentacion.getText().toUpperCase();
+            fila[2] = Double.parseDouble(txt_factor.getText());
+            fila[3] = Double.parseDouble(txt_precio.getText());
+            detalle.addRow(fila);
+
+        } else {
+            int idpresentacion = Integer.parseInt(t_presentaciones.getValueAt(fila_seleccionada, 0).toString());
+            if (idpresentacion == 1) {
+                txt_precio_minimo.setText(txt_precio.getText());
+            }
+            t_presentaciones.setValueAt(txt_factor.getText(), fila_seleccionada, 2);
+            t_presentaciones.setValueAt(txt_precio.getText(), fila_seleccionada, 3);
+            t_presentaciones.setValueAt(txt_nombre_presentacion.getText(), fila_seleccionada, 1);
+        }
 
         txt_nombre_presentacion.setText("");
         txt_factor.setText("");
@@ -645,15 +664,31 @@ public class frm_reg_producto extends javax.swing.JDialog {
         btn_add_presentacion.setEnabled(false);
         txt_factor.setEnabled(false);
         txt_precio.setEnabled(false);
+        txt_nombre_presentacion.setEnabled(true);
         txt_nombre_presentacion.requestFocus();
+        modificar_presentacion = false;
     }//GEN-LAST:event_btn_add_presentacionActionPerformed
 
     private void t_presentacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_presentacionesMouseClicked
         if (evt.getClickCount() == 2) {
             fila_seleccionada = t_presentaciones.getSelectedRow();
+            int idpresentacion = Integer.parseInt(t_presentaciones.getValueAt(fila_seleccionada, 0).toString());
+
+            modificar_presentacion = true;
             txt_nombre_presentacion.setText(t_presentaciones.getValueAt(fila_seleccionada, 1).toString());
             txt_factor.setText(t_presentaciones.getValueAt(fila_seleccionada, 2).toString());
             txt_precio.setText(t_presentaciones.getValueAt(fila_seleccionada, 3).toString());
+            btn_add_presentacion.setEnabled(true);
+            txt_factor.setEnabled(true);
+            txt_precio.setEnabled(true);
+            if (idpresentacion == 1) {
+                txt_nombre_presentacion.setEnabled(false);
+                txt_factor.setEnabled(false);
+                txt_precio.requestFocus();
+            } else {
+                txt_nombre_presentacion.setEnabled(true);
+                txt_nombre_presentacion.requestFocus();
+            }
         }
     }//GEN-LAST:event_t_presentacionesMouseClicked
 
