@@ -154,7 +154,7 @@ public class cl_kardex {
                     return false;
                 }
             };
-            String query = "select k.id_kardex, k.fecha, p.descripcion, p.marca,  tm.descripcion as nombre_timo, k.cant_ingreso, k.cant_salida, k.costo_ingreso, "
+            String query = "select k.id_kardex, k.fecha, k.id_producto, p.descripcion, p.marca,  tm.descripcion as nombre_timo, k.cant_ingreso, k.cant_salida, k.costo_ingreso, "
                     + "k.costo_salida, ds.abreviado, k.serie_documento, k.numero_documento, k.id_usuarios, u.username, k.fecha_registro "
                     + "from kardex_productos as k "
                     + "inner join productos as p on p.id_producto = k.id_producto "
@@ -165,7 +165,7 @@ public class cl_kardex {
                     + "order by k.fecha_registro asc, k.id_kardex asc ";
 
             System.out.println(query);
-            
+
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -183,12 +183,13 @@ public class cl_kardex {
             mostrar.addColumn("S/ Salida");
             mostrar.addColumn("Usuario");
             mostrar.addColumn("Fec. Registro");
+            mostrar.addColumn("");
 
             int total_ingreso = 0;
             int total_salida = 0;
 
             while (rs.next()) {
-                Object fila[] = new Object[11];
+                Object fila[] = new Object[12];
                 saldo = saldo + (rs.getInt("cant_ingreso") - rs.getInt("cant_salida"));
                 fila[0] = rs.getString("id_kardex");
                 fila[1] = c_varios.fecha_usuario(rs.getString("fecha"));
@@ -213,11 +214,11 @@ public class cl_kardex {
                 fila[8] = c_varios.formato_numero(rs.getDouble("costo_salida"));
                 fila[9] = rs.getString("username");
                 fila[10] = rs.getString("fecha_registro");
-
+                fila[11] = rs.getString("id_producto");
                 mostrar.addRow(fila);
             }
 
-            Object filaf[] = new Object[11];
+            Object filaf[] = new Object[12];
             filaf[0] = "Z";
             filaf[1] = "";
             filaf[2] = "TOTALES";
@@ -229,6 +230,7 @@ public class cl_kardex {
             filaf[8] = "";
             filaf[9] = "";
             filaf[10] = "";
+            filaf[11] = "";
 
             mostrar.addRow(filaf);
 
@@ -246,6 +248,7 @@ public class cl_kardex {
             tabla.getColumnModel().getColumn(8).setPreferredWidth(60);
             tabla.getColumnModel().getColumn(9).setPreferredWidth(100);
             tabla.getColumnModel().getColumn(10).setPreferredWidth(150);
+            tabla.getColumnModel().getColumn(11).setPreferredWidth(0);
             c_varios.centrar_celda(tabla, 0);
             c_varios.centrar_celda(tabla, 1);
             c_varios.centrar_celda(tabla, 3);
@@ -382,12 +385,12 @@ public class cl_kardex {
                 id_tipo_movimiento = rs.getInt("id_tipo_movimiento");
                 cant_ingreso = rs.getInt("cant_ingreso");
                 cant_salida = rs.getInt("cant_salida");
-                costo_ingreso =rs.getDouble("costo_ingreso");
-                costo_salida =rs.getDouble("costo_salida");
-                id_tido =rs.getInt("id_tido");
-                serie =rs.getString("serie_documento");
-                numero =rs.getInt("numero_documento");
-                id_usuario =rs.getInt("id_usuarios");
+                costo_ingreso = rs.getDouble("costo_ingreso");
+                costo_salida = rs.getDouble("costo_salida");
+                id_tido = rs.getInt("id_tido");
+                serie = rs.getString("serie_documento");
+                numero = rs.getInt("numero_documento");
+                id_usuario = rs.getInt("id_usuarios");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

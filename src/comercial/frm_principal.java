@@ -30,6 +30,7 @@ import javax.swing.Timer;
 import nicon.notify.core.Notification;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import vistas.frm_ver_almacenes;
+import vistas.frm_ver_clasificacion_productos;
 import vistas.frm_ver_clientes;
 import vistas.frm_ver_cobros;
 import vistas.frm_ver_compras;
@@ -723,10 +724,14 @@ public class frm_principal extends javax.swing.JFrame {
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/archiver-512.png"))); // NOI18N
         jButton15.setText("Clasificacion");
-        jButton15.setEnabled(false);
         jButton15.setFocusable(false);
         jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton15);
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/product-icon.png"))); // NOI18N
@@ -1172,6 +1177,11 @@ public class frm_principal extends javax.swing.JFrame {
         frm_ver_compras formulario = new frm_ver_compras();
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        frm_ver_clasificacion_productos formulario = new frm_ver_clasificacion_productos();
+        c_varios.llamar_ventana_normal(formulario);
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
