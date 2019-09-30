@@ -109,7 +109,7 @@ public class cl_unidad_medida {
             if (rs.next()) {
                 existe = true;
                 nombre = rs.getString("nombre");
-                abreviatura = rs.getString("abrevitura");
+                abreviatura = rs.getString("abreviatura");
                 cod_sunat = rs.getString("cod_sunat");
             }
         } catch (SQLException ex) {

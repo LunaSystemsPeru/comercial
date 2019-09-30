@@ -54,7 +54,7 @@ public class cl_producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.toUpperCase();
     }
 
     public String getMarca() {
@@ -62,7 +62,7 @@ public class cl_producto {
     }
 
     public void setMarca(String marca) {
-        this.marca = marca;
+        this.marca = marca.toUpperCase();
     }
 
     public String getCod_barra() {
@@ -281,7 +281,7 @@ public class cl_producto {
         Statement st = c_conectar.conexion();
         String query = "update productos "
                 + "set descripcion = '" + descripcion + "', marca = '" + marca + "', cod_barra = '" + cod_barra + "', precio = '" + precio + "', costo = '" + costo + "', comision = '" + comision + "', "
-                + "clase = '" + id_clasificacion + "' "
+                + "id_clasificacion = '" + id_clasificacion + "' "
                 + "where id_producto = '" + id + "'";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);

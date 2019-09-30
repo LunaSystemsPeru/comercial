@@ -119,7 +119,7 @@ public class cl_productos_ventas {
     public void mostrar_modificar(DefaultTableModel modelo) {
         try {
             //c_conectar.conectar();
-            String query = "select pv.id_producto, p.descripcion, p.marca, p.modelo, pv.cantidad, pv.precio "
+            String query = "select pv.id_producto, p.descripcion, p.marca,  pv.cantidad, pv.precio "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
                     + "where id_ventas = '" + id_venta + "' "
@@ -131,7 +131,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[5];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim() + " - " + rs.getString("modelo").trim()).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim() ).trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
                 double pparcial = pcantidad * pprecio;

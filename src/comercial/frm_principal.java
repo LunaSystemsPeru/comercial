@@ -30,6 +30,7 @@ import javax.swing.Timer;
 import nicon.notify.core.Notification;
 import org.jvnet.substance.SubstanceLookAndFeel;
 import vistas.frm_ver_almacenes;
+import vistas.frm_ver_clasificacion_productos;
 import vistas.frm_ver_clientes;
 import vistas.frm_ver_cobros;
 import vistas.frm_ver_compras;
@@ -151,9 +152,10 @@ public class frm_principal extends javax.swing.JFrame {
         c_permiso.setId_permiso(16);
         boolean permitido16 = c_permiso.validar();
 
-        if (!permitido16) {
+/*        if (!permitido16) {
             jButton3.setEnabled(false);
         }
+*/
 
         c_permiso.setId_permiso(15);
         boolean permitido15 = c_permiso.validar();
@@ -220,8 +222,8 @@ public class frm_principal extends javax.swing.JFrame {
         jp_dias = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jToolBar4 = new javax.swing.JToolBar();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton5 = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
@@ -252,7 +254,6 @@ public class frm_principal extends javax.swing.JFrame {
         jSeparator15 = new javax.swing.JToolBar.Separator();
         jButton23 = new javax.swing.JButton();
         jToolBar6 = new javax.swing.JToolBar();
-        jButton3 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jButton16 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
@@ -566,9 +567,7 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar4.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar4.setBorder(null);
         jToolBar4.setFloatable(false);
-        jToolBar4.setRollover(true);
         jToolBar4.setBorderPainted(false);
-        jToolBar4.add(jSeparator2);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Office-Customer-Male-Light-icon.png"))); // NOI18N
         jButton5.setText("Clientes");
@@ -581,6 +580,7 @@ public class frm_principal extends javax.swing.JFrame {
             }
         });
         jToolBar4.add(jButton5);
+        jToolBar4.add(jSeparator2);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/shopping-add-512.png"))); // NOI18N
         jButton6.setText("Vender");
@@ -724,10 +724,14 @@ public class frm_principal extends javax.swing.JFrame {
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/archiver-512.png"))); // NOI18N
         jButton15.setText("Clasificacion");
-        jButton15.setEnabled(false);
         jButton15.setFocusable(false);
         jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton15.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton15);
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/product-icon.png"))); // NOI18N
@@ -812,18 +816,6 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar6.setBorder(null);
         jToolBar6.setFloatable(false);
         jToolBar6.setBorderPainted(false);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/company_building-512.png"))); // NOI18N
-        jButton3.setText("Empresas");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jToolBar6.add(jButton3);
         jToolBar6.add(jSeparator3);
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/40-512.png"))); // NOI18N
@@ -959,11 +951,6 @@ public class frm_principal extends javax.swing.JFrame {
         frm_reg_venta formulario = new frm_reg_venta();
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        frm_ver_empresas formulario = new frm_ver_empresas();
-        c_varios.llamar_ventana(formulario);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         frm_ver_ingresos formulario = new frm_ver_ingresos();
@@ -1191,6 +1178,11 @@ public class frm_principal extends javax.swing.JFrame {
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        frm_ver_clasificacion_productos formulario = new frm_ver_clasificacion_productos();
+        c_varios.llamar_ventana_normal(formulario);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1246,7 +1238,6 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
