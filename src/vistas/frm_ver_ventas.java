@@ -210,6 +210,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         btn_imprimir = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         btn_anular_venta = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btn_ver_cupon = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
@@ -569,10 +570,10 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
 
         txt_doc_venta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_doc_venta.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 txt_doc_ventaInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         txt_doc_venta.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -845,6 +846,13 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btn_anular_venta);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add.png"))); // NOI18N
+        jButton1.setText("Generar N.C.");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
 
         btn_ver_cupon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/comment.png"))); // NOI18N
         btn_ver_cupon.setText("Ver Anulacion");
@@ -1613,6 +1621,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_ver_detalle;
     private javax.swing.JComboBox<String> cbx_buscar;
     private javax.swing.JComboBox<String> cbx_doc_venta;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox2;

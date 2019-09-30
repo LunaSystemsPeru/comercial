@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_documento_venta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83e6294a-e951-4013-9a41-86232dfed820">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="192.168.1.6"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -12,6 +11,9 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lsp"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
 	<parameter name="p_hash" class="java.lang.String"/>
 	<parameter name="p_letras_numero" class="java.lang.String"/>
 	<parameter name="p_codigo_qr" class="java.lang.String"/>
@@ -19,9 +21,9 @@
 	<parameter name="p_id_venta" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select v.fecha,  e.ruc, e.razon, e.direccion as dir_principal, al.direccion as dir_sucursal, al.telefono, ds.descripcion as nom_tido, ds.id_tido, v.serie, 
-LPAD(v.numero, 8, 0) as numero, c.documento as doc_cliente, c.nombre as nom_cliente, c.direccion as dir_cliente, u.username as vendedor, pv.id_producto, p.descripcion as nom_producto, p.marca, p.modelo, pv.cantidad, pv.precio
+LPAD(v.numero, 8, 0) as numero, c.documento as doc_cliente, c.nombre as nom_cliente, c.direccion as dir_cliente, u.username as vendedor, pv.id_producto, p.descripcion as nom_producto, p.marca, pv.cantidad, pv.precio
 from ventas as v 
-inner join productos_ventas as pv on pv.id_ventas = v.id_ventas and pv.id_almacen = v.id_almacen
+inner join productos_ventas as pv on pv.id_ventas = v.id_ventas
 inner join productos as p on p.id_producto = pv.id_producto
 inner join documentos_sunat as ds on ds.id_tido = v.id_tido
 inner join clientes as c on c.id_cliente = v.id_cliente
@@ -98,10 +100,6 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 		<property name="com.jaspersoft.studio.field.label" value="marca"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
 	</field>
-	<field name="modelo" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="modelo"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="productos"/>
-	</field>
 	<field name="cantidad" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="productos_ventas"/>
@@ -129,7 +127,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="75" height="75" uuid="e982f7f7-ba83-4766-ae61-9aff919282ce"/>
-				<imageExpression><![CDATA["http://lunasystemsperu.com/clientes/sonomusic/images/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Bruno\\Documents\\NetBeansProjects\\comercial\\reports\\logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="481" y="77" width="74" height="14" uuid="80a6001a-1c13-45f7-b969-06d9b0f412fc">
@@ -159,7 +157,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<text><![CDATA[Direcccion:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="359" y="0" width="196" height="64" backcolor="#FF0000" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
+				<reportElement x="359" y="0" width="196" height="64" backcolor="#F43612" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -297,7 +295,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 	<columnHeader>
 		<band height="16" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="16" backcolor="#FF0000" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
+				<reportElement x="0" y="0" width="555" height="16" backcolor="#F43612" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -357,7 +355,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nom_producto} + " " + $F{marca} + " " + $F{modelo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nom_producto} + " " + $F{marca} ]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="45" height="14" uuid="83af5b3b-63b3-4c28-84ac-994648670633">
