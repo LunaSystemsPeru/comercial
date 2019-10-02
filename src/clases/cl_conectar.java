@@ -19,8 +19,8 @@ public class cl_conectar {
     private static String bd = "comercial_penia"; // Nombre de BD.
     private static String user = "lsp_comercial"; // Usuario de BD.
     private static String password = "KEvNlFS2ro7Q"; // Password de BD.
-    //private static String url = "lunasystemsperu.com";
-    private static String url = "192.168.1.6";
+    private static String url = "lunasystemsperu.com";
+    //private static String url = "192.168.1.6";
 
     // Driver para MySQL en este caso.
     private static String driver = "com.mysql.jdbc.Driver";
