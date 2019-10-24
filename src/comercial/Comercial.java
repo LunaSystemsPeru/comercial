@@ -24,6 +24,7 @@ public class Comercial {
         SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.BusinessBlackSteelSkin");
         frm_principal menu = new frm_principal();
         menu.setVisible(true);
+                
     }
     
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_ver_ventas_sunat" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ab6bbe79-98b6-4c83-bac7-8528ecbfff4e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lsp"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select v.id_ventas, v.fecha, c.documento, c.nombre, ds.cod_sunat, ds.abreviado, v.serie, v.numero, 
+v.total, v.estado, v.tipo_venta 
+from ventas as v 
+inner join clientes as c on c.id_cliente = v.id_cliente 
+inner join documentos_sunat as ds on ds.id_tido = v.id_tido 
+inner join usuarios as u on u.id_usuarios = v.id_usuarios 
+where concat(year(v.fecha), LPAD(month(v.fecha), 2, 0)) = '201909' and v.id_almacen = 1  and ds.id_tido in (1,2) 
+order by v.fecha asc, v.id_ventas asc]]>
+	</queryString>
+	<field name="id_ventas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_ventas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="documento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="documento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="clientes"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="clientes"/>
+	</field>
+	<field name="cod_sunat" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cod_sunat"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documentos_sunat"/>
+	</field>
+	<field name="abreviado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="abreviado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="documentos_sunat"/>
+	</field>
+	<field name="serie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="serie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="estado" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<field name="tipo_venta" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_venta"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ventas"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="20" width="100" height="30" uuid="ef7560d7-97b3-4b55-a1d5-a070a9b6c127">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c08d546e-9147-4605-8834-8ffbeb151f76"/>
+				</reportElement>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="130" y="50" width="100" height="30" uuid="764a77e7-0de0-4c88-9dc1-5fcb8c88bc58">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c08d546e-9147-4605-8834-8ffbeb151f76"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
