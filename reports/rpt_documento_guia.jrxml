@@ -28,7 +28,7 @@ inner join productos as p on p.id_producto = pv.id_producto
 inner join clientes as c on c.id_cliente = v.id_cliente
 inner join almacen as al on al.id_almacen = gr.id_almacen 
 inner join empresa as e on e.id_empresa = al.id_empresa
-where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
+where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta}]]>
 	</queryString>
 	<field name="ruc" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="ruc"/>
@@ -140,10 +140,10 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 		<band height="201" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="75" height="75" uuid="e982f7f7-ba83-4766-ae61-9aff919282ce"/>
-				<imageExpression><![CDATA["http://lunasystemsperu.com/clientes/sonomusic/images/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["http://www.lunasystemsperu.com/clientes/comercial_penia/images/logo.png"]]></imageExpression>
 			</image>
 			<rectangle>
-				<reportElement x="359" y="0" width="196" height="64" backcolor="#FF0000" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
+				<reportElement x="359" y="0" width="196" height="64" backcolor="#F43612" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -205,7 +205,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="80" width="275" height="16" backcolor="#F80000" uuid="f3f2aa12-b5cd-4662-8b4c-870be1d5f0a8">
+				<reportElement x="0" y="80" width="275" height="16" backcolor="#F43612" uuid="f3f2aa12-b5cd-4662-8b4c-870be1d5f0a8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -221,7 +221,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<text><![CDATA[Datos Envio]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="280" y="80" width="275" height="16" backcolor="#F80000" uuid="2ace64db-5918-4969-ba61-7abdc9d75295">
+				<reportElement x="280" y="80" width="275" height="16" backcolor="#F43612" uuid="2ace64db-5918-4969-ba61-7abdc9d75295">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -237,7 +237,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<text><![CDATA[Datos Destinatario]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="145" width="275" height="16" backcolor="#F80000" uuid="33ae1a68-d9ce-4e57-a81b-f58292ded39b">
+				<reportElement x="0" y="145" width="275" height="16" backcolor="#F43612" uuid="33ae1a68-d9ce-4e57-a81b-f58292ded39b">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -253,7 +253,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<text><![CDATA[Direccion de Partida]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="280" y="145" width="275" height="16" backcolor="#F80000" uuid="d6dc4ddd-767f-4c9c-9f57-05cb7e18a9dd">
+				<reportElement x="280" y="145" width="275" height="16" backcolor="#F43612" uuid="d6dc4ddd-767f-4c9c-9f57-05cb7e18a9dd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -348,7 +348,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 	<columnHeader>
 		<band height="16" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="16" backcolor="#FF0000" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
+				<reportElement x="0" y="0" width="555" height="16" backcolor="#F43612" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -475,7 +475,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<textFieldExpression><![CDATA["Venta"]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="10" width="275" height="16" backcolor="#F80000" uuid="2c364add-e3b3-4178-beb2-5e71eb911a59">
+				<reportElement x="0" y="10" width="275" height="16" backcolor="#F43612" uuid="2c364add-e3b3-4178-beb2-5e71eb911a59">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -517,7 +517,7 @@ where gr.id_almacen = $P{p_id_almacen}   and gr.id_venta =  $P{p_id_venta} ]]>
 				<textFieldExpression><![CDATA[$F{ruc_transportista}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="280" y="10" width="275" height="16" backcolor="#F80000" uuid="cc405ffd-8cc0-416c-a52e-254657bf1b35">
+				<reportElement x="280" y="10" width="275" height="16" backcolor="#F43612" uuid="cc405ffd-8cc0-416c-a52e-254657bf1b35">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>

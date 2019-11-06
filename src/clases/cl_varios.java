@@ -62,6 +62,18 @@ public class cl_varios {
         numero = formato.format(number);
         return numero;
     }
+    
+    /*
+    @param number = 123548.00000
+    return ######0.00000 a dos decimales sin comas de miles
+     */
+    public String formato_precio(Double number) {
+        simbolo.setDecimalSeparator('.');
+        formato = new DecimalFormat("######0.00000", simbolo);
+        String numero = "";
+        numero = formato.format(number);
+        return numero;
+    }
 
     /*
     @param number = 123548.00

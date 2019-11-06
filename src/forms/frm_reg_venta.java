@@ -1360,7 +1360,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         double precio = c_presentacion.getPrecio();
         double factor = c_presentacion.getFactor();
         double subtotal = factor * precio * cantidad;
-        txt_precio_total.setText(c_varios.formato_numero(subtotal));
+        txt_precio_total.setText(c_varios.formato_precio(subtotal));
     }
 
     private void txt_cantidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_cantidadKeyPressed
@@ -1913,7 +1913,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             c_presentacion.setId_producto(c_producto_almacen.getProducto());
             c_presentacion.setId_presentacion(cla_presentacion.getId());
             c_presentacion.obtener_datos();
-            txt_precio.setText(c_varios.formato_numero(c_presentacion.getPrecio()));
+            txt_precio.setText(c_varios.formato_precio(c_presentacion.getPrecio()));
             txt_cantidad.setEnabled(true);
             txt_cantidad.selectAll();
             txt_cantidad.requestFocus();

@@ -292,7 +292,7 @@ public class frm_ver_clasificacion_productos extends javax.swing.JInternalFrame 
 
     private void btn_j_grabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_j_grabarActionPerformed
         c_clasificacion.setDescripcion(txt_reg_nombre.getText());
-        if (c_clasificacion.getId_clasificacion() != 0) {
+        if (c_clasificacion.getId_clasificacion() == 0) {
             c_clasificacion.obtener_codigo();
             c_clasificacion.registrar();
         } else {

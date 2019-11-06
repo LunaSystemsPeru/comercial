@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_documento_venta" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="83e6294a-e951-4013-9a41-86232dfed820">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -127,7 +127,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="75" height="75" uuid="e982f7f7-ba83-4766-ae61-9aff919282ce"/>
-				<imageExpression><![CDATA["C:\\Users\\Bruno\\Documents\\NetBeansProjects\\comercial\\reports\\logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["http://www.lunasystemsperu.com/clientes/comercial_penia/images/logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="481" y="77" width="74" height="14" uuid="80a6001a-1c13-45f7-b969-06d9b0f412fc">
@@ -355,7 +355,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nom_producto} + " " + $F{marca} ]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nom_producto} + " " + $F{marca}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="45" height="14" uuid="83af5b3b-63b3-4c28-84ac-994648670633">

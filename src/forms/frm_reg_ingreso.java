@@ -984,8 +984,8 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         fila[1] = c_producto.getDescripcion();
         fila[2] = c_producto.getMarca();
         fila[3] = cantidad;
-        fila[4] = c_varios.formato_numero(costo);
-        fila[5] = c_varios.formato_numero(precio);
+        fila[4] = c_varios.formato_precio(costo);
+        fila[5] = c_varios.formato_precio(precio);
         fila[6] = c_varios.formato_numero(parcial);
 
         detalle.addRow(fila);
