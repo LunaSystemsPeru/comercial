@@ -8,6 +8,7 @@ package clases;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -225,8 +226,10 @@ public class cl_ingresos {
             tmodelo.addColumn("Total");
             tmodelo.addColumn("Usuario");
 
+            int contar = 0;
             //Creando las filas para el JTable
             while (rs.next()) {
+                contar++;
                 Object[] fila = new Object[6];
                 fila[0] = rs.getString("id_ingreso");
                 fila[1] = rs.getString("fecha");
@@ -236,6 +239,10 @@ public class cl_ingresos {
                 fila[5] = rs.getString("username");
 
                 tmodelo.addRow(fila);
+            }
+            
+            if (contar == 0) {
+                JOptionPane.showMessageDialog(null, "NO SE HA ENCONTRADO RESULTADOS");
             }
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);

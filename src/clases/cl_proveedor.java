@@ -52,7 +52,7 @@ public class cl_proveedor {
     }
 
     public void setRazon_social(String razon_social) {
-        this.razon_social = razon_social;
+        this.razon_social = razon_social.replace("'","");
     }
 
     public String getDireccion() {

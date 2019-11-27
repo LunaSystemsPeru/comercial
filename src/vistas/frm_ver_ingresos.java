@@ -316,6 +316,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
             }
 
             if (tipo_busqueda == 1) {
+                // buscar fechas con rango 
                 buscar = c_varios.fecha_myql(buscar);
                 query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
