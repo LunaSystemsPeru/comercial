@@ -484,7 +484,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Consulta tu comprobante en: esonomusic.lunasystemsperu.com]]></text>
+				<text><![CDATA[Consulta tu comprobante en: comercialpenia.lunasystemsperu.com]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="90" y="4" width="331" height="16" uuid="3dd3821f-7ad3-435f-a3bd-7fa0a6caf3d0"/>

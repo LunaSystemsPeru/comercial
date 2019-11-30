@@ -33,8 +33,11 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                 + "from ingresos as i "
                 + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                 + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
-                + "inner join usuarios as u on u.id_usuarios = i.id_usuarios ";
+                + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
+                + "where concat(year(i.fecha), lpad(month(i.fecha), 2, 0)) = '" + periodo + "' "
+                + "order by i.fecha desc, i.numero asc ";
         c_ingreso.mostrar(t_ingresos, query);
+        sumar_totales();
     }
 
     private void activar_botones() {
@@ -47,6 +50,15 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         btn_detalle.setEnabled(false);
         btn_pdf.setEnabled(false);
         btn_eliminar.setEnabled(false);
+    }
+
+    private void sumar_totales() {
+        int nrofilas = t_ingresos.getRowCount();
+        double totales = 0;
+        for (int i = 0; i < nrofilas; i++) {
+            totales += Double.parseDouble(t_ingresos.getValueAt(i, 4).toString());
+        }
+        txt_tot_ingresos.setText(c_varios.formato_totales(totales));
     }
 
     /**
@@ -79,6 +91,10 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         btn_eliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cerrar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txt_tot_ingresos = new javax.swing.JTextField();
+        txt_fec_inicio = new javax.swing.JFormattedTextField();
+        txt_fec_fin = new javax.swing.JFormattedTextField();
 
         jd_detalle.setTitle("Ver Detalle de Ingreso de Mercaderia");
 
@@ -156,7 +172,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
             }
         ));
         t_ingresos.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        t_ingresos.setShowVerticalLines(false);
+        t_ingresos.setShowHorizontalLines(false);
         t_ingresos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 t_ingresosMouseClicked(evt);
@@ -179,7 +195,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
             }
         });
 
-        cbx_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PERIODO", "FECHA", "PROVEEDOR", "NRO DOCUMENTO" }));
+        cbx_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR OPCION", "PERIODO", "FECHAS", "PROVEEDOR", "NRO DOCUMENTO" }));
         cbx_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbx_buscarActionPerformed(evt);
@@ -255,6 +271,37 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_cerrar);
 
+        jLabel5.setText("Suma Ingresos:");
+
+        txt_tot_ingresos.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_tot_ingresos.setText("0.00");
+
+        try {
+            txt_fec_inicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txt_fec_inicio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_fec_inicio.setEnabled(false);
+        txt_fec_inicio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_fec_inicioKeyPressed(evt);
+            }
+        });
+
+        try {
+            txt_fec_fin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txt_fec_fin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_fec_fin.setEnabled(false);
+        txt_fec_fin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_fec_finKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,8 +315,15 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbx_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_fec_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_fec_fin, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_tot_ingresos, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -278,10 +332,16 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbx_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbx_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_tot_ingresos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txt_fec_inicio, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(txt_fec_fin, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
@@ -346,12 +406,44 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                         + "order by i.fecha asc";
             }
             c_ingreso.mostrar(t_ingresos, query);
+            sumar_totales();
         }
     }//GEN-LAST:event_txt_buscarKeyPressed
 
     private void cbx_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_buscarActionPerformed
-        txt_buscar.selectAll();
-        txt_buscar.requestFocus();
+        int opcion = cbx_buscar.getSelectedIndex();
+        switch (opcion) {
+            case 1:
+                txt_fec_inicio.setEnabled(false);
+                txt_fec_fin.setEnabled(false);
+                txt_buscar.setEnabled(true);
+                txt_buscar.selectAll();
+                txt_buscar.requestFocus();
+                break;
+            case 2:
+                txt_fec_inicio.setEnabled(true);
+                txt_fec_fin.setEnabled(true);
+                txt_buscar.setEnabled(false);
+                txt_fec_inicio.requestFocus();
+                break;
+            case 4:
+                txt_fec_inicio.setEnabled(false);
+                txt_fec_fin.setEnabled(false);
+                txt_buscar.setEnabled(true);
+                txt_buscar.selectAll();
+                txt_buscar.requestFocus();
+                break;
+            case 3:
+                txt_fec_inicio.setEnabled(false);
+                txt_fec_fin.setEnabled(false);
+                txt_buscar.setEnabled(true);
+                txt_buscar.selectAll();
+                txt_buscar.requestFocus();
+                break;
+            default:
+                break;
+        }
+
     }//GEN-LAST:event_cbx_buscarActionPerformed
 
     private void t_ingresosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_ingresosMouseClicked
@@ -378,6 +470,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                     c_ingreso.eliminar();
 
                     c_ingreso.mostrar(t_ingresos, query);
+                    sumar_totales();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No ha seleccionado una fila");
@@ -412,6 +505,24 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_pdfActionPerformed
 
+    private void txt_fec_inicioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fec_inicioKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_fec_inicio.getText().length() == 10) {
+                txt_fec_fin.setEnabled(true);
+                txt_fec_fin.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_fec_inicioKeyPressed
+
+    private void txt_fec_finKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fec_finKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (txt_fec_inicio.getText().length() == 10) {
+                txt_fec_fin.setEnabled(true);
+                txt_fec_fin.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_txt_fec_finKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agregar;
@@ -424,6 +535,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -433,7 +545,10 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     private javax.swing.JTable t_ingresos;
     private javax.swing.JTextField txt_buscar;
     private javax.swing.JTextField txt_documento;
+    private javax.swing.JFormattedTextField txt_fec_fin;
+    private javax.swing.JFormattedTextField txt_fec_inicio;
     private javax.swing.JTextField txt_fecha;
     private javax.swing.JTextField txt_proveedor;
+    private javax.swing.JTextField txt_tot_ingresos;
     // End of variables declaration//GEN-END:variables
 }

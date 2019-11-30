@@ -1528,11 +1528,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                 parametros.put("p_codigo_qr", url_codigo_qr);
                 parametros.put("p_hash", c_hash.getHash());
                 //   c_varios.imp_reporte("rpt_documento_venta", parametros);
-                if (id_almacen == 1) {
-                    c_varios.ver_reporte("rpt_documento_venta_rodson", parametros);
-                } else {
-                    c_varios.ver_reporte("rpt_documento_venta", parametros);
-                }
+                c_varios.ver_reporte("rpt_documento_venta", parametros);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
             }
