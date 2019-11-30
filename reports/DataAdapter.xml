@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>local</name><driver>com.mysql.jdbc.Driver</driver><username>lsp_comercial</username><password>KEvNlFS2ro7Q</password><savePassword>true</savePassword><url>jdbc:mysql://192.168.1.6/comercial_penia</url><database></database><serverAddress></serverAddress><classpath>C:\Users\Flavio\Documents\NetBeansProjects\comercial\libs\mysql-connector-java-5.1.23-bin.jar</classpath></jdbcDataAdapter>
