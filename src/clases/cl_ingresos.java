@@ -254,6 +254,7 @@ public class cl_ingresos {
             tabla.getColumnModel().getColumn(4).setPreferredWidth(80);
             tabla.getColumnModel().getColumn(5).setPreferredWidth(120);
             tabla.setRowSorter(sorter);
+            c_varios.derecha_celda(tabla, 4);
 
         } catch (SQLException e) {
             System.out.print(e);
