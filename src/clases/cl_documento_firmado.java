@@ -63,14 +63,14 @@ public class cl_documento_firmado {
         boolean existe = false;
         try {
             Statement st = c_conectar.conexion();
-            String query = "select hash, nombre "
-                    + "from hash_ventas "
-                    + "where id_almacen = '" + id_almacen + "' and id_venta = '" + id_venta + "'";
+            String query = "select hash, nombre_xml "
+                    + "from ventas_hash "
+                    + "where id_ventas = '" + id_venta + "'";
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
                 existe = true;
                 hash = rs.getString("hash");
-                nombre = rs.getString("nombre");
+                nombre = rs.getString("nombre_xml");
             }
             c_conectar.cerrar(rs);
             c_conectar.cerrar(st);

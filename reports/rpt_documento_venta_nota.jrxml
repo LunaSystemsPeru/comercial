@@ -125,7 +125,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 			</textField>
 			<image>
 				<reportElement x="0" y="0" width="75" height="75" uuid="e982f7f7-ba83-4766-ae61-9aff919282ce"/>
-				<imageExpression><![CDATA["http://lunasystemsperu.com/clientes/sonomusic/images/logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["http://www.lunasystemsperu.com/clientes/comercial_penia/images/logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="481" y="77" width="74" height="16" uuid="80a6001a-1c13-45f7-b969-06d9b0f412fc"/>
@@ -149,7 +149,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<text><![CDATA[Direcccion:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="359" y="0" width="196" height="64" backcolor="#FF0000" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
+				<reportElement x="359" y="0" width="196" height="64" backcolor="#F43612" uuid="3f31d8f7-d8d7-4b9a-a2aa-b52203b03802"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
@@ -271,7 +271,7 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 	<columnHeader>
 		<band height="16" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="16" backcolor="#FF0000" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
+				<reportElement x="0" y="0" width="555" height="16" backcolor="#F43612" uuid="5f53195a-82e7-4fde-a7d8-faabd90735d8"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>

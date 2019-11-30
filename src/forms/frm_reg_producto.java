@@ -582,23 +582,26 @@ public class frm_reg_producto extends javax.swing.JDialog {
 
     private void txt_precio_minimoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precio_minimoKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String texto = txt_precio_minimo.getText();
-            if (c_varios.esDecimal(texto)) {
-                cla_unidad_medida cla_unidad = (cla_unidad_medida) cbx_unidad_medida.getSelectedItem();
+            if (txt_precio_minimo.isEnabled() && txt_precio_minimo.isEditable()) {
+                String texto = txt_precio_minimo.getText();
+                if (c_varios.esDecimal(texto)) {
+                    txt_precio_minimo.setEditable(false);
+                    cla_unidad_medida cla_unidad = (cla_unidad_medida) cbx_unidad_medida.getSelectedItem();
 
-                //crear objeto unidad 
-                Object fila[] = new Object[4];
-                fila[0] = 1;
-                fila[1] = cla_unidad.getNombre();
-                fila[2] = 1;
-                fila[3] = Double.parseDouble(texto);
-                detalle.addRow(fila);
+                    //crear objeto unidad 
+                    Object fila[] = new Object[4];
+                    fila[0] = 1;
+                    fila[1] = cla_unidad.getNombre();
+                    fila[2] = 1;
+                    fila[3] = Double.parseDouble(texto);
+                    detalle.addRow(fila);
 
-                //pasar a presentacion y activar boton grabar
-                btn_guardar.setEnabled(true);
-                txt_nombre_presentacion.setEnabled(true);
-                txt_nombre_presentacion.selectAll();
-                txt_nombre_presentacion.requestFocus();
+                    //pasar a presentacion y activar boton grabar
+                    btn_guardar.setEnabled(true);
+                    txt_nombre_presentacion.setEnabled(true);
+                    txt_nombre_presentacion.selectAll();
+                    txt_nombre_presentacion.requestFocus();
+                }
             }
         }
     }//GEN-LAST:event_txt_precio_minimoKeyPressed
@@ -610,8 +613,13 @@ public class frm_reg_producto extends javax.swing.JDialog {
     private void cbx_unidad_medidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_unidad_medidaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (registrar) {
-                txt_precio_minimo.setEnabled(true);
-                txt_precio_minimo.requestFocus();
+                if (!txt_precio_minimo.isEditable() && txt_precio_minimo.isEnabled()) {
+                    txt_nombre_presentacion.requestFocus();
+                }
+                if (!txt_precio_minimo.isEnabled()) {
+                    txt_precio_minimo.setEnabled(true);
+                    txt_precio_minimo.requestFocus();
+                }
             }
         }
     }//GEN-LAST:event_cbx_unidad_medidaKeyPressed

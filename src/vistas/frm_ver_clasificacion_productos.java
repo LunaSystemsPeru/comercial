@@ -45,6 +45,7 @@ public class frm_ver_clasificacion_productos extends javax.swing.JInternalFrame 
 
     private void reiniciar_campos() {
         c_clasificacion.setId_clasificacion(0);
+        txt_reg_id.setText("");
         txt_reg_nombre.setEnabled(true);
         btn_j_grabar.setEnabled(false);
         txt_reg_nombre.setText("");
@@ -288,6 +289,10 @@ public class frm_ver_clasificacion_productos extends javax.swing.JInternalFrame 
         jd_reg_clasificacion.setModal(true);
         jd_reg_clasificacion.setSize(721, 239);
         jd_reg_clasificacion.setLocationRelativeTo(null);
+        
+        txt_reg_nombre.setEnabled(true);
+        txt_reg_nombre.requestFocus();
+        
         jd_reg_clasificacion.setVisible(true);
     }//GEN-LAST:event_btn_modificarActionPerformed
 
