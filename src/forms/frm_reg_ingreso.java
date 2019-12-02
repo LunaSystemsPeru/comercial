@@ -29,6 +29,7 @@ import models.m_almacen;
 import models.m_documentos_sunat;
 import nicon.notify.core.Notification;
 import comercial.frm_principal;
+import java.awt.AWTEvent;
 import vistas.frm_ver_ingresos;
 
 /**
@@ -100,7 +101,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         c_varios.derecha_celda(t_detalle, 5);
         c_varios.derecha_celda(t_detalle, 6);
     }
-    
+
     private void modelo_bono() {
         //formato de tabla detalle de venta
         detalle_bono = new DefaultTableModel() {
@@ -123,7 +124,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         c_varios.derecha_celda(t_detalle, 3);
         c_varios.derecha_celda(t_detalle, 4);
     }
-    
+
     private void cargar_proveedores() {
         try {
             if (tac_proveedores != null) {
@@ -1052,27 +1053,25 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         int cantidad = Integer.parseInt(txt_cingreso.getText());
         double precio = Double.parseDouble(txt_precio.getText());
         double parcial = costo * cantidad;
-        
-        if (btn_bono.getSelectedIndex() == 0) {
-        Object fila[] = new Object[7];
-        fila[0] = c_producto.getId();
-        fila[1] = c_producto.getDescripcion();
-        fila[2] = c_producto.getMarca();
-        fila[3] = cantidad;
-        fila[4] = c_varios.formato_precio(costo);
-        fila[5] = c_varios.formato_precio(precio);
-        fila[6] = c_varios.formato_numero(parcial);
 
-        detalle.addRow(fila); 
+        if (btn_bono.getSelectedIndex() == 0) {
+            Object fila[] = new Object[7];
+            fila[0] = c_producto.getId();
+            fila[1] = c_producto.getDescripcion();
+            fila[2] = c_producto.getMarca();
+            fila[3] = cantidad;
+            fila[4] = c_varios.formato_precio(costo);
+            fila[5] = c_varios.formato_precio(precio);
+            fila[6] = c_varios.formato_numero(parcial);
+
+            detalle.addRow(fila);
         } else {
-               Object fila[] = new Object[7];
-        fila[0] = c_producto.getId();
-        fila[1] = c_producto.getDescripcion();
-        fila[2] = c_producto.getMarca();
-        fila[3] = cantidad;
-        fila[4] = c_varios.formato_precio(costo);
-        fila[5] = c_varios.formato_precio(precio);
-        fila[6] = c_varios.formato_numero(parcial);
+            Object fila[] = new Object[7];
+            fila[0] = c_producto.getId();
+            fila[1] = c_producto.getDescripcion();
+            fila[2] = c_producto.getMarca();
+            fila[3] = cantidad;
+            detalle_bono.addRow(fila);
         }
         calcular_total();
         limpiar_buscar();
@@ -1152,8 +1151,10 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_t_detalleMouseClicked
 
     private void btn_bonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_bonoKeyPressed
-        btn_agregar_producto.setEnabled(true);
-        btn_agregar_producto.requestFocus();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btn_agregar_producto.setEnabled(true);
+            btn_agregar_producto.requestFocus();
+        }
     }//GEN-LAST:event_btn_bonoKeyPressed
 
 
