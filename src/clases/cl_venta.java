@@ -380,7 +380,7 @@ public class cl_venta {
     }
 
     public Integer[] ventas_mensuales() {
-        Integer[] valor_x = new Integer[12];
+        Integer[] valor_x = new Integer[13];
         // System.out.println("total dias de este mes = " + total_mes);
 
         try {

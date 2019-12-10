@@ -363,7 +363,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     private void txt_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_buscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String buscar = txt_buscar.getText().trim();
-            int tipo_busqueda = cbx_buscar.getSelectedIndex();
+            int tipo_busqueda = cbx_buscar.getSelectedIndex() - 1;
 
             if (tipo_busqueda == 0) {
                 query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
@@ -377,13 +377,15 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
 
             if (tipo_busqueda == 1) {
                 // buscar fechas con rango 
+                String fec_ini = c_varios.fecha_myql(txt_fec_inicio.getText());
+                String fec_fin = c_varios.fecha_myql(txt_fec_fin.getText());
                 buscar = c_varios.fecha_myql(buscar);
                 query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
                         + "from ingresos as i "
                         + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
                         + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
-                        + "where i.fecha = '" + buscar + "' "
+                        + "where i.fecha between '" + fec_ini + "' and '" + fec_fin + "' "
                         + "order by i.numero asc";
             }
 
@@ -394,7 +396,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
                         + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
                         + "where p.nro_documento = '" + buscar + "' or p.razon_social like '%" + buscar + "%' "
-                        + "order by i.fecha asc";
+                        + "order by i.fecha asc, i.numero asc";
             }
             if (tipo_busqueda == 3) {
                 query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
@@ -403,7 +405,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
                         + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
                         + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
                         + "where i.numero = '" + buscar + "' "
-                        + "order by i.fecha asc";
+                        + "order by i.fecha asc, i.numero ascs";
             }
             c_ingreso.mostrar(t_ingresos, query);
             sumar_totales();
@@ -516,9 +518,24 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
 
     private void txt_fec_finKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_fec_finKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_fec_inicio.getText().length() == 10) {
-                txt_fec_fin.setEnabled(true);
-                txt_fec_fin.requestFocus();
+            if (txt_fec_fin.getText().length() == 10) {
+                int tipo_busqueda = cbx_buscar.getSelectedIndex() - 1;
+
+                if (tipo_busqueda == 1) {
+                    // buscar fechas con rango 
+                    String fec_ini = c_varios.fecha_myql(txt_fec_inicio.getText());
+                    String fec_fin = c_varios.fecha_myql(txt_fec_fin.getText());
+                    query = "select i.id_ingreso, i.fecha, p.nro_documento, p.razon_social, ds.abreviado, i.serie, i.numero, i.total, u.username "
+                            + "from ingresos as i "
+                            + "inner join proveedor as p on p.id_proveedor = i.id_proveedor "
+                            + "inner join documentos_sunat as ds on ds.id_tido = i.id_tido "
+                            + "inner join usuarios as u on u.id_usuarios = i.id_usuarios "
+                            + "where i.fecha between '" + fec_ini + "' and '" + fec_fin + "' "
+                            + "order by i.numero asc";
+                }
+
+                c_ingreso.mostrar(t_ingresos, query);
+                sumar_totales();
             }
         }
     }//GEN-LAST:event_txt_fec_finKeyPressed

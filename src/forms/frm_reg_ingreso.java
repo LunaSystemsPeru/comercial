@@ -11,6 +11,7 @@ import clases.cl_ingresos;
 import clases.cl_producto;
 import clases.cl_productos_almacen;
 import clases.cl_productos_ingresos;
+import clases.cl_productos_ingresos_bono;
 import clases.cl_proveedor;
 import clases.cl_varios;
 import clases_autocomplete.cla_almacen;
@@ -43,6 +44,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
 
     cl_ingresos c_ingreso = new cl_ingresos();
     cl_productos_ingresos c_detalle = new cl_productos_ingresos();
+    cl_productos_ingresos_bono c_bono = new cl_productos_ingresos_bono();
     cl_proveedor c_proveedor = new cl_proveedor();
     cl_producto c_producto = new cl_producto();
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
@@ -1095,6 +1097,8 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             boolean registrado = c_ingreso.registrar();
 
             c_detalle.setId_ingreso(c_ingreso.getId_ingreso());
+            c_bono.setId_ingreso(c_ingreso.getId_ingreso());
+
             if (registrado) {
                 int nro_filas = t_detalle.getRowCount();
                 for (int i = 0; i < nro_filas; i++) {
@@ -1104,6 +1108,14 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     c_detalle.setPrecio(Double.parseDouble(t_detalle.getValueAt(i, 5).toString()));
 
                     c_detalle.registrar();
+                }
+
+                int nro_filas_bono = t_bonificaciones.getRowCount();
+                for (int i = 0; i < nro_filas_bono; i++) {
+                    c_bono.setId_producto(Integer.parseInt(t_bonificaciones.getValueAt(i, 0).toString()));
+                    c_bono.setCantidad(Double.parseDouble(t_bonificaciones.getValueAt(i, 3).toString()));
+                    
+                    c_bono.registrar();
                 }
 
                 Notification.show("Ingreso de Mercaderia", "se guardo correctamente");

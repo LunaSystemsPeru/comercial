@@ -74,6 +74,7 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
     double final_total = 0;
     double final_vale = 0;
     int final_estado = 1;
+    double icbper = 0;
 
     int id_empresa = frm_principal.c_empresa.getId();
     int id_almacen = frm_principal.c_almacen.getId();
@@ -125,6 +126,13 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         for (int i = 0; i < contar_filas; i++) {
             total = total + Double.parseDouble(t_detalle.getValueAt(i, 4).toString());
         }
+        cla_mis_documentos cla_tido = (cla_mis_documentos) cbx_tipo_doc.getSelectedItem();
+        int id_tido = cla_tido.getId_tido();
+        if (id_tido == 1 || id_tido == 2) {
+            icbper += 0;
+        }
+
+        total += icbper;
         lbl_total_venta.setText("S/ " + c_varios.formato_totales(total));
         lbl_pago_venta.setText("S/ " + c_varios.formato_totales(total));
         return total;

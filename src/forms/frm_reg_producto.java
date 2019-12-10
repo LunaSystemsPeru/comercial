@@ -80,6 +80,13 @@ public class frm_reg_producto extends javax.swing.JDialog {
             c_unidad.validar_id();
             cbx_unidad_medida.setEnabled(true);
             cbx_unidad_medida.getModel().setSelectedItem(new cla_unidad_medida(c_unidad.getId(), c_unidad.getNombre()));
+            
+            //marcar si esta afecto
+            if(c_producto.getIcbper() == 1) {
+                cbx_afecto_icbper.setSelected(true);
+            } else {
+                cbx_afecto_icbper.setSelected(false);
+            }
 
             //obtener modelo clasificacion
             c_clasificacion = new cl_productos_clasificacion();
@@ -160,6 +167,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
         txt_precio_minimo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         cbx_unidad_medida = new javax.swing.JComboBox<>();
+        cbx_afecto_icbper = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Registrar Producto");
@@ -375,6 +383,8 @@ public class frm_reg_producto extends javax.swing.JDialog {
             }
         });
 
+        cbx_afecto_icbper.setText("Afecto ICBPER");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -397,7 +407,8 @@ public class frm_reg_producto extends javax.swing.JDialog {
                             .addComponent(txt_proveedor)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbx_tipo_producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbx_afecto_icbper))
                             .addComponent(cbx_clasificacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -423,7 +434,8 @@ public class frm_reg_producto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbx_tipo_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_tipo_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_afecto_icbper, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -474,7 +486,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
         cla_producto_clasificacion cla_clasificacion = (cla_producto_clasificacion) cbx_clasificacion.getSelectedItem();
         c_producto.setId_clasificacion(cla_clasificacion.getId_clasificacion());
         c_producto.setIcbper(0);
-        if (cla_clasificacion.getId_clasificacion() == 3) {
+        if (cbx_afecto_icbper.isSelected()) {
             c_producto.setIcbper(1);
         }
         cla_unidad_medida cla_unidad = (cla_unidad_medida) cbx_unidad_medida.getSelectedItem();
@@ -745,6 +757,7 @@ public class frm_reg_producto extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add_presentacion;
     private javax.swing.JButton btn_guardar;
+    private javax.swing.JCheckBox cbx_afecto_icbper;
     private javax.swing.JComboBox<String> cbx_clasificacion;
     private javax.swing.JComboBox<String> cbx_tipo_producto;
     private javax.swing.JComboBox<String> cbx_unidad_medida;
