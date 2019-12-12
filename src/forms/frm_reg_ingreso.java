@@ -849,6 +849,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                 c_doc_tienda.comprobar_documento();
                 txt_serie.setText(c_doc_tienda.getSerie());
                 txt_numero.setText(c_doc_tienda.getNumero() + "");
+                cargar_proveedores();
                 txt_ruc_proveedor.setEnabled(true);
                 btn_add_proveedor.setEnabled(true);
                 txt_ruc_proveedor.requestFocus();

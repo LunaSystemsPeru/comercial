@@ -181,7 +181,7 @@ public class cl_producto {
             tmodelo.addColumn("Precio");
             tmodelo.addColumn("Clasificacion");
             tmodelo.addColumn("Cant. Actual");
-            tmodelo.addColumn("Comision");
+            tmodelo.addColumn("ICBPER");
 
             //Creando las filas para el JTable
             while (rs.next()) {
@@ -192,7 +192,7 @@ public class cl_producto {
                 fila[3] = c_varios.formato_numero(rs.getDouble("precio"));
                 fila[4] = rs.getString("id_clasificacion");
                 fila[5] = rs.getInt("ctotal");
-                fila[6] = c_varios.formato_numero(rs.getDouble("comision"));
+                fila[6] = rs.getBoolean("afecto_icbper");
 
                 tmodelo.addRow(fila);
             }
@@ -280,7 +280,7 @@ public class cl_producto {
         boolean registrado = false;
         Statement st = c_conectar.conexion();
         String query = "update productos "
-                + "set descripcion = '" + descripcion + "', marca = '" + marca + "', cod_barra = '" + cod_barra + "', precio = '" + precio + "', costo = '" + costo + "', comision = '" + comision + "', "
+                + "set descripcion = '" + descripcion + "', marca = '" + marca + "', cod_barra = '" + cod_barra + "', precio = '" + precio + "', costo = '" + costo + "', afecto_icbper = '" + icbper + "', "
                 + "id_clasificacion = '" + id_clasificacion + "' "
                 + "where id_producto = '" + id + "'";
         System.out.println(query);

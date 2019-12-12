@@ -11,7 +11,7 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lsp"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
 	<parameter name="p_hash" class="java.lang.String"/>
@@ -21,7 +21,8 @@
 	<parameter name="p_id_venta" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select v.fecha,  e.ruc, e.razon, e.direccion as dir_principal, al.direccion as dir_sucursal, al.telefono, ds.descripcion as nom_tido, ds.id_tido, v.serie, 
-LPAD(v.numero, 8, 0) as numero, c.documento as doc_cliente, c.nombre as nom_cliente, c.direccion as dir_cliente, u.username as vendedor, pv.id_producto, p.descripcion as nom_producto, p.marca, pv.cantidad, pv.precio
+LPAD(v.numero, 8, 0) as numero, c.documento as doc_cliente, c.nombre as nom_cliente, c.direccion as dir_cliente, u.username as vendedor, 
+pv.id_producto, p.descripcion as nom_producto, p.marca, pv.cantidad, pv.precio, (if(p.afecto_icbper = 1, pv.cantidad * 0.1, 0)) as monto_icbper
 from ventas as v 
 inner join productos_ventas as pv on pv.id_ventas = v.id_ventas
 inner join productos as p on p.id_producto = pv.id_producto
@@ -108,8 +109,14 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 		<property name="com.jaspersoft.studio.field.label" value="precio"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="productos_ventas"/>
 	</field>
+	<field name="monto_icbper" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="monto_icbper"/>
+	</field>
 	<variable name="total" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{cantidad} * $F{precio}]]></variableExpression>
+	</variable>
+	<variable name="tot_icbper" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto_icbper}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -408,14 +415,18 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 	<columnFooter>
 		<band height="84" splitType="Stretch">
 			<staticText>
-				<reportElement x="90" y="68" width="36" height="16" uuid="70d9628e-6529-42e5-b370-a4be72deafc7"/>
+				<reportElement x="90" y="69" width="36" height="13" uuid="70d9628e-6529-42e5-b370-a4be72deafc7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SON:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="126" y="68" width="429" height="16" uuid="6e258ffc-7dd8-4c8d-b603-ad66f5b1b4ed"/>
+				<reportElement x="126" y="69" width="429" height="13" uuid="6e258ffc-7dd8-4c8d-b603-ad66f5b1b4ed">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
@@ -429,84 +440,120 @@ where v.id_ventas = $P{p_id_venta} and v.id_almacen = $P{p_id_almacen}]]>
 				<imageExpression><![CDATA[$P{p_codigo_qr}]]></imageExpression>
 			</image>
 			<textField pattern="#,##0.00">
-				<reportElement x="481" y="4" width="74" height="16" uuid="ca561771-96ee-4c25-a5d4-2a3014558041"/>
+				<reportElement x="481" y="4" width="74" height="13" uuid="ca561771-96ee-4c25-a5d4-2a3014558041">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total}/ 1.18]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="4" width="81" height="16" forecolor="#000000" uuid="d6ff77b3-7023-4a55-a0aa-9d8773571063"/>
+				<reportElement x="400" y="4" width="81" height="13" forecolor="#000000" uuid="d6ff77b3-7023-4a55-a0aa-9d8773571063">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Gravado:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="36" width="81" height="16" forecolor="#000000" uuid="fa4b3267-c862-4d77-8b37-dc527161f3ce"/>
+				<reportElement x="400" y="30" width="81" height="13" forecolor="#000000" uuid="fa4b3267-c862-4d77-8b37-dc527161f3ce">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total IGV 18%]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="481" y="36" width="74" height="16" uuid="bf27762c-355e-45cf-b9b9-074ad70caadd"/>
+				<reportElement x="481" y="30" width="74" height="13" uuid="bf27762c-355e-45cf-b9b9-074ad70caadd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total} / 1.18 * 0.18]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="481" y="52" width="74" height="16" uuid="ad4efe6b-96b7-4f04-ab08-3bb1bad14c3e"/>
+				<reportElement x="481" y="56" width="74" height="13" uuid="ad4efe6b-96b7-4f04-ab08-3bb1bad14c3e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total} + $F{monto_icbper}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="52" width="81" height="16" forecolor="#000000" uuid="8746b113-6a83-4865-ae4a-2cc2b049936f"/>
+				<reportElement x="400" y="56" width="81" height="13" forecolor="#000000" uuid="8746b113-6a83-4865-ae4a-2cc2b049936f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Importe Total:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="20" width="331" height="16" uuid="84c91941-474a-4e99-8e2b-9317d314931d"/>
+				<reportElement x="90" y="17" width="331" height="13" uuid="84c91941-474a-4e99-8e2b-9317d314931d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Hash: " + $P{p_hash}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="90" y="36" width="331" height="16" uuid="1a17508d-4964-470a-8d7e-4667e12dd949">
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
+				<reportElement x="90" y="30" width="331" height="13" uuid="1a17508d-4964-470a-8d7e-4667e12dd949"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Consulta tu comprobante en: comercialpenia.lunasystemsperu.com]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="4" width="331" height="16" uuid="3dd3821f-7ad3-435f-a3bd-7fa0a6caf3d0"/>
+				<reportElement x="90" y="4" width="331" height="13" uuid="3dd3821f-7ad3-435f-a3bd-7fa0a6caf3d0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Representacion impresa de la " + $F{nom_tido} + " ELECTRONICA"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="20" width="81" height="16" forecolor="#000000" uuid="14d80488-657b-4877-aaad-bd752ba0f595"/>
+				<reportElement x="400" y="17" width="81" height="13" forecolor="#000000" uuid="14d80488-657b-4877-aaad-bd752ba0f595">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Inafecto:]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="481" y="20" width="74" height="16" uuid="5b5b0f62-383f-42f7-adba-9ec7c52dd414"/>
+				<reportElement x="481" y="17" width="74" height="13" uuid="5b5b0f62-383f-42f7-adba-9ec7c52dd414">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["0.00"]]></textFieldExpression>
 			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="481" y="43" width="74" height="13" uuid="d49d45df-a419-45f8-9f31-4f496c49f316">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_icbper}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="43" width="81" height="13" forecolor="#000000" uuid="f233cc13-5de6-4e79-842b-be5383dac556">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ICBPER:]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

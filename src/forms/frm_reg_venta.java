@@ -108,23 +108,26 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
         detalle.addColumn("Cant.");
         detalle.addColumn("Precio");
         detalle.addColumn("Parcial");
+        detalle.addColumn("ICBPER");
         t_detalle.setModel(detalle);
         t_detalle.getColumnModel().getColumn(0).setPreferredWidth(20);
         t_detalle.getColumnModel().getColumn(1).setPreferredWidth(400);
         t_detalle.getColumnModel().getColumn(2).setPreferredWidth(50);
         t_detalle.getColumnModel().getColumn(3).setPreferredWidth(50);
         t_detalle.getColumnModel().getColumn(4).setPreferredWidth(70);
+        t_detalle.getColumnModel().getColumn(5).setPreferredWidth(70);
         c_varios.centrar_celda(t_detalle, 0);
         c_varios.derecha_celda(t_detalle, 2);
         c_varios.derecha_celda(t_detalle, 3);
         c_varios.derecha_celda(t_detalle, 4);
+        c_varios.derecha_celda(t_detalle, 5);
     }
 
     private double calcular_total() {
         double total = 0;
         int contar_filas = t_detalle.getRowCount();
         for (int i = 0; i < contar_filas; i++) {
-            total = total + Double.parseDouble(t_detalle.getValueAt(i, 4).toString());
+            total = total + Double.parseDouble(t_detalle.getValueAt(i, 4).toString()) + Double.parseDouble(t_detalle.getValueAt(i, 5).toString());
         }
         cla_mis_documentos cla_tido = (cla_mis_documentos) cbx_tipo_doc.getSelectedItem();
         int id_tido = cla_tido.getId_tido();
@@ -1939,6 +1942,10 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
             double dprecio = c_presentacion.getPrecio();
             double dfactor = c_presentacion.getFactor();
             double dsubtotal = dfactor * dprecio * dcantidad;
+            double dicbper = 0;
+            if (c_producto.getIcbper() == 1 & c_doc_almacen.getId_tido() != 6) {
+                dicbper = dcantidad * 0.1;
+            }
 
             //validar cantidad
             String tcantidad = txt_cantidad.getText();
@@ -1961,12 +1968,13 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
 
             //formar objeto y agregar para tabla
             if (!error) {
-                Object fila[] = new Object[5];
+                Object fila[] = new Object[6];
                 fila[0] = c_producto.getId();
                 fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca();
                 fila[2] = dcantidad;
                 fila[3] = c_varios.formato_numero(dprecio);
                 fila[4] = c_varios.formato_numero(dsubtotal);
+                fila[5] = c_varios.formato_numero(dicbper);
 
                 detalle.addRow(fila);
                 calcular_total();
