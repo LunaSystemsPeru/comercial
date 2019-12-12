@@ -26,17 +26,17 @@ public class cl_compras {
     cl_conectar c_conectar = new cl_conectar();
     cl_varios c_varios = new cl_varios();
 
-    private int periodo;
+    private String periodo;
     private int id_empresa;
 
     public cl_compras() {
     }
 
-    public int getPeriodo() {
+    public String getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(int periodo) {
+    public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
 
@@ -55,7 +55,7 @@ public class cl_compras {
                 + "inner join proveedor as p on p.id_proveedor = c.id_proveedor "
                 + "inner join empresa as em on em.id_empresa = c.id_empresa "
                 + "inner join documentos_sunat as ds on ds.id_tido = c.id_tido "
-                + "where concat(year(c.fecha), LPAD(month(c.fecha), 2, 0)) = '201909' "
+                + "where concat(year(c.fecha), LPAD(month(c.fecha), 2, 0)) = '" + this.periodo + "' "
                 + "order by c.fecha asc ";
         Statement st = c_conectar.conexion();
         ResultSet rs = c_conectar.consulta(st, query);

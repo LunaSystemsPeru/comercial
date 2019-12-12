@@ -27,7 +27,7 @@ public class cl_ventas {
     cl_varios c_varios = new cl_varios();
 
     private int id_emprea;
-    private int periodo;
+    private String periodo;
 
     public cl_ventas() {
     }
@@ -40,11 +40,11 @@ public class cl_ventas {
         this.id_emprea = id_emprea;
     }
 
-    public int getPeriodo() {
+    public String getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(int periodo) {
+    public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
 
@@ -55,9 +55,9 @@ public class cl_ventas {
                 + "inner join clientes as c on c.id_cliente = v.id_cliente "
                 + "inner join documentos_sunat as ds on ds.id_tido = v.id_tido "
                 + "inner join usuarios as u on u.id_usuarios = v.id_usuarios "
-                + "where concat(year(v.fecha), LPAD(month(v.fecha), 2, 0)) = '201909' and v.id_almacen = 1  and ds.id_tido in (1,2) "
+                + "where concat(year(v.fecha), LPAD(month(v.fecha), 2, 0)) = '"+this.periodo+"' and v.id_almacen = 1  and ds.id_tido in (1,2) "
                 + "order by v.fecha asc, v.id_ventas asc";
-
+        System.out.println(query);
         Statement st = c_conectar.conexion();
         ResultSet rs = c_conectar.consulta(st, query);
         int nro_linea = 1;

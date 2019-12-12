@@ -452,7 +452,7 @@ public class rpt_ventas extends javax.swing.JDialog {
         if (libro == 0) {
             if (tipo_libro == 1) {
                 clases_le.cl_ventas le_venta = new clases_le.cl_ventas();
-                le_venta.setPeriodo(201909);
+                le_venta.setPeriodo(periodo);
                 le_venta.llenar_libros();
             }
         }
@@ -460,7 +460,7 @@ public class rpt_ventas extends javax.swing.JDialog {
         if (libro == 1) {
             if (tipo_libro == 1) {
                 clases_le.cl_compras le_compra = new clases_le.cl_compras();
-                le_compra.setPeriodo(201909);
+                le_compra.setPeriodo(periodo);
                 le_compra.llenar_libros();
             }
         }
