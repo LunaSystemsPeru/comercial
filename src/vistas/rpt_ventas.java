@@ -209,7 +209,7 @@ public class rpt_ventas extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Reportes en Excel"));
 
-        cbx_excel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Detalle de Venta - Tienda - Cliente - Producto - Clasificacion - Vendedor" }));
+        cbx_excel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Detalle de Venta - Tienda - Cliente - Producto - Clasificacion - Vendedor", "Registro de ventas", "Registro de compras" }));
 
         jButton3.setText("Generar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -419,6 +419,10 @@ public class rpt_ventas extends javax.swing.JDialog {
         String nombre_reporte = "";
         if (reporte == 0) {
             nombre_reporte = "rpt_detalle_ventas_tienda";
+        }else if(reporte == 1){
+            nombre_reporte = "registro_vetas";
+        }else if(reporte == 2){
+            nombre_reporte = "registro_compras";
         }
 
         String fecha_inicio = c_varios.fecha_myql(txt_inicio_excel.getText());
@@ -429,15 +433,33 @@ public class rpt_ventas extends javax.swing.JDialog {
         try {
             Map<String, Object> parametros = new HashMap<>();
             String path = miDir.getCanonicalPath();
+            
             String direccion = path + File.separator + "reports" + File.separator + "subreports" + File.separator;
-
             System.out.println(direccion);
             parametros.put("SUBREPORT_DIR", direccion);
             parametros.put("JRParameter.REPORT_LOCALE", Locale.ENGLISH);
             parametros.put("REPORT_LOCALE", Locale.ENGLISH);
-            parametros.put("p_id_tienda", id_almacen);
-            parametros.put("p_fecha_inicio", fecha_inicio);
-            parametros.put("p_fecha_fin", fecha_fin);
+            if (reporte == 0) {
+                parametros.put("p_id_tienda", id_almacen);
+                parametros.put("p_fecha_inicio", fecha_inicio);
+                parametros.put("p_fecha_fin", fecha_fin);
+            }else if(reporte == 1){
+                parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
+                parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
+                parametros.put("Periodo", "201912");
+                parametros.put("fecha_inicio", fecha_inicio);
+                parametros.put("fecha_final", fecha_fin);
+            }else if(reporte == 2){
+                parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
+                parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
+                parametros.put("Periodo", "201912");
+                parametros.put("fecha_inicio", fecha_inicio);
+                parametros.put("fecha_final", fecha_fin);
+                parametros.put("id_empresa", frm_principal.c_empresa.getId()+"");
+            }
+            
+            
+            
             c_varios.ver_reporte_excel(nombre_reporte, parametros, nombre_reporte);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
