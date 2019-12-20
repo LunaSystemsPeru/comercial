@@ -1972,9 +1972,9 @@ public class frm_reg_venta extends javax.swing.JInternalFrame {
                 fila[0] = c_producto.getId();
                 fila[1] = c_producto.getDescripcion() + " | " + c_producto.getMarca();
                 fila[2] = dcantidad;
-                fila[3] = c_varios.formato_numero(dprecio);
+                fila[3] = c_varios.formato_precio(dprecio);
                 fila[4] = c_varios.formato_numero(dsubtotal);
-                fila[5] = c_varios.formato_numero(dicbper);
+                fila[5] = c_varios.formato_precio(dicbper);
 
                 detalle.addRow(fila);
                 calcular_total();

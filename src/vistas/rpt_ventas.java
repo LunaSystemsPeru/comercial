@@ -66,13 +66,6 @@ public class rpt_ventas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        cbx_pdf = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         cbx_graficas = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
@@ -99,70 +92,6 @@ public class rpt_ventas extends javax.swing.JDialog {
         setBackground(new java.awt.Color(255, 255, 255));
         setModal(true);
         setResizable(false);
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Reportes en PDF"));
-
-        cbx_pdf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton1.setText("Generar");
-
-        jLabel1.setText("Fecha de Inicio:");
-
-        jLabel2.setText("Fecha de fin:");
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(cbx_pdf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cbx_pdf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Reportes Graficos"));
 
@@ -286,7 +215,7 @@ public class rpt_ventas extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        cbx_tipo_libro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EXCEL", "PLE" }));
+        cbx_tipo_libro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EXCEL(proximamente)", "PLE" }));
 
         jLabel6.setText("Tipo");
 
@@ -361,7 +290,6 @@ public class rpt_ventas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,12 +303,11 @@ public class rpt_ventas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, 0)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addGap(0, 215, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -417,12 +344,18 @@ public class rpt_ventas extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int reporte = cbx_excel.getSelectedIndex();
         String nombre_reporte = "";
-        if (reporte == 0) {
-            nombre_reporte = "rpt_detalle_ventas_tienda";
-        }else if(reporte == 1){
-            nombre_reporte = "registro_vetas";
-        }else if(reporte == 2){
-            nombre_reporte = "registro_compras";
+        switch (reporte) {
+            case 0:
+                nombre_reporte = "rpt_detalle_ventas_tienda";
+                break;
+            case 1:
+                nombre_reporte = "registro_vetas";
+                break;
+            case 2:
+                nombre_reporte = "registro_compras";
+                break;
+            default:
+                break;
         }
 
         String fecha_inicio = c_varios.fecha_myql(txt_inicio_excel.getText());
@@ -437,29 +370,32 @@ public class rpt_ventas extends javax.swing.JDialog {
             String direccion = path + File.separator + "reports" + File.separator + "subreports" + File.separator;
             System.out.println(direccion);
             parametros.put("SUBREPORT_DIR", direccion);
-            parametros.put("JRParameter.REPORT_LOCALE", Locale.ENGLISH);
-            parametros.put("REPORT_LOCALE", Locale.ENGLISH);
-            if (reporte == 0) {
-                parametros.put("p_id_tienda", id_almacen);
-                parametros.put("p_fecha_inicio", fecha_inicio);
-                parametros.put("p_fecha_fin", fecha_fin);
-            }else if(reporte == 1){
-                parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
-                parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
-                parametros.put("Periodo", "201912");
-                parametros.put("fecha_inicio", fecha_inicio);
-                parametros.put("fecha_final", fecha_fin);
-            }else if(reporte == 2){
-                parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
-                parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
-                parametros.put("Periodo", "201912");
-                parametros.put("fecha_inicio", fecha_inicio);
-                parametros.put("fecha_final", fecha_fin);
-                parametros.put("id_empresa", frm_principal.c_empresa.getId()+"");
+            parametros.put("JRParameter.REPORT_LOCALE", Locale.US);
+            parametros.put("REPORT_LOCALE", Locale.US);
+            switch (reporte) {
+                case 0:
+                    parametros.put("p_id_tienda", id_almacen);
+                    parametros.put("p_fecha_inicio", fecha_inicio);
+                    parametros.put("p_fecha_fin", fecha_fin);
+                    break;
+                case 1:
+                    parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
+                    parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
+                    parametros.put("Periodo", "201912");
+                    parametros.put("fecha_inicio", fecha_inicio);
+                    parametros.put("fecha_final", fecha_fin);
+                    break;
+                case 2:
+                    parametros.put("Razon_Social", frm_principal.c_empresa.getRazon());
+                    parametros.put("Ruc",frm_principal.c_empresa.getRuc() );
+                    parametros.put("Periodo", "201912");
+                    parametros.put("fecha_inicio", fecha_inicio);
+                    parametros.put("fecha_final", fecha_fin);
+                    parametros.put("id_empresa", frm_principal.c_empresa.getId()+"");
+                    break;
+                default:
+                    break;
             }
-            
-            
-            
             c_varios.ver_reporte_excel(nombre_reporte, parametros, nombre_reporte);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
@@ -552,23 +488,16 @@ public class rpt_ventas extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbx_excel;
     private javax.swing.JComboBox<String> cbx_graficas;
     private javax.swing.JComboBox<String> cbx_libro;
-    private javax.swing.JComboBox<String> cbx_pdf;
     private javax.swing.JComboBox<String> cbx_tipo_libro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

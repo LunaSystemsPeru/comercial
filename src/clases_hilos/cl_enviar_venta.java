@@ -72,7 +72,7 @@ public class cl_enviar_venta extends Thread {
             System.out.println("imprimiendo docmumento de venta");
             //imprimir boleta o factura
             leer_numeros c_letras = new leer_numeros();
-            String letras_numeros = c_letras.Convertir(c_venta.getTotal() + "", true) + " SOLES";
+            String letras_numeros = c_letras.Convertir(c_varios.formato_numero(c_venta.getTotal()) + "", true) + " SOLES";
             System.out.println(letras_numeros);
             System.out.println(url_codigo_qr);
 
