@@ -113,6 +113,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
         t_kardex = new javax.swing.JTable();
         txt_kardex_descripcion = new javax.swing.JTextField();
         btn_detalle_kardex = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jd_ajuste_producto = new javax.swing.JDialog();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -218,6 +219,14 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clipboard_text.png"))); // NOI18N
+        jButton8.setText("ver PDF");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jd_kardexLayout = new javax.swing.GroupLayout(jd_kardex.getContentPane());
         jd_kardex.getContentPane().setLayout(jd_kardexLayout);
         jd_kardexLayout.setHorizontalGroup(
@@ -229,6 +238,8 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
                     .addGroup(jd_kardexLayout.createSequentialGroup()
                         .addComponent(txt_kardex_descripcion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_detalle_kardex)))
                 .addContainerGap())
         );
@@ -238,7 +249,8 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jd_kardexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_kardex_descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_detalle_kardex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_detalle_kardex, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1211,6 +1223,26 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        File miDir = new File(".");
+        try {
+            Map<String, Object> parametros = new HashMap<>();
+            String path = miDir.getCanonicalPath();
+            String diagonal = File.separator;
+            String direccion = path + diagonal + "reports" + diagonal + "subreports" + diagonal;
+
+            System.out.println(direccion);
+            parametros.put("SUBREPORT_DIR", direccion);
+            parametros.put("JRParameter.REPORT_LOCALE", Locale.ENGLISH);
+            parametros.put("REPORT_LOCALE", Locale.ENGLISH);
+            parametros.put("p_idalmacen", c_kardex.getId_almacen() );
+            parametros.put("p_idproducto", c_kardex.getId_producto());
+            c_varios.ver_reporte("rpt_kardex", parametros);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ajuste_kardex;
@@ -1229,6 +1261,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

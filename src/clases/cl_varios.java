@@ -62,7 +62,7 @@ public class cl_varios {
         numero = formato.format(number);
         return numero;
     }
-    
+
     /*
     @param number = 123548.00000
     return ######0.00000 a dos decimales sin comas de miles
@@ -169,7 +169,7 @@ public class cl_varios {
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         return formateador.format(ahora);
     }
-    
+
     public String getanio() {
         Date ahora = new Date();
         SimpleDateFormat formateador = new SimpleDateFormat("yyyy");
