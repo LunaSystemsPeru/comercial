@@ -234,8 +234,6 @@ public class frm_principal extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jToolBar5 = new javax.swing.JToolBar();
         jButton18 = new javax.swing.JButton();
-        jSeparator8 = new javax.swing.JToolBar.Separator();
-        jButton10 = new javax.swing.JButton();
         jSeparator11 = new javax.swing.JToolBar.Separator();
         jButton19 = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
@@ -663,23 +661,10 @@ public class frm_principal extends javax.swing.JFrame {
             }
         });
         jToolBar5.add(jButton18);
-        jToolBar5.add(jSeparator8);
-
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eccomerce_-_receipt-512.png"))); // NOI18N
-        jButton10.setText("Compras");
-        jButton10.setFocusable(false);
-        jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        jToolBar5.add(jButton10);
         jToolBar5.add(jSeparator11);
 
         jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/basket-01-512.png"))); // NOI18N
-        jButton19.setText("Ingreso Mercaderia");
+        jButton19.setText("Compras");
         jButton19.setFocusable(false);
         jButton19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton19.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -1173,11 +1158,6 @@ public class frm_principal extends javax.swing.JFrame {
         dialog.setVisible(true);
     }//GEN-LAST:event_jButton23ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        frm_ver_compras formulario = new frm_ver_compras();
-        c_varios.llamar_ventana(formulario);
-    }//GEN-LAST:event_jButton10ActionPerformed
-
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         frm_ver_clasificacion_productos formulario = new frm_ver_clasificacion_productos();
         c_varios.llamar_ventana_normal(formulario);
@@ -1223,7 +1203,6 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JButton btn_cerrar;
     private javax.swing.JButton btn_ingresar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
@@ -1275,7 +1254,6 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar.Separator jSeparator7;
-    private javax.swing.JToolBar.Separator jSeparator8;
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;

@@ -283,7 +283,7 @@ public class cl_kardex {
                     + "where k.id_producto = '" + id_producto + "' and k.id_almacen = '" + id_almacen + "' "
                     + "order by k.fecha asc, k.id_kardex asc";
 
-            //System.out.println(query);
+            System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 

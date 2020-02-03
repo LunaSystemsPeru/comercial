@@ -288,8 +288,10 @@ public class cl_venta {
             tmodelo.addColumn("Estado");
             tmodelo.addColumn("_idventa");
 
+            int contar = 0;
             //Creando las filas para el JTable
             while (rs.next()) {
+                contar++;
                 int iestado = rs.getInt("estado");
                 int itipo_venta = rs.getInt("tipo_venta");
                 String sestado = "";
@@ -332,6 +334,10 @@ public class cl_venta {
                 fila[8] = rs.getInt("id_ventas");
 
                 tmodelo.addRow(fila);
+            }
+            
+            if (contar == 0) {
+                JOptionPane.showMessageDialog(null, "No se han encontrados datos");
             }
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);

@@ -636,7 +636,7 @@ WHERE v.fecha BETWEEN   $P{fecha_inicio}
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{total}/ 1.18 * 0.18]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="910" y="0" width="50" height="16" uuid="cc223357-a6d4-4e15-9d41-a2b577d81fa5">

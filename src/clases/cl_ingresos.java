@@ -34,6 +34,7 @@ public class cl_ingresos {
     private int id_moneda;
     private double tc;
     private int id_usuario;
+    private double percepcion;
 
     public cl_ingresos() {
     }
@@ -125,7 +126,16 @@ public class cl_ingresos {
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
+
+    public double getPercepcion() {
+        return percepcion;
+    }
+
+    public void setPercepcion(double percepcion) {
+        this.percepcion = percepcion;
+    }
     
+   
     public boolean validar_ingreso() {
         boolean existe = false;
         try {
@@ -147,6 +157,7 @@ public class cl_ingresos {
                 id_moneda = rs.getInt("id_moneda");
                 id_usuario = rs.getInt("id_usuarios");
                 tc = rs.getDouble("tc");
+                percepcion = rs.getDouble("percepcion");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -224,19 +235,21 @@ public class cl_ingresos {
             tmodelo.addColumn("Documento");
             tmodelo.addColumn("Proveedor");
             tmodelo.addColumn("Total");
+            tmodelo.addColumn("Detraccion");
             tmodelo.addColumn("Usuario");
 
             int contar = 0;
             //Creando las filas para el JTable
             while (rs.next()) {
                 contar++;
-                Object[] fila = new Object[6];
+                Object[] fila = new Object[7];
                 fila[0] = rs.getString("id_ingreso");
                 fila[1] = rs.getString("fecha");
                 fila[2] = rs.getString("abreviado") + " | " + c_varios.ceros_izquieda_letras(4, rs.getString("serie")) + " - " + c_varios.ceros_izquieda_numero(7, rs.getInt("numero"));
                 fila[3] = rs.getString("nro_documento") + " | " + rs.getString("razon_social");
                 fila[4] = c_varios.formato_numero(rs.getDouble("total"));
-                fila[5] = rs.getString("username");
+                fila[5] = c_varios.formato_numero(rs.getDouble("percepcion"));
+                fila[6] = rs.getString("username");
 
                 tmodelo.addRow(fila);
             }
@@ -252,9 +265,11 @@ public class cl_ingresos {
             tabla.getColumnModel().getColumn(2).setPreferredWidth(150);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(450);
             tabla.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(5).setPreferredWidth(120);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(120);
             tabla.setRowSorter(sorter);
             c_varios.derecha_celda(tabla, 4);
+            c_varios.derecha_celda(tabla, 5);
 
         } catch (SQLException e) {
             System.out.print(e);
@@ -266,7 +281,7 @@ public class cl_ingresos {
         Statement st = c_conectar.conexion();
         String query = "insert into ingresos "
                 + "values ('" + id_ingreso + "', '" + fecha + "', '" + id_almacen + "', '" + id_proveedor + "', '" + id_tido + "', '" + serie + "', '" + numero + "', "
-                + "'" + total + "', '" + id_moneda + "', '" + tc + "', '" + id_usuario + "')";
+                + "'" + total + "', '" + id_moneda + "', '" + tc + "', '" + id_usuario + "', '"+percepcion+"')";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {

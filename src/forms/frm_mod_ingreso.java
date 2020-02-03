@@ -37,27 +37,27 @@ import vistas.frm_ver_ingresos;
  *
  * @author luis
  */
-public class frm_reg_ingreso extends javax.swing.JInternalFrame {
-
+public class frm_mod_ingreso extends javax.swing.JInternalFrame {
+    
     cl_conectar c_conectar = new cl_conectar();
     cl_varios c_varios = new cl_varios();
-
-    cl_ingresos c_ingreso = new cl_ingresos();
+    
+    public static cl_ingresos c_ingreso = new cl_ingresos();
     cl_productos_ingresos c_detalle = new cl_productos_ingresos();
     cl_productos_ingresos_bono c_bono = new cl_productos_ingresos_bono();
     cl_proveedor c_proveedor = new cl_proveedor();
     cl_producto c_producto = new cl_producto();
     cl_productos_almacen c_producto_almacen = new cl_productos_almacen();
     cl_documento_almacen c_doc_tienda = new cl_documento_almacen();
-
+    
     m_documentos_sunat m_documentos = new m_documentos_sunat();
     m_almacen m_almacen = new m_almacen();
-
+    
     DefaultTableModel detalle;
     DefaultTableModel detalle_bono;
     TextAutoCompleter tac_productos = null;
     TextAutoCompleter tac_proveedores = null;
-
+    
     int fila_seleccionada;
     int fila_bono;
     int id_almacen = frm_principal.c_almacen.getId();
@@ -65,14 +65,25 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
     /**
      * Creates new form frm_reg_ingreso
      */
-    public frm_reg_ingreso() {
+    public frm_mod_ingreso() {
         initComponents();
-        txt_fecha.setText(c_varios.fecha_usuario(c_varios.getFechaActual()));
+        c_ingreso.validar_ingreso();
+        c_proveedor.setId_proveedor(c_ingreso.getId_proveedor());
+        c_proveedor.cargar_datos();
+        txt_fecha.setText(c_varios.fecha_usuario(c_ingreso.getFecha()));
+        txt_serie.setText(c_ingreso.getSerie());
+        txt_numero.setText(c_ingreso.getNumero() + "");
+        txt_ruc_proveedor.setText(c_proveedor.getRuc());
+        txt_razon_social.setText(c_proveedor.getRazon_social());
+        if (c_ingreso.getPercepcion() > 0) {
+            cbx_percepcion.setSelectedIndex(0);
+        }
+        txt_percepcion.setText(c_varios.formato_numero(c_ingreso.getPercepcion()));
         txt_fecha.requestFocus();
         modelo_ingreso();
         modelo_bono();
     }
-
+    
     private void modelo_ingreso() {
         //formato de tabla detalle de venta
         detalle = new DefaultTableModel() {
@@ -103,7 +114,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         c_varios.derecha_celda(t_detalle, 5);
         c_varios.derecha_celda(t_detalle, 6);
     }
-
+    
     private void modelo_bono() {
         //formato de tabla detalle de venta
         detalle_bono = new DefaultTableModel() {
@@ -126,14 +137,14 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         c_varios.derecha_celda(t_detalle, 3);
         c_varios.derecha_celda(t_detalle, 4);
     }
-
+    
     private void cargar_proveedores() {
         try {
             if (tac_proveedores != null) {
                 tac_proveedores.removeAllItems();
             }
             tac_proveedores = new TextAutoCompleter(txt_ruc_proveedor);
-
+            
             tac_proveedores.setMode(0);
             tac_proveedores.setCaseSensitive(false);
             Statement st = c_conectar.conexion();
@@ -149,7 +160,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             System.out.println(e.getLocalizedMessage());
         }
     }
-
+    
     private void cargar_productos() {
         try {
             if (tac_productos != null) {
@@ -170,7 +181,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     }
                 }
             });
-
+            
             tac_productos.setMode(0);
             tac_productos.setCaseSensitive(false);
             Statement st = c_conectar.conexion();
@@ -190,7 +201,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             System.out.println(e.getLocalizedMessage());
         }
     }
-
+    
     private boolean valida_tabla(int producto) {
         //estado de ingreso
         boolean ingresar = false;
@@ -201,7 +212,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         if (contar_filas == 0) {
             ingresar = true;
         }
-
+        
         if (contar_filas > 0) {
             for (int j = 0; j < contar_filas; j++) {
                 int id_producto_fila = Integer.parseInt(t_detalle.getValueAt(j, 0).toString());
@@ -214,13 +225,13 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                 }
             }
         }
-
+        
         if (cuenta_iguales == 0) {
             ingresar = true;
         }
         return ingresar;
     }
-
+    
     private void limpiar_buscar() {
         txt_buscar_productos.setText("");
         txt_cingreso.setText("");
@@ -235,7 +246,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         btn_agregar_producto.setEnabled(true);
         txt_buscar_productos.requestFocus();
     }
-
+    
     private double calcular_total() {
         double total = 0;
         double percepcion = 0;
@@ -244,7 +255,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             total = total + Double.parseDouble(t_detalle.getValueAt(i, 6).toString());
         }
         if (cbx_percepcion.getSelectedIndex() == 0) {
-        percepcion = total * 0.02;
+            percepcion = total * 0.02;
         }
         c_ingreso.setTotal(total);
         c_ingreso.setPercepcion(percepcion);
@@ -921,7 +932,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     dialog.setLocationRelativeTo(null);
                     dialog.setVisible(true);
                 }
-
+                
             }
         }
     }//GEN-LAST:event_txt_ruc_proveedorKeyPressed
@@ -970,7 +981,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "ERROR AL SELECCIONAR PRODUCTO");
                 }
             }
-
+            
             if (txt_buscar_productos.getText().length() == 0) {
                 //si nro de filas es mayor a 0 entonces ir a datos generales
                 int contar_filas = t_detalle.getRowCount();
@@ -980,7 +991,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                 }
             }
         }
-
+        
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
             limpiar_buscar();
         }
@@ -1049,7 +1060,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         int cantidad = Integer.parseInt(txt_cingreso.getText());
         double precio = Double.parseDouble(txt_precio.getText());
         double parcial = costo * cantidad;
-
+        
         if (btn_bono.getSelectedIndex() == 0) {
             Object fila[] = new Object[7];
             fila[0] = c_producto.getId();
@@ -1059,7 +1070,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             fila[4] = c_varios.formato_precio(costo);
             fila[5] = c_varios.formato_precio(precio);
             fila[6] = c_varios.formato_numero(parcial);
-
+            
             detalle.addRow(fila);
         } else {
             Object fila[] = new Object[7];
@@ -1076,7 +1087,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
 
     private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
         int confirmado = JOptionPane.showConfirmDialog(null, "¿Esta Seguro de Guardar el ingreso de Mercaderia?");
-
+        
         if (JOptionPane.OK_OPTION == confirmado) {
             c_ingreso.setFecha(c_varios.fecha_myql(txt_fecha.getText()));
             c_ingreso.setId_almacen(id_almacen);
@@ -1087,12 +1098,12 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             c_ingreso.setNumero(Integer.parseInt(txt_numero.getText()));
             c_ingreso.setTc(1.000);
             c_ingreso.obtener_codigo();
-
+            
             boolean registrado = c_ingreso.registrar();
-
+            
             c_detalle.setId_ingreso(c_ingreso.getId_ingreso());
             c_bono.setId_ingreso(c_ingreso.getId_ingreso());
-
+            
             if (registrado) {
                 int nro_filas = t_detalle.getRowCount();
                 for (int i = 0; i < nro_filas; i++) {
@@ -1100,10 +1111,10 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     c_detalle.setCantidad(Double.parseDouble(t_detalle.getValueAt(i, 3).toString()));
                     c_detalle.setCosto(Double.parseDouble(t_detalle.getValueAt(i, 4).toString()));
                     c_detalle.setPrecio(Double.parseDouble(t_detalle.getValueAt(i, 5).toString()));
-
+                    
                     c_detalle.registrar();
                 }
-
+                
                 int nro_filas_bono = t_bonificaciones.getRowCount();
                 for (int i = 0; i < nro_filas_bono; i++) {
                     c_bono.setId_producto(Integer.parseInt(t_bonificaciones.getValueAt(i, 0).toString()));
@@ -1111,7 +1122,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     
                     c_bono.registrar();
                 }
-
+                
                 Notification.show("Ingreso de Mercaderia", "se guardo correctamente");
                 frm_ver_ingresos formulario = new frm_ver_ingresos();
                 c_varios.llamar_ventana(formulario);
