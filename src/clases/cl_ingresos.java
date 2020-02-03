@@ -134,8 +134,7 @@ public class cl_ingresos {
     public void setPercepcion(double percepcion) {
         this.percepcion = percepcion;
     }
-    
-   
+
     public boolean validar_ingreso() {
         boolean existe = false;
         try {
@@ -182,14 +181,14 @@ public class cl_ingresos {
         }
         return existe;
     }
-    
+
     public boolean validar_documento_kardex() {
         boolean existe = false;
         try {
             Statement st = c_conectar.conexion();
             String query = "select id_ingreso, periodo "
                     + "from ingresos "
-                    + "where id_almacen = '" + id_almacen + "' and id_tido = '" + id_tido + "' and serie = '" + serie + "' and numero = '" + numero + "' and fecha = '"+fecha+"'";
+                    + "where id_almacen = '" + id_almacen + "' and id_tido = '" + id_tido + "' and serie = '" + serie + "' and numero = '" + numero + "' and fecha = '" + fecha + "'";
             System.out.println(query);
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
@@ -253,7 +252,7 @@ public class cl_ingresos {
 
                 tmodelo.addRow(fila);
             }
-            
+
             if (contar == 0) {
                 JOptionPane.showMessageDialog(null, "NO SE HA ENCONTRADO RESULTADOS");
             }
@@ -281,7 +280,23 @@ public class cl_ingresos {
         Statement st = c_conectar.conexion();
         String query = "insert into ingresos "
                 + "values ('" + id_ingreso + "', '" + fecha + "', '" + id_almacen + "', '" + id_proveedor + "', '" + id_tido + "', '" + serie + "', '" + numero + "', "
-                + "'" + total + "', '" + id_moneda + "', '" + tc + "', '" + id_usuario + "', '"+percepcion+"')";
+                + "'" + total + "', '" + id_moneda + "', '" + tc + "', '" + id_usuario + "', '" + percepcion + "')";
+        System.out.println(query);
+        int resultado = c_conectar.actualiza(st, query);
+        if (resultado > -1) {
+            registrado = true;
+        }
+        return registrado;
+    }
+
+    public boolean modificar() {
+        boolean registrado = false;
+        Statement st = c_conectar.conexion();
+        String query = "update ingresos "
+                + "set fecha =  '" + fecha + "',"
+                + "total = '" + total + "', "
+                + "percepcion = '" + percepcion + "' "
+                + "where id_ingreso = '" + id_ingreso + "'";
         System.out.println(query);
         int resultado = c_conectar.actualiza(st, query);
         if (resultado > -1) {

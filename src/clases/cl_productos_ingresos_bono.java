@@ -5,7 +5,11 @@
  */
 package clases;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -59,6 +63,82 @@ public class cl_productos_ingresos_bono {
         }
         c_conectar.cerrar(st);
         return registrado;
+    }
+     
+      public void mostrar_detalle(JTable tabla) {
+        DefaultTableModel modelo;
+        try {
+            modelo = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int fila, int columna) {
+                    return false;
+                }
+            };
+            //c_conectar.conectar();
+            String query = "select pi.id_producto, p.descripcion, p.marca, pi.cantidad "
+                    + "from productos_ingresos_bono as pi "
+                    + "inner join productos as p on p.id_producto = pi.id_producto "
+                    + "where pi.id_ingreso= '" + id_ingreso + "'";
+            System.out.println(query);
+            Statement st = c_conectar.conexion();
+            ResultSet rs = c_conectar.consulta(st, query);
+
+            //La cantidad de columnas que tiene la consulta
+            //Establecer como cabezeras el nombre de las colimnas
+            modelo.addColumn("Id");
+            modelo.addColumn("Producto");
+            modelo.addColumn("Marca");
+            modelo.addColumn("Cantidad");
+
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+                fila[0] = rs.getInt("id_producto");
+                fila[1] = rs.getString("descripcion").trim();
+                fila[2] = rs.getString("marca").trim();
+                fila[3] = rs.getInt("cantidad");
+                modelo.addRow(fila);
+            }
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
+            tabla.setModel(modelo);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(40);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(400);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
+            c_varios.centrar_celda(tabla, 0);
+            c_varios.centrar_celda(tabla, 2);
+            c_varios.centrar_celda(tabla, 3);
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
+    }
+      
+      public void mostrar_modificar(DefaultTableModel modelo) {
+        try {
+            //c_conectar.conectar();
+            String query = "select pi.id_producto, p.descripcion, p.marca, pi.cantidad "
+                    + "from productos_ingresos_bono as pi "
+                    + "inner join productos as p on p.id_producto = pi.id_producto "
+                    + "where pi.id_ingreso= '" + id_ingreso + "'";
+            System.out.println(query);
+            Statement st = c_conectar.conexion();
+            ResultSet rs = c_conectar.consulta(st, query);
+
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+                fila[0] = rs.getInt("id_producto");
+                fila[1] = rs.getString("descripcion").trim();
+                fila[2] = rs.getString("marca").trim();
+                fila[3] = rs.getInt("cantidad");
+                modelo.addRow(fila);
+            }
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
     }
     
 }

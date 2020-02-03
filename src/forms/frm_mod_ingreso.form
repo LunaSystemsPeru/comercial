@@ -338,7 +338,6 @@
               </StringArray>
             </Property>
             <Property name="selectedIndex" type="int" value="1"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cbx_percepcionKeyPressed"/>
@@ -499,9 +498,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_buscar_productos">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_buscar_productosKeyPressed"/>
           </Events>
@@ -802,7 +798,6 @@
               <Image iconType="3" name="/icons/accept.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>

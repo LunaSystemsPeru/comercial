@@ -1235,7 +1235,7 @@ public class frm_ver_mis_productos2 extends javax.swing.JInternalFrame {
             parametros.put("SUBREPORT_DIR", direccion);
             parametros.put("JRParameter.REPORT_LOCALE", Locale.ENGLISH);
             parametros.put("REPORT_LOCALE", Locale.ENGLISH);
-            parametros.put("p_idalmacen", c_kardex.getId_almacen() );
+            parametros.put("p_idalmacen", c_kardex.getId_almacen());
             parametros.put("p_idproducto", c_kardex.getId_producto());
             c_varios.ver_reporte("rpt_kardex", parametros);
         } catch (IOException e) {

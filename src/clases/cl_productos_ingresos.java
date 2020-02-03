@@ -117,16 +117,18 @@ public class cl_productos_ingresos {
             modelo.addColumn("Cantidad");
             modelo.addColumn("Costo");
             modelo.addColumn("Precio");
+            modelo.addColumn("Parcial");
 
             //Creando las filas para el JTable
             while (rs.next()) {
-                Object[] fila = new Object[6];
+                Object[] fila = new Object[7];
                 fila[0] = rs.getInt("id_producto");
                 fila[1] = rs.getString("descripcion").trim();
                 fila[2] = rs.getString("marca").trim();
                 fila[3] = rs.getInt("cantidad");
                 fila[4] = c_varios.formato_totales(rs.getDouble("costo"));
                 fila[5] = c_varios.formato_totales(rs.getDouble("precio"));
+                fila[6] = c_varios.formato_totales(rs.getDouble("costo") * rs.getInt("cantidad"));
                 modelo.addRow(fila);
             }
             c_conectar.cerrar(st);
@@ -138,11 +140,44 @@ public class cl_productos_ingresos {
             tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
             tabla.getColumnModel().getColumn(4).setPreferredWidth(70);
             tabla.getColumnModel().getColumn(5).setPreferredWidth(70);
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(70);
             c_varios.centrar_celda(tabla, 0);
             c_varios.centrar_celda(tabla, 2);
             c_varios.centrar_celda(tabla, 3);
             c_varios.derecha_celda(tabla, 4);
             c_varios.derecha_celda(tabla, 5);
+            c_varios.derecha_celda(tabla, 6);
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
+    }
+    
+    public void mostrar_modificar(DefaultTableModel modelo) {
+        try {
+            //c_conectar.conectar();
+            String query = "select pi.id_producto, p.descripcion, p.marca, pi.cantidad, pi.costo, pi.precio "
+                    + "from productos_ingresos as pi "
+                    + "inner join productos as p on p.id_producto = pi.id_producto "
+                    + "where pi.id_ingreso= '" + id_ingreso + "'";
+            System.out.println(query);
+            Statement st = c_conectar.conexion();
+            ResultSet rs = c_conectar.consulta(st, query);
+
+
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+                fila[0] = rs.getInt("id_producto");
+                fila[1] = rs.getString("descripcion").trim();
+                fila[2] = rs.getString("marca").trim();
+                fila[3] = rs.getInt("cantidad");
+                fila[4] = c_varios.formato_totales(rs.getDouble("costo"));
+                fila[5] = c_varios.formato_totales(rs.getDouble("precio"));
+                fila[6] = c_varios.formato_totales(rs.getDouble("costo") * rs.getInt("cantidad"));
+                modelo.addRow(fila);
+            }
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
         } catch (SQLException e) {
             System.out.print(e);
         }
