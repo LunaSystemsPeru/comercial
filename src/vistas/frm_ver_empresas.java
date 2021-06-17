@@ -337,9 +337,9 @@ public class frm_ver_empresas extends javax.swing.JInternalFrame {
                     if (existe_entidad == false) {
                         //ruc
                         try {
-                            String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);
+                            String json = cl_json_entidad.getJSONRUC(documento);
                             //Lo mostramos
-                            String[] datos = cl_json_entidad.showJSONRUC_JMP(json);
+                            String[] datos = cl_json_entidad.showJSONRUC(json);
                             txt_j_razon.setText(datos[0]);
                             txt_j_direccion.setText(datos[1]);
                             txt_j_condicion.setText(datos[2]);

@@ -114,7 +114,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
         jLabel4.setText("Direccion:");
 
-        txt_nom.setEnabled(false);
         txt_nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nomActionPerformed(evt);
@@ -129,7 +128,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
             }
         });
 
-        txt_dir.setEnabled(false);
         txt_dir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_dirKeyPressed(evt);
@@ -145,7 +143,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
         btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/accept.png"))); // NOI18N
         btn_reg.setText("Grabar");
-        btn_reg.setEnabled(false);
         btn_reg.setFocusable(false);
         btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -171,7 +168,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
         jLabel1.setText("Telefono / Celular:");
 
-        txt_celular.setEnabled(false);
         txt_celular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_celularKeyPressed(evt);
@@ -180,7 +176,6 @@ public class frm_reg_cliente extends javax.swing.JDialog {
 
         jLabel6.setText("Datos del Cliente:");
 
-        txt_telefono.setEnabled(false);
         txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_telefonoKeyPressed(evt);
@@ -278,9 +273,9 @@ public class frm_reg_cliente extends javax.swing.JDialog {
                         btn_cerrar.doClick();
                     } else {
                         try {
-                            String json = cl_json_entidad.getJSONDNI_LUNASYSTEMS(documento);
+                            String json = cl_json_entidad.getJSONDNI(documento);
                             //Lo mostramos
-                            String datos = cl_json_entidad.showJSONDNIL(json);
+                            String datos = cl_json_entidad.showJSONDNI(json);
                             txt_nom.setText(datos);
                             txt_dir.setText("-");
                             txt_celular.setEnabled(true);
@@ -299,9 +294,9 @@ public class frm_reg_cliente extends javax.swing.JDialog {
                         btn_cerrar.doClick();
                     } else {
                         try {
-                            String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);
+                            String json = cl_json_entidad.getJSONRUC(documento);
                             //Lo mostramos
-                            String[] datos = cl_json_entidad.showJSONRUC_JMP(json);
+                            String[] datos = cl_json_entidad.showJSONRUC(json);
                             txt_nom.setText(datos[0]);
                             txt_dir.setText(datos[1]);
                             txt_celular.setEnabled(true);

@@ -1417,9 +1417,9 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "CLIENTE NO REGISTRADO, SE BUSCARA DATOS EN RENIEC");
                             System.out.println("buscar dni");
                             try {
-                                String json = cl_json_entidad.getJSONDNI_LUNASYSTEMS(documento);
+                                String json = cl_json_entidad.getJSONDNI(documento);
                                 //Lo mostramos
-                                String datos = cl_json_entidad.showJSONDNIL(json);
+                                String datos = cl_json_entidad.showJSONDNI(json);
                                 txt_datos_venta.setText(datos);
                                 c_cliente.obtener_codigo();
                                 c_cliente.setNombre(datos);
@@ -1443,9 +1443,9 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "CLIENTE NO REGISTRADO, SE BUSCARA DATOS EN SUNAT");
                             System.out.println("buscar ruc");
                             try {
-                                String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);
+                                String json = cl_json_entidad.getJSONRUC(documento);
                                 //Lo mostramos
-                                String[] datos = cl_json_entidad.showJSONRUC_JMP(json);
+                                String[] datos = cl_json_entidad.showJSONRUC(json);
                                 txt_datos_venta.setText(datos[0]);
                                 c_cliente.obtener_codigo();
                                 c_cliente.setNombre(datos[0]);

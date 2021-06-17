@@ -231,9 +231,9 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
                 if (documento.length() == 8) {
                     System.out.println("buscar dni");
                     try {
-                        String json = cl_json_entidad.getJSONDNI_LUNASYSTEMS(documento);
+                        String json = cl_json_entidad.getJSONDNI(documento);
                         //Lo mostramos
-                        String datos = cl_json_entidad.showJSONDNIL(json);
+                        String datos = cl_json_entidad.showJSONDNI(json);
                         txt_nom.setText(datos);
                         txt_condicion.setText("HABIDO");
                         txt_estado.setText("ACTIVO");
@@ -249,9 +249,9 @@ public class frm_reg_proveedor extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "Espere, se esta buscando los datos en la base de datos de SUNAT");
                     System.out.println("buscar ruc");
                     try {
-                        String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);
+                        String json = cl_json_entidad.getJSONRUC(documento);
                         //Lo mostramos
-                        String[] datos = cl_json_entidad.showJSONRUC_JMP(json);
+                        String[] datos = cl_json_entidad.showJSONRUC(json);
                         txt_nom.setText(datos[0]);
                         txt_dir.setText(datos[1]);
                         txt_condicion.setText(datos[2]);

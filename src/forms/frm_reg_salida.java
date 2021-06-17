@@ -723,9 +723,9 @@ public class frm_reg_salida extends javax.swing.JInternalFrame {
                 if (documento.length() == 8) {
                     //buscar dni en reniec
                     try {
-                        String json = cl_json_entidad.getJSONDNI_LUNASYSTEMS(documento);
+                        String json = cl_json_entidad.getJSONDNI(documento);
                         //Lo mostramos
-                        String datos = cl_json_entidad.showJSONDNIL(json);
+                        String datos = cl_json_entidad.showJSONDNI(json);
                         txt_razon_social.setText(datos);
                     } catch (ParseException e) {
                         JOptionPane.showMessageDialog(null, "ERROR EN BUSCAR  " + e.getLocalizedMessage());
@@ -738,9 +738,9 @@ public class frm_reg_salida extends javax.swing.JInternalFrame {
                 if (documento.length() == 11) {
                     //buscar ruc en sunat
                     try {
-                        String json = cl_json_entidad.getJSONRUC_LUNASYSTEMS(documento);
+                        String json = cl_json_entidad.getJSONRUC(documento);
                         //Lo mostramos
-                        String[] datos = cl_json_entidad.showJSONRUC_JMP(json);
+                        String[] datos = cl_json_entidad.showJSONRUC(json);
                         txt_razon_social.setText(datos[0]);
                     } catch (ParseException e) {
                         JOptionPane.showMessageDialog(null, "ERROR EN BUSCAR RUC " + e.getLocalizedMessage());
