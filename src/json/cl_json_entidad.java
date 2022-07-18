@@ -23,7 +23,7 @@ import org.json.simple.parser.ParseException;
 public class cl_json_entidad {
 
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static final String SERVER_PATH = "http://lunasystemsperu.com/";
+    private static final String SERVER_PATH = "https://lunasystemsperu.com/";
 
     public static String getJSONRUC(String ruc) {
 
@@ -31,8 +31,8 @@ public class cl_json_entidad {
 
         try {
             //Generar la URL
-            //String url = "http://lunasystemsperu.com/consultas_json/composer/consulta_sunat_JMP.php?ruc=" + ruc;
-            String url = "http://lunasystemsperu.com/apis/apiruc.php?ruc=" + ruc;
+            //String url = "https://lunasystemsperu.com/consultas_json/composer/consulta_sunat_JMP.php?ruc=" + ruc;
+            String url = "https://lunasystemsperu.com/apis/apiruc.php?ruc=" + ruc;
             //Creamos un nuevo objeto URL con la url donde pedir el JSON
             URL obj = new URL(url);
             //Creamos un objeto de conexión
@@ -75,7 +75,7 @@ public class cl_json_entidad {
 
         try {
             //Generar la URL
-            String url = "http://lunasystemsperu.com/apis/apidni.php?dni=" + dni;
+            String url = "https://lunasystemsperu.com/apis/apidni.php?dni=" + dni;
             //Creamos un nuevo objeto URL con la url donde pedir el JSON
             URL obj = new URL(url);
             //Creamos un objeto de conexión
