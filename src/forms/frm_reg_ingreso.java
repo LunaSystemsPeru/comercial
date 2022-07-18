@@ -582,6 +582,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
         });
 
         btn_recargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/currency.png"))); // NOI18N
+        btn_recargar.setToolTipText("Actualizar Lista");
         btn_recargar.setEnabled(false);
         btn_recargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1132,6 +1133,7 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
 
     private void btn_add_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_add_productoActionPerformed
         Frame f = JOptionPane.getRootFrame();
+        btn_recargar.setEnabled(true);
         frm_reg_producto.registrar = true;
         frm_reg_producto dialog = new frm_reg_producto(f, true);
         dialog.setLocationRelativeTo(null);
