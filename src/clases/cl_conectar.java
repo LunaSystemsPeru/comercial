@@ -20,7 +20,7 @@ public class cl_conectar {
     private static String user = "brunoasc_luis_bd"; // Usuario de BD.
     private static String password = "C]6&TN4Bt@&I"; // Password de BD.
     private static String url = "artemisa.servidoresph.com";
-    //private static String url = "192.168.1.248";
+    //private static String url = "localhost";
 
     // Driver para MySQL en este caso.
     private static String driver = "com.mysql.jdbc.Driver";
