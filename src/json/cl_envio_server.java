@@ -23,8 +23,8 @@ public class cl_envio_server {
     private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36";
 
     public static String[] enviar_documento(int id_venta, int tipo_documento, int id_almacen) {
-        String SERVER_PATH = "https://lunasystemsperu.com/clientes/comercial_penia/greenter/generates/";
-        
+        String SERVER_PATH = "https://lunasystemsperu.com/clientes/comercial_penia/composer/generateXML/";
+
         String url = null;
         String[] datos = new String[6];
         // open a connection to the site
@@ -34,7 +34,7 @@ public class cl_envio_server {
         if (tipo_documento == 2) {
             url = SERVER_PATH + "factura.php?id_venta=" + id_venta + "&id_almacen=" + id_almacen;
         }
-        
+
         if (tipo_documento == 5) {
             url = SERVER_PATH + "guia-remision.php?id_venta=" + id_venta + "&id_almacen=" + id_almacen;
         }
@@ -79,21 +79,19 @@ public class cl_envio_server {
             boolean estatus = (Boolean) jsonObject.get("success");
             if (estatus) {
                 //https://examples.javacodegeeks.com/core-java/json/java-json-parser-example/
-                JSONObject result = (JSONObject) jsonObject.get("resultado");
+                //JSONObject result = (JSONObject) jsonObject.get("resultado");
 
-                datos[0] = result.get("nombre_archivo").toString();
-                datos[1] = result.get("direccion_xml").toString();
-                datos[2] = result.get("direccion_qr").toString();
-                datos[3] = result.get("hash").toString();
-                datos[4] = result.get("descripcion_cdr").toString();
-                datos[5] = "aceptado";
+                datos[0] = jsonObject.get("observaciones").toString();
+                datos[1] = jsonObject.get("nombreDocumento").toString();
+                datos[2] = jsonObject.get("codigoSunat").toString();
+                datos[3] = jsonObject.get("hash").toString();
+                datos[4] = "aceptado";
             } else {
                 datos[0] = "";
                 datos[1] = "";
                 datos[2] = "";
                 datos[3] = "";
-                datos[4] = "";
-                datos[5] = "error";
+                datos[4] = "error";
             }
 
         } catch (IOException | ParseException e) {
@@ -101,28 +99,4 @@ public class cl_envio_server {
         }
         return datos;
     }
-
-    public static String[] showJSONRUC_JMP(String json) throws ParseException {
-        String[] datos = new String[4];
-        System.out.println("INFORMACIÓN OBTENIDA DE LA BASE DE DATOS:");
-
-        JSONParser Jparser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) Jparser.parse(json);
-        boolean estatus = (Boolean) jsonObject.get("success");
-
-        //System.out.println("el estado es: " + estatus);
-        //JSONArray result = (JSONArray) jsonObject.get("result");
-        //array cuando es repetitivo
-        //estructurs cuando es uno simple
-        //aprendi de aqui
-        //https://examples.javacodegeeks.com/core-java/json/java-json-parser-example/
-        JSONObject result = (JSONObject) jsonObject.get("result");
-        //System.out.println("razon social: " + result.get("RazonSocial"));
-        datos[0] = result.get("RazonSocial").toString();
-        datos[1] = result.get("Direccion").toString();
-        datos[2] = result.get("Condicion").toString();
-        datos[3] = result.get("Estado").toString();
-        return datos;
-    }
-
 }

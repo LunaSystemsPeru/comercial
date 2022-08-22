@@ -36,6 +36,7 @@ import java.util.Locale;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import json.cl_envio_server;
+import pdfs.pdfComprobanteVenta;
 
 /**
  *
@@ -64,43 +65,17 @@ public class cl_enviar_venta extends Thread {
         String[] envio_sunat;
         envio_sunat = cl_envio_server.enviar_documento(c_venta.getId_venta(), c_venta.getId_tido(), c_venta.getId_almacen());
 
-        String nombre_archivo = envio_sunat[0];
-        String url_codigo_qr = envio_sunat[2];
+        String observaciones = envio_sunat[0];
+        String codsunat = envio_sunat[1];
+        String nombreXML = envio_sunat[2];
         String hash = envio_sunat[3];
-        String estatus = envio_sunat[5];
+        String estatus = envio_sunat[4];
         if (estatus.equals("aceptado")) {
-            System.out.println("imprimiendo docmumento de venta");
-            //imprimir boleta o factura
-            leer_numeros c_letras = new leer_numeros();
-            String letras_numeros = c_letras.Convertir(c_varios.formato_numero(c_venta.getTotal()) + "", true) + " SOLES";
-            System.out.println(letras_numeros);
-            System.out.println(url_codigo_qr);
-
-            File miDir = new File(".");
-            try {
-                Map<String, Object> parametros = new HashMap<>();
-                String path = miDir.getCanonicalPath();
-                String diagonal = File.separator;
-                String direccion = path + diagonal + "reports" + diagonal + "subreports" + diagonal;
-
-                System.out.println(direccion);
-                parametros.put("SUBREPORT_DIR", direccion);
-                parametros.put("JRParameter.REPORT_LOCALE", Locale.ENGLISH);
-                parametros.put("REPORT_LOCALE", Locale.ENGLISH);
-                parametros.put("p_id_venta", c_venta.getId_venta());
-                parametros.put("p_id_almacen", c_venta.getId_almacen());
-                parametros.put("p_letras_numero", letras_numeros);
-                parametros.put("p_codigo_qr", url_codigo_qr);
-                parametros.put("p_hash", hash);
-                //c_varios.imp_reporte("rpt_documento_venta", parametros);
-               
-                    c_varios.ver_reporte("rpt_documento_venta", parametros);
-                
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
-            }
+            JOptionPane.showMessageDialog(null, "Comprobante aceptado " + nombreXML );
+            pdfs.pdfComprobanteVenta pdf = new pdfComprobanteVenta(c_venta.getId_venta());
+            pdf.generarPDF();
         } else {
-            JOptionPane.showMessageDialog(null, "Ocurrio un error al recibir el comprobante");
+            JOptionPane.showMessageDialog(null, "Ocurrio un error al recibir el comprobante" + observaciones);
         }
     }
 
@@ -163,6 +138,5 @@ public class cl_enviar_venta extends Thread {
         /*if (guia == 0) {
             enviar_guia();
         }*/
-
     }
 }

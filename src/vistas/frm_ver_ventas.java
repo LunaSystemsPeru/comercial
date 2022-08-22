@@ -33,6 +33,7 @@ import json.cl_json_entidad;
 import models.m_mis_documentos;
 import org.json.simple.parser.ParseException;
 import comercial.frm_principal;
+import pdfs.pdfComprobanteVenta;
 
 /**
  *
@@ -1496,10 +1497,11 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
     private void btn_imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_imprimirActionPerformed
         //cargar datos venta
         int id_venta = Integer.parseInt(t_ventas.getValueAt(fila_seleccionada, 8).toString());
-        c_venta.setId_venta(id_venta);
-        c_venta.setId_almacen(id_almacen);
-        c_venta.validar_venta();
-
+        
+        pdfComprobanteVenta pdf = new pdfComprobanteVenta(id_venta);
+        pdf.generarPDF();
+        
+        /*
         leer_numeros c_letras = new leer_numeros();
         String letras_numeros = c_letras.Convertir(c_venta.getTotal() + "", true) + " SOLES";
         System.out.println(letras_numeros);
@@ -1560,6 +1562,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
             }
         }
+*/
     }//GEN-LAST:event_btn_imprimirActionPerformed
 
     private void cbx_buscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbx_buscarKeyPressed

@@ -5,6 +5,7 @@
  */
 package clases;
 
+import comercial.frm_principal;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -24,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -509,5 +511,33 @@ public class cl_varios {
                 throw new java.lang.IllegalArgumentException(
                         "El mes debe estar entre 0 y 11");
         }
+    }
+    
+    public String obtenerCarpetaGuardar (String nombrearchivo) {
+         // System.out.println(Arrays.toString(titulos));
+        File dir = new File("");
+
+        String carpeta_reportes = dir.getAbsolutePath() + File.separator + "reportes";
+
+        //String nombre_archivo = carpeta_reportes + File.separator + "pesaje_" + fecha_inicio + "_hasta_" + date_final + ".xls";
+        JFileChooser guardar = new JFileChooser();
+        //guardar.showSaveDialog(null);
+
+        guardar.setDialogTitle("Seleccionar Carpeta para guardar Reporte");
+        guardar.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        //guardar.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        //guardar.setName("pesaje_" + fecha_inicio + "_hasta_" + date_final + ".xls");
+        guardar.setAcceptAllFileFilterUsed(false);
+        guardar.setApproveButtonText("Sel. Carpeta ");
+
+        if (guardar.showSaveDialog(frm_principal.jDesktopPane1) == JFileChooser.APPROVE_OPTION) {
+            String carpetanueva = guardar.getSelectedFile().toString();
+            // System.out.println(carpetanueva);
+            carpeta_reportes = carpetanueva + File.separator + nombrearchivo;
+        } else {
+            JOptionPane.showMessageDialog(null, "SE GUARDARA EL REPORTE EN LA CARPETA POR DEFECTO");
+            carpeta_reportes += File.separator + nombrearchivo;
+        }
+        return carpeta_reportes;
     }
 }

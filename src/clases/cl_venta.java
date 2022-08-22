@@ -149,7 +149,7 @@ public class cl_venta {
             Statement st = c_conectar.conexion();
             String query = "select * "
                     + "from ventas "
-                    + "where id_almacen = '" + id_almacen + "' and id_ventas = '" + id_venta + "'";
+                    + "where id_ventas = '" + id_venta + "'";
             System.out.println(query);
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
@@ -410,4 +410,10 @@ public class cl_venta {
         return valor_x;
     }
 
+    @Override
+    public String toString() {
+        return "cl_venta{" + "id_venta=" + id_venta + ", fecha=" + fecha + ", id_cliente=" + id_cliente + ", id_tido=" + id_tido + ", serie=" + serie + ", numero=" + numero + ", id_almacen=" + id_almacen + ", id_usuario=" + id_usuario + ", total=" + total + ", pagado=" + pagado + ", id_tipo_venta=" + id_tipo_venta + ", enviado_sunat=" + enviado_sunat + ", estado=" + estado + '}';
+    }
+
+    
 }

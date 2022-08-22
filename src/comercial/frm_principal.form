@@ -267,7 +267,6 @@
         </Component>
         <Container class="javax.swing.JToolBar" name="jToolBar7">
           <Properties>
-            <Property name="floatable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
@@ -412,10 +411,7 @@
               <EmptySpace pref="758" max="32767" attributes="0"/>
               <Component id="jToolBar3" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jDesktopPane1" max="32767" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-          </Group>
+          <Component id="jDesktopPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -437,7 +433,6 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
-        <Property name="floatable" type="boolean" value="false"/>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
@@ -578,7 +573,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
-                <Property name="floatable" type="boolean" value="false"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Constraints>
@@ -653,6 +647,17 @@
                 </Component>
                 <Component class="javax.swing.JToolBar$Separator" name="jSeparator10">
                 </Component>
+                <Component class="javax.swing.JButton" name="jButton3">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Res. Ventas"/>
+                    <Property name="focusable" type="boolean" value="false"/>
+                    <Property name="horizontalTextPosition" type="int" value="0"/>
+                    <Property name="verticalTextPosition" type="int" value="3"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                  </Events>
+                </Component>
                 <Component class="javax.swing.JButton" name="jButton8">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -693,7 +698,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
-                <Property name="floatable" type="boolean" value="false"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Constraints>
@@ -746,7 +750,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
-                <Property name="floatable" type="boolean" value="false"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Constraints>
@@ -905,7 +908,6 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
-                <Property name="floatable" type="boolean" value="false"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
               <Constraints>
@@ -1034,7 +1036,6 @@
     </Container>
     <Container class="javax.swing.JToolBar" name="jToolBar3">
       <Properties>
-        <Property name="floatable" type="boolean" value="false"/>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>

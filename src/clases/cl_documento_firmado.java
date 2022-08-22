@@ -81,4 +81,9 @@ public class cl_documento_firmado {
         return existe;
     }
 
+    @Override
+    public String toString() {
+        return "cl_documento_firmado{" + "id_venta=" + id_venta + ", id_almacen=" + id_almacen + ", hash=" + hash + ", nombre=" + nombre + '}';
+    }
+
 }

@@ -8,6 +8,7 @@ package clases;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -131,7 +132,7 @@ public class cl_productos_ventas {
             while (rs.next()) {
                 Object[] fila = new Object[5];
                 fila[0] = rs.getInt("id_producto");
-                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim() ).trim();
+                fila[1] = (rs.getString("descripcion").trim() + " - " + rs.getString("marca").trim()).trim();
                 int pcantidad = rs.getInt("cantidad");
                 double pprecio = rs.getDouble("precio");
                 double pparcial = pcantidad * pprecio;
@@ -154,10 +155,10 @@ public class cl_productos_ventas {
                     + "from productos_ventas as pv "
                     + "inner join productos_almacen as pa on pa.id_almacen = pv.id_almacen and pa.id_producto = pv.id_producto "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
-                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad " 
+                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad "
                     + "where pv.id_ventas = '" + id_venta + "' "
                     + "order by p.descripcion asc";
-          //  System.out.println(query);
+            //  System.out.println(query);
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
@@ -195,7 +196,7 @@ public class cl_productos_ventas {
             String query = "select pv.id_producto, p.descripcion, p.marca, pv.cantidad, pv.precio, um.nombre as und_medida "
                     + "from productos_ventas as pv "
                     + "inner join productos as p on p.id_producto = pv.id_producto "
-                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad " 
+                    + "inner join unidades_medida as um on um.id_unidad = p.id_unidad "
                     + "where id_ventas = '" + id_venta + "' "
                     + "order by p.descripcion asc";
             Statement st = c_conectar.conexion();
@@ -236,5 +237,40 @@ public class cl_productos_ventas {
         } catch (SQLException e) {
             System.out.print(e);
         }
+    }
+
+    public ArrayList getArrayDetalle() {
+        ArrayList array = new ArrayList();
+        //c_conectar.conectar();
+        String query = "select pv.id_producto, p.descripcion, p.marca, pv.cantidad, pv.precio, um.nombre as und_medida "
+                + "from productos_ventas as pv "
+                + "inner join productos as p on p.id_producto = pv.id_producto "
+                + "inner join unidades_medida as um on um.id_unidad = p.id_unidad "
+                + "where id_ventas = '" + id_venta + "' "
+                + "order by p.descripcion asc";
+        Statement st = c_conectar.conexion();
+        ResultSet rs = c_conectar.consulta(st, query);
+        try {
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[6];
+                fila[0] = rs.getInt("id_producto");
+                fila[1] = rs.getString("descripcion").trim() + " " + rs.getString("marca").trim();
+                fila[2] = rs.getString("und_medida").trim();
+                int pcantidad = rs.getInt("cantidad");
+                double pprecio = rs.getDouble("precio");
+                double pparcial = pcantidad * pprecio;
+                fila[3] = pcantidad;
+                fila[4] = c_varios.formato_totales(pprecio);
+                fila[5] = c_varios.formato_totales(pparcial);
+                array.add(fila);
+            }
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
+
+        } catch (SQLException e) {
+            System.out.print(e);
+        }
+        return array;
     }
 }

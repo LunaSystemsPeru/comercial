@@ -25,6 +25,7 @@
  */
 package vistas;
 
+import clases.cl_reporte_ventas;
 import clases.cl_varios;
 import clases_varios.cl_grafica_mensual;
 import java.io.File;
@@ -138,7 +139,7 @@ public class rpt_ventas extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Reportes en Excel"));
 
-        cbx_excel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Detalle de Venta - Tienda - Cliente - Producto - Clasificacion - Vendedor", "Registro de ventas", "Registro de compras" }));
+        cbx_excel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Registro de ventas", " " }));
 
         jButton3.setText("Generar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +304,6 @@ public class rpt_ventas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,6 +360,12 @@ public class rpt_ventas extends javax.swing.JDialog {
 
         String fecha_inicio = c_varios.fecha_myql(txt_inicio_excel.getText());
         String fecha_fin = c_varios.fecha_myql(txt_fin_excel.getText());
+        
+        cl_reporte_ventas reportexls = new cl_reporte_ventas();
+        reportexls.setFec_inicio(fecha_inicio);
+        reportexls.setFec_fin(fecha_fin);
+        reportexls.generarXLSVentas();
+        /*
 
         //ver reporte en excel;        
         File miDir = new File(".");
@@ -400,6 +406,7 @@ public class rpt_ventas extends javax.swing.JDialog {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
         }
+        */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

@@ -121,6 +121,7 @@ public class cl_empresa {
             String query = "select * "
                     + "from empresa "
                     + "where id_empresa = '" + id + "'";
+            
             ResultSet rs = c_conectar.consulta(st, query);
             if (rs.next()) {
                 existe = true;

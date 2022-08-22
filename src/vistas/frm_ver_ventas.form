@@ -92,7 +92,6 @@
         </Component>
         <Container class="javax.swing.JToolBar" name="jToolBar2">
           <Properties>
-            <Property name="floatable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
@@ -309,7 +308,6 @@
         </Container>
         <Container class="javax.swing.JToolBar" name="jToolBar3">
           <Properties>
-            <Property name="floatable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
@@ -418,7 +416,6 @@
       <SubComponents>
         <Container class="javax.swing.JToolBar" name="jToolBar4">
           <Properties>
-            <Property name="floatable" type="boolean" value="false"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
 
@@ -929,7 +926,6 @@
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="showVerticalLines" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -966,7 +962,6 @@
     </Component>
     <Container class="javax.swing.JToolBar" name="jToolBar1">
       <Properties>
-        <Property name="floatable" type="boolean" value="false"/>
         <Property name="opaque" type="boolean" value="false"/>
       </Properties>
 

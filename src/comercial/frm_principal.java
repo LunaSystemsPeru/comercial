@@ -30,6 +30,7 @@ import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import nicon.notify.core.Notification;
 import org.jvnet.substance.SubstanceLookAndFeel;
+import vistas.frm_enviar_boletas_sunat;
 import vistas.frm_ver_almacenes;
 import vistas.frm_ver_clasificacion_productos;
 import vistas.frm_ver_clientes;
@@ -231,6 +232,7 @@ public class frm_principal extends javax.swing.JFrame {
         jSeparator9 = new javax.swing.JToolBar.Separator();
         jButton1 = new javax.swing.JButton();
         jSeparator10 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jSeparator14 = new javax.swing.JToolBar.Separator();
         jButton9 = new javax.swing.JButton();
@@ -415,7 +417,6 @@ public class frm_principal extends javax.swing.JFrame {
             }
         });
 
-        jToolBar7.setFloatable(false);
         jToolBar7.setOpaque(false);
 
         btn_abrir_caja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/coins.png"))); // NOI18N
@@ -517,7 +518,6 @@ public class frm_principal extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage("reports/icono.jpg"));
 
         jToolBar1.setBorder(null);
-        jToolBar1.setFloatable(false);
         jToolBar1.setBorderPainted(false);
         jToolBar1.setOpaque(false);
 
@@ -569,7 +569,6 @@ public class frm_principal extends javax.swing.JFrame {
 
         jToolBar4.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar4.setBorder(null);
-        jToolBar4.setFloatable(false);
         jToolBar4.setBorderPainted(false);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Office-Customer-Male-Light-icon.png"))); // NOI18N
@@ -623,6 +622,17 @@ public class frm_principal extends javax.swing.JFrame {
         jToolBar4.add(jButton1);
         jToolBar4.add(jSeparator10);
 
+        jButton3.setText("Res. Ventas");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar4.add(jButton3);
+
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/clipboard-512.png"))); // NOI18N
         jButton8.setText("Reportes");
         jButton8.setFocusable(false);
@@ -652,7 +662,6 @@ public class frm_principal extends javax.swing.JFrame {
 
         jToolBar5.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar5.setBorder(null);
-        jToolBar5.setFloatable(false);
         jToolBar5.setBorderPainted(false);
 
         jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/customer-testimonials-512.png"))); // NOI18N
@@ -684,7 +693,6 @@ public class frm_principal extends javax.swing.JFrame {
 
         jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar2.setBorder(null);
-        jToolBar2.setFloatable(false);
         jToolBar2.setBorderPainted(false);
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/transport-512.png"))); // NOI18N
@@ -804,7 +812,6 @@ public class frm_principal extends javax.swing.JFrame {
 
         jToolBar6.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar6.setBorder(null);
-        jToolBar6.setFloatable(false);
         jToolBar6.setBorderPainted(false);
         jToolBar6.add(jSeparator3);
 
@@ -924,7 +931,6 @@ public class frm_principal extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jToolBar3.setFloatable(false);
         jToolBar3.setBorderPainted(false);
         jToolBar3.setOpaque(false);
 
@@ -956,9 +962,7 @@ public class frm_principal extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 758, Short.MAX_VALUE)
                 .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1)
-                .addGap(0, 0, 0))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1211,6 +1215,11 @@ public class frm_principal extends javax.swing.JFrame {
         c_varios.llamar_ventana_normal(formulario);
     }//GEN-LAST:event_jButton15ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+frm_enviar_boletas_sunat form = new frm_enviar_boletas_sunat();
+c_varios.llamar_ventana_normal(form);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1265,6 +1274,7 @@ public class frm_principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton22;
     private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
